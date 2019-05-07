@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'EasyRefresher_Example' do
+  pod 'EasyRefresher', :path => '../'
+
+  target 'EasyRefresher_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
