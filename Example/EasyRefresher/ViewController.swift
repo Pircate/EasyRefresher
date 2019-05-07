@@ -7,18 +7,46 @@
 //
 
 import UIKit
+import EasyRefresher
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
+        
+        tableView.refresh.header.addRefresher {
+            self.reqeust {
+                self.tableView.refresh.header.endRefreshing()
+            }
+        }
+        
+        tableView.refresh.footer = RefreshFooter(scrollView: tableView)
+        tableView.refresh.footer.refreshClosure = {
+            self.reqeust {
+                self.tableView.refresh.footer.endRefreshing()
+            }
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func reqeust(completion: @escaping () -> Void) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
     }
-
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "cellID")!
+    }
+}

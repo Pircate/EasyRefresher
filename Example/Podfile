@@ -1,4 +1,6 @@
+platform :ios, '9.0'
 use_frameworks!
+install! 'cocoapods', :disable_input_output_paths => true
 
 target 'EasyRefresher_Example' do
   pod 'EasyRefresher', :path => '../'
