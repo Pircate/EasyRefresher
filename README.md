@@ -11,6 +11,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+* iOS 9.0
+* Swift 4.2
+
 ## Installation
 
 EasyRefresher is available through [CocoaPods](https://cocoapods.org). To install
@@ -18,6 +21,23 @@ it, simply add the following line to your Podfile:
 
 ```ruby
 pod 'EasyRefresher'
+```
+
+## Usage
+
+```swift
+tableView.refresh.header.addRefresher {
+    self.reqeust {
+        self.tableView.refresh.header.endRefreshing()
+    }
+}
+
+tableView.refresh.footer = RefreshFooter(scrollView: tableView)
+tableView.refresh.footer.refreshClosure = {
+    self.reqeust {
+        self.tableView.refresh.footer.endRefreshing()
+    }
+}
 ```
 
 ## Author
