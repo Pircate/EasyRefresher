@@ -8,59 +8,20 @@
 
 import UIKit
 
-open class RefreshHeader: UIView {
+open class RefreshHeader: RefreshComponent {
     
-    open var state: RefreshState = .idle {
-        didSet {
-            guard state != oldValue else { return }
+    public override var stateTitles: [RefreshState : String] {
+        get {
+            guard super.stateTitles.isEmpty else { return super.stateTitles }
             
-            switch state {
-            case .idle:
-                stopRefreshing()
-            case .refreshing:
-                refreshClosure()
-                
-                initialInsetTop = scrollView?.contentInset.top ?? 0
-                startRefreshing()
-            default:
-                break
-            }
-            
-            if let attributedTitle = attributedTitle(for: state) {
-                stateLabel.attributedText = attributedTitle
-            } else {
-                stateLabel.text = title(for: state)
-            }
-            
-            stateLabel.sizeToFit()
+            return [.pulling: "下拉可以刷新",
+                    .willRefresh: "松开立即刷新",
+                    .refreshing: "正在刷新数据中..."]
+        }
+        set {
+            super.stateTitles = newValue
         }
     }
-    
-    open var refreshClosure: () -> Void = {}
-    
-    public var stateTitles: [RefreshState: String] = [
-        .pulling: "下拉可以刷新",
-        .willRefresh: "松开立即刷新",
-        .refreshing: "正在刷新数据中..."]
-    
-    public var stateAttributedTitles: [RefreshState: NSAttributedString] = [:]
-    
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [indicatorView, stateLabel])
-        stackView.spacing = 10
-        return stackView
-    }()
-    
-    private lazy var indicatorView: UIActivityIndicatorView = {
-        UIActivityIndicatorView(style: .gray)
-    }()
-    
-    private lazy var stateLabel: UILabel = {
-        let stateLabel = UILabel()
-        stateLabel.font = UIFont.systemFont(ofSize: 14)
-        stateLabel.textAlignment = .center
-        return stateLabel
-    }()
     
     private var scrollObservation: NSKeyValueObservation?
     
@@ -68,7 +29,7 @@ open class RefreshHeader: UIView {
     
     private var initialInsetTop: CGFloat = 0
     
-    weak var scrollView: UIScrollView? {
+    override weak var scrollView: UIScrollView? {
         didSet {
             guard let scrollView = scrollView else { return }
             
@@ -80,36 +41,24 @@ open class RefreshHeader: UIView {
         }
     }
     
-    public required init(refreshClosure: @escaping () -> Void) {
-        self.refreshClosure = refreshClosure
+    override func startRefreshing() {
+        super.startRefreshing()
         
-        super.init(frame: CGRect.zero)
-        
-        build()
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView?.contentInset.top = self.initialInsetTop + 54
+        }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func stopRefreshing() {
+        super.stopRefreshing()
         
-        build()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        build()
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView?.contentInset.top = self.initialInsetTop
+        }
     }
 }
 
 extension RefreshHeader {
-    
-    private func build() {
-        addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    }
     
     private func add(into scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
@@ -158,29 +107,8 @@ extension RefreshHeader {
             
             guard self.state == .willRefresh else { return }
             
+            self.initialInsetTop = this.contentInset.top
             self.state = .refreshing
         }
     }
-    
-    private func startRefreshing() {
-        indicatorView.startAnimating()
-        
-        UIView.animate(withDuration: 0.25) {
-            self.scrollView?.contentInset.top = self.initialInsetTop + 54
-        }
-    }
-    
-    private func stopRefreshing() {
-        indicatorView.stopAnimating()
-        
-        UIView.animate(withDuration: 0.25) {
-            self.scrollView?.contentInset.top = self.initialInsetTop
-        }
-    }
-}
-
-extension RefreshHeader: Refreshable {
-}
-
-extension RefreshHeader: HasStateTitle {
 }

@@ -9,13 +9,11 @@
 import UIKit
 import ObjectiveC
 
-public typealias RefreshComponent = Refreshable & HasStateTitle
-
 extension UIScrollView {
     
-    public var header: RefreshComponent {
+    public var header: RefreshHeader {
         get {
-            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshComponent {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshHeader {
                 return obj
             }
             
@@ -29,15 +27,13 @@ extension UIScrollView {
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.header)
             
-            guard let header = newValue as? RefreshFooter else { return }
-            
-            header.scrollView = self
+            newValue.scrollView = self
         }
     }
     
-    public var footer: RefreshComponent {
+    public var footer: RefreshFooter {
         get {
-            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? RefreshComponent {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? RefreshFooter {
                 return obj
             }
             
@@ -51,9 +47,7 @@ extension UIScrollView {
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.footer)
             
-            guard let footer = newValue as? RefreshFooter else { return }
-            
-            footer.scrollView = self
+            newValue.scrollView = self
         }
     }
     
