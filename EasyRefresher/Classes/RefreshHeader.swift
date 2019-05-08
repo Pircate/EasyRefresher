@@ -16,18 +16,20 @@ open class RefreshHeader: UIView {
             
             switch state {
             case .idle:
-                stateLabel.text = ""
                 stopRefreshing()
-            case .pulling:
-                stateLabel.text = "下拉刷新"
-            case .willRefresh:
-                stateLabel.text = "释放加载"
             case .refreshing:
-                stateLabel.text = "正在刷新中..."
                 refreshClosure()
                 
                 initialInsetTop = scrollView?.contentInset.top ?? 0
                 startRefreshing()
+            default:
+                break
+            }
+            
+            if let attributedTitle = attributedTitle(for: state) {
+                stateLabel.attributedText = attributedTitle
+            } else {
+                stateLabel.text = title(for: state)
             }
             
             stateLabel.sizeToFit()
@@ -35,6 +37,13 @@ open class RefreshHeader: UIView {
     }
     
     open var refreshClosure: () -> Void = {}
+    
+    public var stateTitles: [RefreshState: String] = [
+        .pulling: "下拉可以刷新",
+        .willRefresh: "松开立即刷新",
+        .refreshing: "正在刷新数据中..."]
+    
+    public var stateAttributedTitles: [RefreshState: NSAttributedString] = [:]
     
     private lazy var indicatorView: UIActivityIndicatorView = {
         UIActivityIndicatorView(style: .gray)
@@ -99,6 +108,8 @@ extension RefreshHeader {
         scrollObservation = scrollView?.observe(\.contentOffset) { [weak self] this, change in
             guard let `self` = self else { return }
             
+            this.bringSubviewToFront(self)
+            
             guard !self.isRefreshing else {
                 self.startRefreshing()
                 return
@@ -142,7 +153,7 @@ extension RefreshHeader {
     }
 }
 
-extension RefreshHeader: RefreshComponent {
+extension RefreshHeader: Refreshable {
     
     public func addRefresher(_ refreshClosure: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
@@ -162,4 +173,7 @@ extension RefreshHeader: RefreshComponent {
         
         self.refreshClosure = refreshClosure
     }
+}
+
+extension RefreshHeader: HasStateTitle {
 }

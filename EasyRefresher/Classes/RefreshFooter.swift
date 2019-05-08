@@ -16,19 +16,21 @@ open class RefreshFooter: UIView {
             
             switch state {
             case .idle:
-                stateLabel.text = ""
                 stopRefreshing()
-            case .pulling:
-                stateLabel.text = "上拉刷新"
-            case .willRefresh:
-                stateLabel.text = "释放加载"
             case .refreshing:
-                stateLabel.text = "正在刷新中..."
                 refreshClosure()
                 
                 initialInsetTop = scrollView?.contentInset.top ?? 0
                 initialInsetBottom = scrollView?.contentInset.bottom ?? 0
                 startRefreshing()
+            default:
+                break
+            }
+            
+            if let attributedTitle = attributedTitle(for: state) {
+                stateLabel.attributedText = attributedTitle
+            } else {
+                stateLabel.text = title(for: state)
             }
             
             stateLabel.sizeToFit()
@@ -36,6 +38,13 @@ open class RefreshFooter: UIView {
     }
     
     open var refreshClosure: () -> Void = {}
+    
+    public var stateTitles: [RefreshState: String] = [
+        .pulling: "上拉可以加载更多",
+        .willRefresh: "松开立即加载更多",
+        .refreshing: "正在加载更多的数据..."]
+    
+    public var stateAttributedTitles: [RefreshState: NSAttributedString] = [:]
     
     private lazy var indicatorView: UIActivityIndicatorView = {
         UIActivityIndicatorView(style: .gray)
@@ -102,6 +111,8 @@ extension RefreshFooter {
     private func addObservers() {
         scrollObservation = scrollView?.observe(\.contentOffset) { [weak self] this, change in
             guard let `self` = self else { return }
+            
+            this.bringSubviewToFront(self)
             
             guard !self.isRefreshing else {
                 self.startRefreshing()
@@ -171,7 +182,7 @@ extension RefreshFooter {
     }
 }
 
-extension RefreshFooter: RefreshComponent {
+extension RefreshFooter: Refreshable {
     
     public func addRefresher(_ refreshClosure: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
@@ -190,4 +201,7 @@ extension RefreshFooter: RefreshComponent {
         
         self.refreshClosure = refreshClosure
     }
+}
+
+extension RefreshFooter: HasStateTitle {
 }

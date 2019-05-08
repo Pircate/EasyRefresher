@@ -6,64 +6,45 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-import UIKit
-import ObjectiveC
+import Foundation
+
+public enum RefreshState {
+    case idle
+    case pulling
+    case willRefresh
+    case refreshing
+}
 
 public protocol Refreshable: class {
     
-    var header: RefreshComponent { get set }
+    var state: RefreshState { get set }
     
-    var footer: RefreshComponent { get set }
+    var isRefreshing: Bool { get }
+    
+    var refreshClosure: () -> Void { get set }
+    
+    func addRefresher(_ refreshClosure: @escaping () -> Void)
+    
+    func beginRefreshing()
+    
+    func endRefreshing()
 }
 
-extension UIScrollView: Refreshable {
+public extension Refreshable {
     
-    public var header: RefreshComponent {
-        get {
-            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshComponent {
-                return obj
-            }
-            
-            let header = RefreshHeader(scrollView: self)
-            
-            objcSetAssociatedObject(header, for: &AssociatedKeys.header)
-            
-            return header
-        }
-        set {
-            objcSetAssociatedObject(newValue, for: &AssociatedKeys.header)
-        }
+    var isRefreshing: Bool {
+        return state == .refreshing
     }
     
-    public var footer: RefreshComponent {
-        get {
-            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? RefreshComponent {
-                return obj
-            }
-            
-            let footer = RefreshFooter(scrollView: self)
-            
-            objcSetAssociatedObject(footer, for: &AssociatedKeys.footer)
-            
-            return footer
-        }
-        set {
-            objcSetAssociatedObject(newValue, for: &AssociatedKeys.footer)
-        }
+    func addRefresher(_ refreshClosure: @escaping () -> Void) {
+        self.refreshClosure = refreshClosure
     }
     
-    private func objcGetAssociatedObject(for key: UnsafeRawPointer) -> Any? {
-        return objc_getAssociatedObject(self, key)
+    func beginRefreshing() {
+        state = .refreshing
     }
     
-    private func objcSetAssociatedObject(_ value: Any?, for key: UnsafeRawPointer) {
-        objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    func endRefreshing() {
+        state = .idle
     }
-}
-
-struct AssociatedKeys {
-    
-    static var header = "com.pircate.github.refresh.header"
-    
-    static var footer = "com.pircate.github.refresh.footer"
 }
