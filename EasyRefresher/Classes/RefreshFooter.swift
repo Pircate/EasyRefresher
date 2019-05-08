@@ -23,7 +23,7 @@ open class RefreshFooter: RefreshComponent {
         }
     }
     
-    open var isAutoRefresh: Bool { return false }
+    var isAutoRefresh: Bool { return false }
     
     private var scrollObservation: NSKeyValueObservation?
     

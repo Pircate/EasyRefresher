@@ -10,5 +10,5 @@ import UIKit
 
 open class AutoRefreshFooter: RefreshFooter {
 
-    open override var isAutoRefresh: Bool { return true }
+    override var isAutoRefresh: Bool { return true }
 }

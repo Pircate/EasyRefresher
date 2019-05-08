@@ -21,7 +21,7 @@ public protocol HasStateTitle: class {
     func attributedTitle(for state: RefreshState) -> NSAttributedString?
 }
 
-public extension HasStateTitle where Self: Refreshable {
+public extension HasStateTitle {
     
     func setTitle(_ title: String?, for state: RefreshState) {
         stateTitles[state] = title
