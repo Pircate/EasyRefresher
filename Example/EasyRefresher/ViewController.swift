@@ -13,6 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var dataArray: [String] = ["", "", "", "", ""]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,7 +25,7 @@ class ViewController: UIViewController {
                 self.tableView.refresh.header.endRefreshing()
             }
         }
-        
+
         tableView.refresh.footer = AutoRefreshFooter {
             self.reqeust {
                 self.tableView.refresh.footer.endRefreshing()
@@ -34,6 +36,14 @@ class ViewController: UIViewController {
     private func reqeust(completion: @escaping () -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             DispatchQueue.main.async {
+                if self.tableView.refresh.header.isRefreshing {
+                    self.dataArray = ["", "", "", "", ""]
+                } else {
+                    (0...10).forEach { _ in self.dataArray.append("") }
+                }
+                
+                self.tableView.reloadData()
+                
                 completion()
             }
         }
@@ -42,10 +52,12 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "cellID")!
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID")!
+        cell.textLabel?.text = "\(indexPath.row)"
+        return cell
     }
 }

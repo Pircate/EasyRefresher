@@ -29,10 +29,6 @@ open class RefreshFooter: RefreshComponent {
     
     private var panStateObservation: NSKeyValueObservation?
     
-    private var initialInsetTop: CGFloat = 0
-    
-    private var initialInsetBottom: CGFloat = 0
-    
     private lazy var constraintTop: NSLayoutConstraint? = {
         guard let scrollView = scrollView else { return nil }
         
@@ -46,36 +42,8 @@ open class RefreshFooter: RefreshComponent {
         didSet {
             guard let scrollView = scrollView else { return }
             
-            initialInsetTop = scrollView.contentInset.top
-            initialInsetBottom = scrollView.contentInset.bottom
-            scrollView.alwaysBounceVertical = true
-            
             add(into: scrollView)
             observe(scrollView)
-        }
-    }
-    
-    override func startRefreshing() {
-        super.startRefreshing()
-        
-        UIView.animate(withDuration: 0.25) {
-            if self.contentSizeHeightGreaterThanBoundsHeight {
-                self.scrollView?.contentInset.bottom = self.initialInsetBottom + 54
-            } else {
-                self.scrollView?.contentInset.top = self.initialInsetTop - 54
-            }
-        }
-    }
-    
-    override func stopRefreshing() {
-        super.stopRefreshing()
-        
-        UIView.animate(withDuration: 0.25) {
-            if self.contentSizeHeightGreaterThanBoundsHeight {
-                self.scrollView?.contentInset.bottom = self.initialInsetBottom
-            } else {
-                self.scrollView?.contentInset.top = self.initialInsetTop
-            }
         }
     }
 }
@@ -106,10 +74,7 @@ extension RefreshFooter {
             
             this.bringSubviewToFront(self)
             
-            guard !self.isRefreshing else {
-                self.startRefreshing()
-                return
-            }
+            guard !self.isRefreshing else { return }
             
             let offset: CGFloat
             let constant: CGFloat
@@ -123,11 +88,10 @@ extension RefreshFooter {
             }
             
             self.constraintTop?.constant = constant
-            
-            if self.isAutoRefresh, offset > 0 {
-                self.initialInsetTop = this.contentInset.top
-                self.initialInsetBottom = this.contentInset.bottom
+
+            if self.isAutoRefresh, this.isDragging, offset > 0 {
                 self.state = .refreshing
+                self.didChangeInset()
                 return
             }
             
@@ -149,18 +113,28 @@ extension RefreshFooter {
             
             guard self.state == .willRefresh else { return }
             
-            self.initialInsetTop = this.contentInset.top
-            self.initialInsetBottom = this.contentInset.bottom
+            self.willChangeInset()
             self.state = .refreshing
+            self.didChangeInset()
         }
     }
 }
 
 private extension RefreshFooter {
     
-    var contentSizeHeightGreaterThanBoundsHeight: Bool {
-        guard let scrollView = scrollView else { return false }
+    func willChangeInset() {
+        guard let scrollView = scrollView else { return }
         
-        return scrollView.contentSize.height > scrollView.bounds.height
+        initialInset = scrollView.contentInset
+    }
+    
+    func didChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        if scrollView.contentSize.height > scrollView.bounds.height {
+            scrollView.contentInset.bottom = initialInset.bottom + 54
+        } else {
+            scrollView.contentInset.top = initialInset.top - 54
+        }
     }
 }

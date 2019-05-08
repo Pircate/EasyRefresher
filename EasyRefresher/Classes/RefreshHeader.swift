@@ -27,33 +27,12 @@ open class RefreshHeader: RefreshComponent {
     
     private var panStateObservation: NSKeyValueObservation?
     
-    private var initialInsetTop: CGFloat = 0
-    
     override weak var scrollView: UIScrollView? {
         didSet {
             guard let scrollView = scrollView else { return }
             
-            initialInsetTop = scrollView.contentInset.top
-            scrollView.alwaysBounceVertical = true
-            
             add(into: scrollView)
             observe(scrollView)
-        }
-    }
-    
-    override func startRefreshing() {
-        super.startRefreshing()
-        
-        UIView.animate(withDuration: 0.25) {
-            self.scrollView?.contentInset.top = self.initialInsetTop + 54
-        }
-    }
-    
-    override func stopRefreshing() {
-        super.stopRefreshing()
-        
-        UIView.animate(withDuration: 0.25) {
-            self.scrollView?.contentInset.top = self.initialInsetTop
         }
     }
 }
@@ -85,10 +64,7 @@ extension RefreshHeader {
             
             this.bringSubviewToFront(self)
             
-            guard !self.isRefreshing else {
-                self.startRefreshing()
-                return
-            }
+            guard !self.isRefreshing else { return }
             
             let offset = this.contentOffset.y + this.contentInset.top
             
@@ -107,8 +83,8 @@ extension RefreshHeader {
             
             guard self.state == .willRefresh else { return }
             
-            self.initialInsetTop = this.contentInset.top
             self.state = .refreshing
+            this.contentInset.top = self.initialInset.top + 54
         }
     }
 }

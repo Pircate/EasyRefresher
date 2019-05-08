@@ -39,7 +39,16 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     
     public var refreshClosure: () -> Void = {}
     
-    weak var scrollView: UIScrollView?
+    weak var scrollView: UIScrollView? {
+        didSet {
+            guard let scrollView = scrollView else { return }
+            
+            scrollView.alwaysBounceVertical = true
+            initialInset = scrollView.contentInset
+        }
+    }
+    
+    var initialInset: UIEdgeInsets = .zero
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [indicatorView, stateLabel])
@@ -84,6 +93,10 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     
     func stopRefreshing() {
         indicatorView.stopAnimating()
+        
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView?.contentInset = self.initialInset
+        }
     }
 }
 
