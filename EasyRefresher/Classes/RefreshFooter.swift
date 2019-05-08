@@ -46,6 +46,12 @@ open class RefreshFooter: UIView {
     
     public var stateAttributedTitles: [RefreshState: NSAttributedString] = [:]
     
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [indicatorView, stateLabel])
+        stackView.spacing = 10
+        return stackView
+    }()
+    
     private lazy var indicatorView: UIActivityIndicatorView = {
         UIActivityIndicatorView(style: .gray)
     }()
@@ -91,16 +97,11 @@ open class RefreshFooter: UIView {
 extension RefreshFooter {
     
     private func build() {
-        addSubview(stateLabel)
-        addSubview(indicatorView)
+        addSubview(stackView)
         
-        stateLabel.translatesAutoresizingMaskIntoConstraints = false
-        stateLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stateLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
-        indicatorView.translatesAutoresizingMaskIntoConstraints = false
-        indicatorView.rightAnchor.constraint(equalTo: stateLabel.leftAnchor, constant: -10).isActive = true
-        indicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     private func removeAllObservers() {
@@ -130,6 +131,7 @@ extension RefreshFooter {
                 constant = this.bounds.height
             }
             
+            self.translatesAutoresizingMaskIntoConstraints = false
             self.topAnchor.constraint(equalTo: this.topAnchor, constant: constant).isActive = true
             
             switch offset {

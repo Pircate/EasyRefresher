@@ -27,6 +27,8 @@ extension UIScrollView {
         }
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.header)
+            
+            newValue.addRefresher {}
         }
     }
     
@@ -44,6 +46,8 @@ extension UIScrollView {
         }
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.footer)
+            
+            newValue.addRefresher {}
         }
     }
     

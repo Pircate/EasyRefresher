@@ -38,17 +38,11 @@ public extension Refresh where Base: UIScrollView {
     
     var header: RefreshComponent {
         get { return base.header }
-        set {
-            base.header = newValue
-            base.header.addRefresher {}
-        }
+        set { base.header = newValue }
     }
     
     var footer: RefreshComponent {
         get { return base.footer }
-        set {
-            base.footer = newValue
-            base.footer.addRefresher {}
-        }
+        set { base.footer = newValue }
     }
 }
