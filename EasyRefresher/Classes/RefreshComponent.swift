@@ -44,11 +44,11 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
             guard let scrollView = scrollView else { return }
             
             scrollView.alwaysBounceVertical = true
-            initialInset = scrollView.contentInset
+            idleInset = scrollView.contentInset
         }
     }
     
-    var initialInset: UIEdgeInsets = .zero
+    var idleInset: UIEdgeInsets = .zero
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [indicatorView, stateLabel])
@@ -94,9 +94,17 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     func stopRefreshing() {
         indicatorView.stopAnimating()
         
-        UIView.animate(withDuration: 0.25) {
-            self.scrollView?.contentInset = self.initialInset
-        }
+        reset()
+    }
+    
+    func willChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        var contentInset = scrollView.contentInset
+        contentInset.top -= scrollView.offsetInset.top
+        contentInset.bottom -= scrollView.offsetInset.bottom
+        
+        idleInset = contentInset
     }
 }
 
@@ -108,5 +116,12 @@ extension RefreshComponent {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    private func reset() {
+        UIView.animate(withDuration: 0.25) {
+            self.scrollView?.contentInset = self.idleInset
+            self.scrollView?.offsetInset = self.idleInset
+        }
     }
 }

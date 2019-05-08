@@ -64,6 +64,21 @@ extension UIScrollView {
     private func objcSetAssociatedObject(_ value: Any?, for key: UnsafeRawPointer) {
         objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
+    
+    var offsetInset: UIEdgeInsets {
+        get {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.offsetInset) as? UIEdgeInsets {
+                return obj
+            }
+            
+            objcSetAssociatedObject(UIEdgeInsets.zero, for: &AssociatedKeys.offsetInset)
+            
+            return .zero
+        }
+        set {
+            objcSetAssociatedObject(newValue, for: &AssociatedKeys.offsetInset)
+        }
+    }
 }
 
 struct AssociatedKeys {
@@ -71,4 +86,6 @@ struct AssociatedKeys {
     static var header = "com.pircate.github.refresh.header"
     
     static var footer = "com.pircate.github.refresh.footer"
+    
+    static var offsetInset = "com.pircate.github.offset.inset"
 }

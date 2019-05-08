@@ -90,6 +90,7 @@ extension RefreshFooter {
             self.constraintTop?.constant = constant
 
             if self.isAutoRefresh, this.isDragging, offset > 0 {
+                self.willChangeInset()
                 self.state = .refreshing
                 self.didChangeInset()
                 return
@@ -122,19 +123,15 @@ extension RefreshFooter {
 
 private extension RefreshFooter {
     
-    func willChangeInset() {
-        guard let scrollView = scrollView else { return }
-        
-        initialInset = scrollView.contentInset
-    }
-    
     func didChangeInset() {
         guard let scrollView = scrollView else { return }
         
         if scrollView.contentSize.height > scrollView.bounds.height {
-            scrollView.contentInset.bottom = initialInset.bottom + 54
+            scrollView.contentInset.bottom = idleInset.bottom + 54
         } else {
-            scrollView.contentInset.top = initialInset.top - 54
+            scrollView.contentInset.top = idleInset.top - 54
         }
+        
+        scrollView.offsetInset = scrollView.contentInset
     }
 }

@@ -83,8 +83,19 @@ extension RefreshHeader {
             
             guard self.state == .willRefresh else { return }
             
+            self.willChangeInset()
             self.state = .refreshing
-            this.contentInset.top = self.initialInset.top + 54
+            self.didChangeInset()
         }
+    }
+}
+
+private extension RefreshHeader {
+    
+    func didChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        scrollView.contentInset.top = idleInset.top + 54
+        scrollView.offsetInset = scrollView.contentInset
     }
 }
