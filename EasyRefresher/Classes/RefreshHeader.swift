@@ -95,7 +95,9 @@ private extension RefreshHeader {
     func didChangeInset() {
         guard let scrollView = scrollView else { return }
         
-        scrollView.contentInset.top = idleInset.top + 54
-        scrollView.offsetInset = scrollView.contentInset
+        UIView.animate(withDuration: 0.25) {
+            scrollView.contentInset.top = self.idleInset.top + 54
+            scrollView.offsetInset = scrollView.contentInset
+        }
     }
 }

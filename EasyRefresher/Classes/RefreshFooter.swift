@@ -126,12 +126,14 @@ private extension RefreshFooter {
     func didChangeInset() {
         guard let scrollView = scrollView else { return }
         
-        if scrollView.contentSize.height > scrollView.bounds.height {
-            scrollView.contentInset.bottom = idleInset.bottom + 54
-        } else {
-            scrollView.contentInset.top = idleInset.top - 54
+        UIView.animate(withDuration: 0.25) {
+            if scrollView.contentSize.height > scrollView.bounds.height {
+                scrollView.contentInset.bottom = self.idleInset.bottom + 54
+            } else {
+                scrollView.contentInset.top = self.idleInset.top - 54
+            }
+            
+            scrollView.offsetInset = scrollView.contentInset
         }
-        
-        scrollView.offsetInset = scrollView.contentInset
     }
 }
