@@ -35,6 +35,15 @@ open class RefreshHeader: RefreshComponent {
             observe(scrollView)
         }
     }
+    
+    override func didChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        UIView.animate(withDuration: 0.25) {
+            scrollView.contentInset.top = self.idleInset.top + 54
+            scrollView.offsetInset = scrollView.contentInset
+        }
+    }
 }
 
 extension RefreshHeader {
@@ -85,19 +94,6 @@ extension RefreshHeader {
             
             self.willChangeInset()
             self.state = .refreshing
-            self.didChangeInset()
-        }
-    }
-}
-
-private extension RefreshHeader {
-    
-    func didChangeInset() {
-        guard let scrollView = scrollView else { return }
-        
-        UIView.animate(withDuration: 0.25) {
-            scrollView.contentInset.top = self.idleInset.top + 54
-            scrollView.offsetInset = scrollView.contentInset
         }
     }
 }

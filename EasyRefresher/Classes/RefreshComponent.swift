@@ -89,12 +89,14 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     
     func startRefreshing() {
         indicatorView.startAnimating()
+        
+        didChangeInset()
     }
     
     func stopRefreshing() {
         indicatorView.stopAnimating()
         
-        reset()
+        resetInset()
     }
     
     func willChangeInset() {
@@ -106,6 +108,8 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
         
         idleInset = contentInset
     }
+    
+    func didChangeInset() {}
 }
 
 extension RefreshComponent {
@@ -118,7 +122,7 @@ extension RefreshComponent {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    private func reset() {
+    private func resetInset() {
         UIView.animate(withDuration: 0.25) {
             self.scrollView?.contentInset = self.idleInset
             self.scrollView?.offsetInset = self.idleInset

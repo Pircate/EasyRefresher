@@ -46,6 +46,20 @@ open class RefreshFooter: RefreshComponent {
             observe(scrollView)
         }
     }
+    
+    override func didChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        UIView.animate(withDuration: 0.25) {
+            if scrollView.contentSize.height > scrollView.bounds.height {
+                scrollView.contentInset.bottom = self.idleInset.bottom + 54
+            } else {
+                scrollView.contentInset.top = self.idleInset.top - 54
+            }
+            
+            scrollView.offsetInset = scrollView.contentInset
+        }
+    }
 }
 
 extension RefreshFooter {
@@ -92,7 +106,6 @@ extension RefreshFooter {
             if self.isAutoRefresh, this.isDragging, offset > 0 {
                 self.willChangeInset()
                 self.state = .refreshing
-                self.didChangeInset()
                 return
             }
             
@@ -116,24 +129,6 @@ extension RefreshFooter {
             
             self.willChangeInset()
             self.state = .refreshing
-            self.didChangeInset()
-        }
-    }
-}
-
-private extension RefreshFooter {
-    
-    func didChangeInset() {
-        guard let scrollView = scrollView else { return }
-        
-        UIView.animate(withDuration: 0.25) {
-            if scrollView.contentSize.height > scrollView.bounds.height {
-                scrollView.contentInset.bottom = self.idleInset.bottom + 54
-            } else {
-                scrollView.contentInset.top = self.idleInset.top - 54
-            }
-            
-            scrollView.offsetInset = scrollView.contentInset
         }
     }
 }
