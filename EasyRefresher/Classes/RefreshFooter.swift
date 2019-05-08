@@ -33,6 +33,15 @@ open class RefreshFooter: RefreshComponent {
     
     private var initialInsetBottom: CGFloat = 0
     
+    private lazy var constraintTop: NSLayoutConstraint? = {
+        guard let scrollView = scrollView else { return nil }
+        
+        let constraint = topAnchor.constraint(equalTo: scrollView.topAnchor)
+        constraint.isActive = true
+        
+        return constraint
+    }()
+    
     override weak var scrollView: UIScrollView? {
         didSet {
             guard let scrollView = scrollView else { return }
@@ -113,8 +122,7 @@ extension RefreshFooter {
                 constant = this.bounds.height
             }
             
-            self.translatesAutoresizingMaskIntoConstraints = false
-            self.topAnchor.constraint(equalTo: this.topAnchor, constant: constant).isActive = true
+            self.constraintTop?.constant = constant
             
             if self.isAutoRefresh, offset > 0 {
                 self.initialInsetTop = this.contentInset.top
