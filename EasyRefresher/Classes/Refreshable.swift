@@ -23,6 +23,8 @@ public protocol Refreshable: class {
     
     var refreshClosure: () -> Void { get set }
     
+    init(refreshClosure: @escaping () -> Void)
+    
     func addRefresher(_ refreshClosure: @escaping () -> Void)
     
     func beginRefreshing()

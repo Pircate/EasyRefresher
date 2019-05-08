@@ -69,18 +69,29 @@ open class RefreshFooter: UIView {
     
     private var panStateObservation: NSKeyValueObservation?
     
-    private weak var scrollView: UIScrollView?
-    
     private var initialInsetTop: CGFloat = 0
     
     private var initialInsetBottom: CGFloat = 0
     
-    public convenience init(scrollView: UIScrollView) {
-        self.init(frame: CGRect.zero)
-        self.scrollView = scrollView
-        self.initialInsetTop = scrollView.contentInset.top
-        self.initialInsetBottom = scrollView.contentInset.bottom
-        scrollView.alwaysBounceVertical = true
+    weak var scrollView: UIScrollView? {
+        didSet {
+            guard let scrollView = scrollView else { return }
+            
+            initialInsetTop = scrollView.contentInset.top
+            initialInsetBottom = scrollView.contentInset.bottom
+            scrollView.alwaysBounceVertical = true
+            
+            add(into: scrollView)
+            observe(scrollView)
+        }
+    }
+    
+    public required init(refreshClosure: @escaping () -> Void) {
+        self.refreshClosure = refreshClosure
+        
+        super.init(frame: CGRect.zero)
+        
+        build()
     }
     
     override init(frame: CGRect) {
@@ -106,13 +117,26 @@ extension RefreshFooter {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
+    private func add(into scrollView: UIScrollView) {
+        guard !scrollView.subviews.contains(self) else { return }
+        
+        scrollView.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 54).isActive = true
+    }
+    
     private func removeAllObservers() {
         scrollObservation?.invalidate()
         panStateObservation?.invalidate()
     }
     
-    private func addObservers() {
-        scrollObservation = scrollView?.observe(\.contentOffset) { [weak self] this, change in
+    private func observe(_ scrollView: UIScrollView) {
+        removeAllObservers()
+        
+        scrollObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
             guard let `self` = self else { return }
             
             this.bringSubviewToFront(self)
@@ -151,7 +175,7 @@ extension RefreshFooter {
             }
         }
         
-        panStateObservation = scrollView?.observe(
+        panStateObservation = scrollView.observe(
         \.panGestureRecognizer.state) { [weak self] this, change in
             guard let `self` = self,
                 !self.isAutoRefresh,
@@ -162,6 +186,9 @@ extension RefreshFooter {
             self.state = .refreshing
         }
     }
+}
+
+extension RefreshFooter {
     
     private func startRefreshing() {
         indicatorView.startAnimating()
@@ -195,24 +222,6 @@ extension RefreshFooter {
 }
 
 extension RefreshFooter: Refreshable {
-    
-    public func addRefresher(_ refreshClosure: @escaping () -> Void) {
-        guard let scrollView = scrollView else { return }
-        
-        removeAllObservers()
-        addObservers()
-        
-        guard !scrollView.subviews.contains(self) else { return }
-        
-        scrollView.addSubview(self)
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
-        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        heightAnchor.constraint(equalToConstant: 54).isActive = true
-        
-        self.refreshClosure = refreshClosure
-    }
 }
 
 extension RefreshFooter: HasStateTitle {

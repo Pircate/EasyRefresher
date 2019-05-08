@@ -32,8 +32,7 @@ tableView.refresh.header.addRefresher {
     }
 }
 
-tableView.refresh.footer = RefreshFooter(scrollView: tableView)
-tableView.refresh.footer.refreshClosure = {
+tableView.refresh.footer = AutoRefreshFooter {
     self.reqeust {
         self.tableView.refresh.footer.endRefreshing()
     }
