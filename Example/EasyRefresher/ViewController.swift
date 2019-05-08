@@ -24,7 +24,7 @@ class ViewController: UIViewController {
             }
         }
         
-        tableView.refresh.footer = RefreshFooter(scrollView: tableView)
+        tableView.refresh.footer = AutoRefreshFooter(scrollView: tableView)
         tableView.refresh.footer.refreshClosure = {
             self.reqeust {
                 self.tableView.refresh.footer.endRefreshing()

@@ -39,6 +39,8 @@ open class RefreshFooter: UIView {
     
     open var refreshClosure: () -> Void = {}
     
+    open var isAutoRefresh: Bool { return false }
+    
     public var stateTitles: [RefreshState: String] = [
         .pulling: "上拉可以加载更多",
         .willRefresh: "松开立即加载更多",
@@ -134,6 +136,11 @@ extension RefreshFooter {
             self.translatesAutoresizingMaskIntoConstraints = false
             self.topAnchor.constraint(equalTo: this.topAnchor, constant: constant).isActive = true
             
+            if self.isAutoRefresh, offset > 0 {
+                self.state = .refreshing
+                return
+            }
+            
             switch offset {
             case 54...:
                 self.state = .willRefresh
@@ -144,8 +151,11 @@ extension RefreshFooter {
             }
         }
         
-        panStateObservation = scrollView?.observe(\.panGestureRecognizer.state) { [weak self] this, change in
-            guard let `self` = self, this.panGestureRecognizer.state == .ended else { return }
+        panStateObservation = scrollView?.observe(
+        \.panGestureRecognizer.state) { [weak self] this, change in
+            guard let `self` = self,
+                !self.isAutoRefresh,
+                this.panGestureRecognizer.state == .ended else { return }
             
             guard self.state == .willRefresh else { return }
             
