@@ -59,11 +59,7 @@ open class RefreshFooter: UIView {
     private var initialInsetBottom: CGFloat = 0
     
     public convenience init(scrollView: UIScrollView) {
-        self.init(frame: CGRect(
-            x: 0,
-            y: scrollView.bounds.height,
-            width: UIScreen.main.bounds.width,
-            height: 54))
+        self.init(frame: CGRect.zero)
         self.scrollView = scrollView
         self.initialInsetTop = scrollView.contentInset.top
         self.initialInsetBottom = scrollView.contentInset.bottom
@@ -113,14 +109,17 @@ extension RefreshFooter {
             }
             
             let offset: CGFloat
+            let constant: CGFloat
             
             if this.contentSize.height > this.bounds.height {
-                self.frame.origin.y = this.contentSize.height
                 offset = this.contentOffset.y + this.bounds.height - this.contentSize.height
+                constant = this.contentSize.height
             } else {
-                self.frame.origin.y = this.bounds.height
                 offset = this.contentOffset.y
+                constant = this.bounds.height
             }
+            
+            self.topAnchor.constraint(equalTo: this.topAnchor, constant: constant).isActive = true
             
             switch offset {
             case 54...:
@@ -183,6 +182,12 @@ extension RefreshFooter: RefreshComponent {
         guard !scrollView.subviews.contains(self) else { return }
         
         scrollView.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 54).isActive = true
+        
         self.refreshClosure = refreshClosure
     }
 }

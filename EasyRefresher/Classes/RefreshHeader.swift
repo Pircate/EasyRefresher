@@ -56,7 +56,7 @@ open class RefreshHeader: UIView {
     private var initialInsetTop: CGFloat = 0
     
     convenience init(scrollView: UIScrollView) {
-        self.init(frame: CGRect(x: 0, y: -54, width: UIScreen.main.bounds.width, height: 54))
+        self.init(frame: CGRect.zero)
         self.scrollView = scrollView
         self.initialInsetTop = scrollView.contentInset.top
         scrollView.alwaysBounceVertical = true
@@ -153,6 +153,13 @@ extension RefreshHeader: RefreshComponent {
         guard !scrollView.subviews.contains(self) else { return }
         
         scrollView.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 54).isActive = true
+        
         self.refreshClosure = refreshClosure
     }
 }
