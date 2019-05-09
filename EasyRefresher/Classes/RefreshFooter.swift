@@ -57,7 +57,7 @@ open class RefreshFooter: RefreshComponent {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
                 scrollView._changedInset.bottom = 54
             } else {
-                scrollView.contentInset.top = self.idleInset.top - 54
+                scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top - 54
                 scrollView._changedInset.top = -54
             }
         }, completion: completion)
@@ -99,8 +99,8 @@ extension RefreshFooter {
                 offset = this.contentOffset.y + this.bounds.height - this.contentSize.height
                 constant = this.contentSize.height
             } else {
-                offset = this.contentOffset.y
-                constant = this.bounds.height
+                offset = this.contentOffset.y + this.contentInset.top
+                constant = this.bounds.height - this.contentInset.top
             }
             
             self.constraintTop?.constant = constant
