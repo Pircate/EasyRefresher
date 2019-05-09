@@ -23,15 +23,6 @@ open class RefreshHeader: RefreshComponent {
         }
     }
     
-    override weak var scrollView: UIScrollView? {
-        didSet {
-            guard let scrollView = scrollView else { return }
-            
-            add(into: scrollView)
-            observe(scrollView)
-        }
-    }
-    
     private var scrollObservation: NSKeyValueObservation?
     
     private var panStateObservation: NSKeyValueObservation?
@@ -41,37 +32,27 @@ open class RefreshHeader: RefreshComponent {
         
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top = self.idleInset.top + 54
-            scrollView._changedInset.top.increase()
+            scrollView.changed_inset.top.increase()
         }, completion: { _ in completion() })
     }
     
     override func willEndRefreshing() {
         guard let scrollView = scrollView else { return }
         
-        scrollView._changedInset.top = 0
+        scrollView.changed_inset.top.decrease()
+        
+        guard let footer = scrollView.refresh_footer as? RefreshFooter else { return }
+        
+        footer.resetConstraint()
     }
-}
-
-extension RefreshHeader {
     
-    private func add(into scrollView: UIScrollView) {
-        guard !scrollView.subviews.contains(self) else { return }
+    override func add(into scrollView: UIScrollView) {
+        super.add(into: scrollView)
         
-        scrollView.addSubview(self)
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
         bottomAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
-    private func removeAllObservers() {
-        scrollObservation?.invalidate()
-        panStateObservation?.invalidate()
-    }
-    
-    private func observe(_ scrollView: UIScrollView) {
+    override func observe(_ scrollView: UIScrollView) {
         removeAllObservers()
         
         scrollObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
@@ -100,6 +81,14 @@ extension RefreshHeader {
             
             self.beginRefreshing()
         }
+    }
+}
+
+private extension RefreshHeader {
+    
+    func removeAllObservers() {
+        scrollObservation?.invalidate()
+        panStateObservation?.invalidate()
     }
 }
 

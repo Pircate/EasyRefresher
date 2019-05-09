@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshComponent: UIView, Refresher {
+open class RefreshComponent: UIView {
     
     public var activityIndicatorStyle: UIActivityIndicatorView.Style = .gray {
         didSet { activityIndicator.style = activityIndicatorStyle }
@@ -96,27 +96,22 @@ open class RefreshComponent: UIView, Refresher {
         build()
     }
     
-    public func beginRefreshing() {
-        guard !isRefreshing else { return }
-        
-        prepare()
-        state = .refreshing
-        willBeginRefreshing { self.refreshClosure() }
-    }
-    
-    public func endRefreshing() {
-        guard isRefreshing, !isEnding else { return }
-        
-        isEnding = true
-        
-        willEndRefreshing()
-        state = .idle
-        didEndRefreshing {}
-    }
-    
     func willBeginRefreshing(completion: @escaping () -> Void) {}
     
     func willEndRefreshing() {}
+    
+    func add(into scrollView: UIScrollView) {
+        guard !scrollView.subviews.contains(self) else { return }
+        
+        scrollView.addSubview(self)
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
+        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        heightAnchor.constraint(equalToConstant: 54).isActive = true
+    }
+    
+    func observe(_ scrollView: UIScrollView) {}
 }
 
 extension RefreshComponent {
@@ -133,8 +128,8 @@ extension RefreshComponent {
         guard let scrollView = scrollView else { return }
         
         var contentInset = scrollView.contentInset
-        contentInset.top -= scrollView._changedInset.top
-        contentInset.bottom -= scrollView._changedInset.bottom
+        contentInset.top -= scrollView.changed_inset.top
+        contentInset.bottom -= scrollView.changed_inset.bottom
         
         idleInset = contentInset
     }
@@ -143,8 +138,8 @@ extension RefreshComponent {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top
-            scrollView.contentInset.bottom = self.idleInset.bottom + scrollView._changedInset.bottom
+            scrollView.contentInset.top = self.idleInset.top + scrollView.changed_inset.top
+            scrollView.contentInset.bottom = self.idleInset.bottom + scrollView.changed_inset.bottom
         }, completion: { _ in
             self.isEnding = false
             completion()
@@ -163,6 +158,36 @@ extension RefreshComponent {
         }
         
         UIView.animate(withDuration: 0.25) { self.arrowImageView.transform = transform }
+    }
+}
+
+extension RefreshComponent: Refresher {
+    
+    public func addRefreshClosure(_ refreshClosure: @escaping () -> Void) {
+        self.refreshClosure = refreshClosure
+        
+        guard let scrollView = scrollView else { return }
+        
+        add(into: scrollView)
+        observe(scrollView)
+    }
+    
+    public func beginRefreshing() {
+        guard !isRefreshing else { return }
+        
+        prepare()
+        state = .refreshing
+        willBeginRefreshing { self.refreshClosure() }
+    }
+    
+    public func endRefreshing() {
+        guard isRefreshing, !isEnding else { return }
+        
+        isEnding = true
+        
+        willEndRefreshing()
+        state = .idle
+        didEndRefreshing {}
     }
 }
 

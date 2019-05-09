@@ -27,15 +27,6 @@ open class RefreshFooter: RefreshComponent {
     
     override var arrowDirection: ArrowDirection { return .up }
     
-    override weak var scrollView: UIScrollView? {
-        didSet {
-            guard let scrollView = scrollView else { return }
-            
-            add(into: scrollView)
-            observe(scrollView)
-        }
-    }
-    
     private var scrollObservation: NSKeyValueObservation?
     
     private var panStateObservation: NSKeyValueObservation?
@@ -49,7 +40,7 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    private var isTopDecrease: Bool = false
+    private var isUpdateConstraint: Bool = false
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
@@ -57,12 +48,11 @@ open class RefreshFooter: RefreshComponent {
         UIView.animate(withDuration: 0.25, animations: {
             if scrollView.contentSize.height > scrollView.bounds.height {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
-                scrollView._changedInset.bottom.increase()
-                self.isTopDecrease = false
+                scrollView.changed_inset.bottom.increase()
+                self.isUpdateConstraint = false
             } else {
-                scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top - 54
-                scrollView._changedInset.top.decrease()
-                self.isTopDecrease = true
+                self.constraintTop?.constant = self.constant(by: scrollView) - 54
+                self.isUpdateConstraint = true
             }
         }, completion: { _ in completion() })
     }
@@ -70,33 +60,14 @@ open class RefreshFooter: RefreshComponent {
     override func willEndRefreshing() {
         guard let scrollView = scrollView else { return }
         
-        if isTopDecrease {
-            scrollView._changedInset.top = scrollView._refreshHeader.isRefreshing ? 54 : 0
+        if isUpdateConstraint {
+            constraintTop?.constant = constant(by: scrollView)
         } else {
-            scrollView._changedInset.bottom.decrease()
+            scrollView.changed_inset.bottom.decrease()
         }
     }
-}
-
-extension RefreshFooter {
     
-    private func add(into scrollView: UIScrollView) {
-        guard !scrollView.subviews.contains(self) else { return }
-        
-        scrollView.addSubview(self)
-        
-        translatesAutoresizingMaskIntoConstraints = false
-        leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
-        widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        heightAnchor.constraint(equalToConstant: 54).isActive = true
-    }
-    
-    private func removeAllObservers() {
-        scrollObservation?.invalidate()
-        panStateObservation?.invalidate()
-    }
-    
-    private func observe(_ scrollView: UIScrollView) {
+    override func observe(_ scrollView: UIScrollView) {
         removeAllObservers()
         
         scrollObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
@@ -144,5 +115,26 @@ extension RefreshFooter {
             
             self.beginRefreshing()
         }
+    }
+}
+
+extension RefreshFooter {
+    
+    func resetConstraint() {
+        guard isRefreshing, isUpdateConstraint, let scrollView = scrollView else { return }
+        
+        UIView.animate(withDuration: 0.25) {
+            self.constraintTop?.constant = self.constant(by: scrollView)
+            self.layoutIfNeeded()
+        }
+    }
+    
+    private func constant(by scrollView: UIScrollView) -> CGFloat {
+        return scrollView.bounds.height - scrollView.contentInset.top
+    }
+    
+    private func removeAllObservers() {
+        scrollObservation?.invalidate()
+        panStateObservation?.invalidate()
     }
 }

@@ -37,16 +37,4 @@ public extension Refreshable {
     var isRefreshing: Bool {
         return state == .refreshing
     }
-    
-    func addRefreshClosure(_ refreshClosure: @escaping () -> Void) {
-        self.refreshClosure = refreshClosure
-    }
-    
-    func beginRefreshing() {
-        state = .refreshing
-    }
-    
-    func endRefreshing() {
-        state = .idle
-    }
 }

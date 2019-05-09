@@ -13,7 +13,7 @@ public typealias Refresher = Refreshable & HasStateTitle & HasActivityIndicator 
 
 extension UIScrollView {
     
-    var _refreshHeader: Refresher {
+    var refresh_header: Refresher {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? Refresher {
                 return obj
@@ -32,10 +32,12 @@ extension UIScrollView {
             guard let header = newValue as? RefreshComponent else { return }
             
             header.scrollView = self
+            header.add(into: self)
+            header.observe(self)
         }
     }
     
-    var _refreshFooter: Refresher {
+    var refresh_footer: Refresher {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? Refresher {
                 return obj
@@ -54,10 +56,12 @@ extension UIScrollView {
             guard let footer = newValue as? RefreshComponent else { return }
             
             footer.scrollView = self
+            footer.add(into: self)
+            footer.observe(self)
         }
     }
     
-    var _changedInset: UIEdgeInsets {
+    var changed_inset: UIEdgeInsets {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.changedInset) as? UIEdgeInsets {
                 return obj

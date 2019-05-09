@@ -37,12 +37,12 @@ extension UIScrollView: RefreshCompatible {}
 public extension Refresh where Base: UIScrollView {
     
     var header: Refresher {
-        get { return base._refreshHeader }
-        set { base._refreshHeader = newValue }
+        get { return base.refresh_header }
+        set { base.refresh_header = newValue }
     }
     
     var footer: Refresher {
-        get { return base._refreshFooter }
-        set { base._refreshFooter = newValue }
+        get { return base.refresh_footer }
+        set { base.refresh_footer = newValue }
     }
 }
