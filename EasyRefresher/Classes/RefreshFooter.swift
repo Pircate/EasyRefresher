@@ -49,18 +49,18 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    override func didChangeInset() {
+    override func didChangeInset(completion: @escaping (Bool) -> Void) {
         guard let scrollView = scrollView else { return }
         
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.25, animations: {
             if scrollView.contentSize.height > scrollView.bounds.height {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
             } else {
                 scrollView.contentInset.top = self.idleInset.top - 54
             }
             
-            scrollView._refreshInset = scrollView.contentInset
-        }
+            scrollView._changedInset = scrollView.contentInset
+        }, completion: completion)
     }
 }
 
