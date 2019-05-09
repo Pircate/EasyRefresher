@@ -6,7 +6,13 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshComponent: UIView, Refreshable, HasStateTitle {
+open class RefreshComponent: UIView, Refresher {
+    
+    public var activityIndicatorStyle: UIActivityIndicatorView.Style = .gray {
+        didSet {
+            activityIndicator.style = activityIndicatorStyle
+        }
+    }
     
     public var stateTitles: [RefreshState : String] = [:]
     
@@ -51,13 +57,13 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     var idleInset: UIEdgeInsets = .zero
     
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [indicatorView, stateLabel])
+        let stackView = UIStackView(arrangedSubviews: [activityIndicator, stateLabel])
         stackView.spacing = 10
         return stackView
     }()
     
-    private lazy var indicatorView: UIActivityIndicatorView = {
-        UIActivityIndicatorView(style: .gray)
+    public lazy var activityIndicator: UIActivityIndicatorView = {
+        UIActivityIndicatorView(style: activityIndicatorStyle)
     }()
     
     private lazy var stateLabel: UILabel = {
@@ -88,13 +94,13 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
     }
     
     func startRefreshing() {
-        indicatorView.startAnimating()
+        activityIndicator.startAnimating()
         
         didChangeInset()
     }
     
     func stopRefreshing() {
-        indicatorView.stopAnimating()
+        activityIndicator.stopAnimating()
         
         resetInset()
     }

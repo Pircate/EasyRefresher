@@ -9,7 +9,7 @@
 import UIKit
 import ObjectiveC
 
-public typealias Refresher = Refreshable & HasStateTitle
+public typealias Refresher = Refreshable & HasStateTitle & HasActivityIndicator & Displayable
 
 extension UIScrollView {
     
@@ -59,16 +59,16 @@ extension UIScrollView {
     
     var _refreshInset: UIEdgeInsets {
         get {
-            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.offsetInset) as? UIEdgeInsets {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.inset) as? UIEdgeInsets {
                 return obj
             }
             
-            objcSetAssociatedObject(UIEdgeInsets.zero, for: &AssociatedKeys.offsetInset)
+            objcSetAssociatedObject(UIEdgeInsets.zero, for: &AssociatedKeys.inset)
             
             return .zero
         }
         set {
-            objcSetAssociatedObject(newValue, for: &AssociatedKeys.offsetInset)
+            objcSetAssociatedObject(newValue, for: &AssociatedKeys.inset)
         }
     }
 }
@@ -90,5 +90,5 @@ struct AssociatedKeys {
     
     static var footer = "com.pircate.github.refresh.footer"
     
-    static var offsetInset = "com.pircate.github.offset.inset"
+    static var inset = "com.pircate.github.refresh.inset"
 }
