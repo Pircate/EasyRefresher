@@ -47,10 +47,7 @@ open class RefreshComponent: UIView, Refresher {
     
     weak var scrollView: UIScrollView? {
         didSet {
-            guard let scrollView = scrollView else { return }
-            
-            scrollView.alwaysBounceVertical = true
-            idleInset = scrollView.contentInset
+            scrollView?.alwaysBounceVertical = true
         }
     }
     
