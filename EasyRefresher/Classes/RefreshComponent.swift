@@ -138,7 +138,8 @@ extension RefreshComponent {
     private func resetInset() {
         UIView.animate(withDuration: 0.25) {
             self.scrollView?.contentInset = self.idleInset
-            self.scrollView?._changedInset = self.idleInset
+            self.scrollView?._changedInset.top = 0
+            self.scrollView?._changedInset.bottom = 0
         }
     }
     

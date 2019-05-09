@@ -55,11 +55,11 @@ open class RefreshFooter: RefreshComponent {
         UIView.animate(withDuration: 0.25, animations: {
             if scrollView.contentSize.height > scrollView.bounds.height {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
+                scrollView._changedInset.bottom = 54
             } else {
                 scrollView.contentInset.top = self.idleInset.top - 54
+                scrollView._changedInset.top = -54
             }
-            
-            scrollView._changedInset = scrollView.contentInset
         }, completion: completion)
     }
 }
