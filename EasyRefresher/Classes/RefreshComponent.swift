@@ -21,15 +21,13 @@ open class RefreshComponent: UIView, Refresher {
             guard state != oldValue else { return }
             
             switch state {
-            case .idle:
-                stopRefreshing()
             case .refreshing:
-                startRefreshing()
+                activityIndicator.startAnimating()
             default:
                 activityIndicator.stopAnimating()
             }
             
-            rotate(for: state)
+            rotateArrow(for: state)
             
             if let attributedTitle = attributedTitle(for: state) {
                 stateLabel.attributedText = attributedTitle
@@ -97,12 +95,17 @@ open class RefreshComponent: UIView, Refresher {
     }
     
     public func beginRefreshing() {
-        willChangeInset()
+        prepare()
         state = .refreshing
-        didChangeInset { _ in self.refreshClosure() }
+        willBeginRefreshing { self.refreshClosure() }
     }
     
-    func didChangeInset(completion: @escaping (Bool) -> Void) {}
+    public func endRefreshing() {
+        state = .idle
+        didEndRefreshing {}
+    }
+    
+    func willBeginRefreshing(completion: @escaping () -> Void) {}
 }
 
 extension RefreshComponent {
@@ -115,17 +118,7 @@ extension RefreshComponent {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    private func startRefreshing() {
-        activityIndicator.startAnimating()
-    }
-    
-    private func stopRefreshing() {
-        activityIndicator.stopAnimating()
-        
-        resetInset()
-    }
-    
-    private func willChangeInset() {
+    private func prepare() {
         guard let scrollView = scrollView else { return }
         
         var contentInset = scrollView.contentInset
@@ -135,17 +128,17 @@ extension RefreshComponent {
         idleInset = contentInset
     }
     
-    private func resetInset() {
+    private func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        UIView.animate(withDuration: 0.25) {
+        UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset = self.idleInset
             scrollView._changedInset.top = 0
             scrollView._changedInset.bottom = 0
-        }
+        }, completion: { _ in completion() })
     }
     
-    private func rotate(for state: RefreshState) {
+    private func rotateArrow(for state: RefreshState) {
         arrowImageView.isHidden = state == .idle || state == .refreshing
         
         let transform: CGAffineTransform
