@@ -1,5 +1,5 @@
 PODS:
-  - EasyRefresher (0.5.5)
+  - EasyRefresher (0.6.1)
 
 DEPENDENCIES:
   - EasyRefresher (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  EasyRefresher: b0f7e252885b3efa7e660e1241ec3e6415fa8d31
+  EasyRefresher: 59240a1e2b549d2796f9b159bdf406ce77b8ef71
 
 PODFILE CHECKSUM: 0bbe2acc8768e0d4d21caa3362edd6df8041aec6
 

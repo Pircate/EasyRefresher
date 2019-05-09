@@ -57,6 +57,7 @@ open class RefreshComponent: UIView {
         let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
         stackView.spacing = 8
         stackView.distribution = .fillProportionally
+        stackView.alignment = .center
         return stackView
     }()
     
