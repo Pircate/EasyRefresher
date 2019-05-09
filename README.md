@@ -25,8 +25,10 @@ pod 'EasyRefresher'
 
 ## Usage
 
+* Add Refresher
+
 ```swift
-tableView.refresh.header.addRefresher {
+tableView.refresh.header.addRefreshClosure {
     self.reqeust {
         self.tableView.refresh.header.endRefreshing()
     }
@@ -37,11 +39,24 @@ tableView.refresh.footer = AutoRefreshFooter {
         self.tableView.refresh.footer.endRefreshing()
     }
 }
+
+```
+
+* Manual Trigger
+
+```swift
+tableView.refresh.header.beginRefreshing()
+```
+
+* State Title
+
+```swift
+tableView.refresh.header.setTitle("loading...", for: .refreshing)
 ```
 
 ## Author
 
-Pircate, gao497868860@gmail.com
+Pircate, swifter.dev@gmail.com
 
 ## License
 

@@ -20,14 +20,14 @@ class ViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         
-        tableView.refresh.header.addRefresher {
+        tableView.refresh.header.addRefreshClosure {
             self.reqeust {
                 self.tableView.refresh.header.endRefreshing()
             }
         }
         
         tableView.refresh.header.beginRefreshing()
-
+        
         tableView.refresh.footer = AutoRefreshFooter {
             self.reqeust {
                 self.tableView.refresh.footer.endRefreshing()

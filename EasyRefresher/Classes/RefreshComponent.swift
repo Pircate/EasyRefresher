@@ -103,8 +103,8 @@ open class RefreshComponent: UIView, Refreshable, HasStateTitle {
         guard let scrollView = scrollView else { return }
         
         var contentInset = scrollView.contentInset
-        contentInset.top -= scrollView.offsetInset.top
-        contentInset.bottom -= scrollView.offsetInset.bottom
+        contentInset.top -= scrollView._refreshInset.top
+        contentInset.bottom -= scrollView._refreshInset.bottom
         
         idleInset = contentInset
     }
@@ -125,7 +125,7 @@ extension RefreshComponent {
     private func resetInset() {
         UIView.animate(withDuration: 0.25) {
             self.scrollView?.contentInset = self.idleInset
-            self.scrollView?.offsetInset = self.idleInset
+            self.scrollView?._refreshInset = self.idleInset
         }
     }
 }

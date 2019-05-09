@@ -57,7 +57,7 @@ open class RefreshFooter: RefreshComponent {
                 scrollView.contentInset.top = self.idleInset.top - 54
             }
             
-            scrollView.offsetInset = scrollView.contentInset
+            scrollView._refreshInset = scrollView.contentInset
         }
     }
 }

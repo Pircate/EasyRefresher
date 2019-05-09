@@ -13,7 +13,7 @@ public typealias Refresher = Refreshable & HasStateTitle
 
 extension UIScrollView {
     
-    public var header: Refresher {
+    var _refreshHeader: Refresher {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? Refresher {
                 return obj
@@ -35,7 +35,7 @@ extension UIScrollView {
         }
     }
     
-    public var footer: Refresher {
+    var _refreshFooter: Refresher {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? Refresher {
                 return obj
@@ -57,15 +57,7 @@ extension UIScrollView {
         }
     }
     
-    private func objcGetAssociatedObject(for key: UnsafeRawPointer) -> Any? {
-        return objc_getAssociatedObject(self, key)
-    }
-    
-    private func objcSetAssociatedObject(_ value: Any?, for key: UnsafeRawPointer) {
-        objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-    }
-    
-    var offsetInset: UIEdgeInsets {
+    var _refreshInset: UIEdgeInsets {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.offsetInset) as? UIEdgeInsets {
                 return obj
@@ -78,6 +70,17 @@ extension UIScrollView {
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.offsetInset)
         }
+    }
+}
+
+private extension UIScrollView {
+    
+    func objcGetAssociatedObject(for key: UnsafeRawPointer) -> Any? {
+        return objc_getAssociatedObject(self, key)
+    }
+    
+    func objcSetAssociatedObject(_ value: Any?, for key: UnsafeRawPointer) {
+        objc_setAssociatedObject(self, key, value, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }
 

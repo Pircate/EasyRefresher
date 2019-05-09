@@ -41,7 +41,7 @@ open class RefreshHeader: RefreshComponent {
         
         UIView.animate(withDuration: 0.25) {
             scrollView.contentInset.top = self.idleInset.top + 54
-            scrollView.offsetInset = scrollView.contentInset
+            scrollView._refreshInset = scrollView.contentInset
         }
     }
 }
