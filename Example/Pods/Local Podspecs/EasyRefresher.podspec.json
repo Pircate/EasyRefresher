@@ -15,6 +15,11 @@
     "tag": "0.5.0"
   },
   "source_files": "EasyRefresher/Classes/**/*",
+  "resource_bundles": {
+    "EasyRefresher": [
+      "EasyRefresher/Assets/*.xcassets"
+    ]
+  },
   "platforms": {
     "ios": "9.0"
   },

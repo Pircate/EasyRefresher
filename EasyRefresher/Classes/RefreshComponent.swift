@@ -9,9 +9,7 @@
 open class RefreshComponent: UIView, Refresher {
     
     public var activityIndicatorStyle: UIActivityIndicatorView.Style = .gray {
-        didSet {
-            activityIndicator.style = activityIndicatorStyle
-        }
+        didSet { activityIndicator.style = activityIndicatorStyle }
     }
     
     public var stateTitles: [RefreshState : String] = [:]
@@ -33,6 +31,8 @@ open class RefreshComponent: UIView, Refresher {
                 break
             }
             
+            rotate(for: state)
+            
             if let attributedTitle = attributedTitle(for: state) {
                 stateLabel.attributedText = attributedTitle
             } else {
@@ -53,13 +53,21 @@ open class RefreshComponent: UIView, Refresher {
     
     var idleInset: UIEdgeInsets = .zero
     
+    var arrowDirection: ArrowDirection { return .down }
+    
     private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [activityIndicator, stateLabel])
-        stackView.spacing = 10
+        let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
+        stackView.spacing = 8
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
-    public lazy var activityIndicator: UIActivityIndicatorView = {
+    private lazy var arrowImageView: UIImageView = {
+        let image = UIImage(named: "refresh_arrow_down", in: Bundle.current, compatibleWith: nil)
+        return UIImageView(image: image)
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         UIActivityIndicatorView(style: activityIndicatorStyle)
     }()
     
@@ -130,5 +138,38 @@ extension RefreshComponent {
             self.scrollView?.contentInset = self.idleInset
             self.scrollView?._refreshInset = self.idleInset
         }
+    }
+    
+    private func rotate(for state: RefreshState) {
+        arrowImageView.isHidden = state == .idle || state == .refreshing
+        
+        let transform: CGAffineTransform
+        switch arrowDirection {
+        case .up:
+            transform = state == .willRefresh ? .identity : CGAffineTransform(rotationAngle: .pi)
+        case .down:
+            transform = state == .willRefresh ? CGAffineTransform(rotationAngle: .pi) : .identity
+        }
+        
+        UIView.animate(withDuration: 0.25) { self.arrowImageView.transform = transform }
+    }
+}
+
+extension RefreshComponent {
+    
+    enum ArrowDirection {
+        case up
+        case down
+    }
+}
+
+private extension Bundle {
+    
+    static var current: Bundle? {
+        guard let resourcePath = Bundle(for: RefreshComponent.self).resourcePath,
+            let bundle = Bundle(path: "\(resourcePath)/EasyRefresher.bundle") else {
+                return nil
+        }
+        return bundle
     }
 }

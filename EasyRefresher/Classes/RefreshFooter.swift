@@ -25,6 +25,17 @@ open class RefreshFooter: RefreshComponent {
     
     var isAutoRefresh: Bool { return false }
     
+    override var arrowDirection: ArrowDirection { return .up }
+    
+    override weak var scrollView: UIScrollView? {
+        didSet {
+            guard let scrollView = scrollView else { return }
+            
+            add(into: scrollView)
+            observe(scrollView)
+        }
+    }
+    
     private var scrollObservation: NSKeyValueObservation?
     
     private var panStateObservation: NSKeyValueObservation?
@@ -37,15 +48,6 @@ open class RefreshFooter: RefreshComponent {
         
         return constraint
     }()
-    
-    override weak var scrollView: UIScrollView? {
-        didSet {
-            guard let scrollView = scrollView else { return }
-            
-            add(into: scrollView)
-            observe(scrollView)
-        }
-    }
     
     override func didChangeInset() {
         guard let scrollView = scrollView else { return }

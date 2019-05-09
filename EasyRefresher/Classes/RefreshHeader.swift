@@ -23,10 +23,6 @@ open class RefreshHeader: RefreshComponent {
         }
     }
     
-    private var scrollObservation: NSKeyValueObservation?
-    
-    private var panStateObservation: NSKeyValueObservation?
-    
     override weak var scrollView: UIScrollView? {
         didSet {
             guard let scrollView = scrollView else { return }
@@ -35,6 +31,10 @@ open class RefreshHeader: RefreshComponent {
             observe(scrollView)
         }
     }
+    
+    private var scrollObservation: NSKeyValueObservation?
+    
+    private var panStateObservation: NSKeyValueObservation?
     
     override func didChangeInset() {
         guard let scrollView = scrollView else { return }

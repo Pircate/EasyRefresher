@@ -8,24 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		01B65C114C5646D404C7DCCC68762439 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
-		01FDE0ABF2F291772910994997DDF6F1 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F22E02E52AF464B71B34608495A8E17 /* Refreshable.swift */; };
-		03DCD2CF459568135CE74C5D30915EE5 /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63705D4471A53D4B1E2BD798167140C1 /* UIScrollView+Refresh.swift */; };
-		0450B7F109A804BAE894EAF86232AFE4 /* RefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA165E5D28633C17ADA9182701F283A /* RefreshHeader.swift */; };
 		04BE1557BD5BF4969659ABE932ED4E84 /* Pods-EasyRefresher_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 79E31825CD3A6CFF2CCFC98665236950 /* Pods-EasyRefresher_Tests-dummy.m */; };
-		0D7B1E1DC8F461C71071940C129638CD /* EasyRefresher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DC06E516F9F5690375D845FCB7E0EEF /* EasyRefresher-dummy.m */; };
 		0E9CD4C9922448B7ED402E29E158C02F /* Pods-EasyRefresher_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C32DFE3281D6B21EFDF6A44A971780B /* Pods-EasyRefresher_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		26BC9F072548FFEC43AE8C16667427E3 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ACE159AD2AC8F406AD5E6295F3A64F4 /* Displayable.swift */; };
-		40B546ECB9E41920C518184FF8F05344 /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96C34A4F0FBA0439B0272DCE93A73F06 /* Refresh.swift */; };
-		4EFF93442B4163E087C6C4915085BED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		1D2B8090720F2B3EFECE7EDE825E5911 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		1ED31907E713DE6F528D5E798FB71E11 /* RefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5206A5914E6AE53A12EAD79BFB2E05F3 /* RefreshComponent.swift */; };
+		20BB8D060A912F47CC7D2147150FFE94 /* AutoRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4103179DFF4193D84AC73B37A5D42DA5 /* AutoRefreshFooter.swift */; };
+		4380F0B1CCDF4C173A4D28FE039FF522 /* UIScrollView+Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 517A39BB06DAEBE97B68DCCFA2038875 /* UIScrollView+Refresh.swift */; };
 		57034C1DAD621A43F9872E7B92B4EA93 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
+		5AD3E3D2949F3D3B077ED26F5379790B /* HasActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B7F1A79D1B295DD5397BF17307F6629 /* HasActivityIndicator.swift */; };
 		5CB5B3428136C02EE710312128A36C10 /* Pods-EasyRefresher_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 23AD9E30B5717576E74054EA0E5469C2 /* Pods-EasyRefresher_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5D1961AB9B8A7CCFBB7AD02F41B0D002 /* HasStateTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0273BAA0B011F93526FD5E949391E46C /* HasStateTitle.swift */; };
-		6D47CF333E961AC0251F6F7DA88AE8F1 /* AutoRefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97802A181301A6A0FC219B546BDE139C /* AutoRefreshFooter.swift */; };
-		87699795D196716E92588C96F1048D29 /* HasActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F9C6A45BDF58C1455D9A35E8BDB079 /* HasActivityIndicator.swift */; };
+		61A5D4900FE40EF433CC521705DB70D2 /* Refreshable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75DC2D558117480F7641608967CAFDE8 /* Refreshable.swift */; };
+		8C8DADB95B377C9101F6A189DC949400 /* EasyRefresher.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28EAD21CA3DAD419353600940BD374DF /* EasyRefresher.xcassets */; };
 		8EA34FF20917CDF72F90EA0158A0A5A0 /* Pods-EasyRefresher_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B28678FA7742842BEDF1C9A654AB80E2 /* Pods-EasyRefresher_Example-dummy.m */; };
-		A70AAE0BC56CFB26D59AEE3F0BDE08B2 /* EasyRefresher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EBF09725A4A1B83B0A628585F20288F2 /* EasyRefresher-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C5EC6412E54A4714EFC9670D6AD5F03D /* RefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45385F573BB911FABBB60FFCB52BA0EB /* RefreshComponent.swift */; };
-		F4120EB1D68B4B243AA9CF56AA0EC649 /* RefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B26F99F2C53FD4451743E940D6CC36 /* RefreshFooter.swift */; };
+		9BE98700224F261A8AC7345FC719D24F /* RefreshHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E67F1B9642CA9CBF417AF0DBB89ACC /* RefreshHeader.swift */; };
+		AB73550688FB8E62DF85B43B0C670713 /* Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD4968770F8908C623B11A0E995310F /* Refresh.swift */; };
+		BE66DDA13E44A74A8B5FAAF7F9607266 /* EasyRefresher-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C78354067BB4A392A65966838D76A25F /* EasyRefresher-dummy.m */; };
+		C2257E93D629D7DBBB79DF6C20886FBC /* HasStateTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7791E60BD8C23BDC63593B95486340FF /* HasStateTitle.swift */; };
+		F74978C4E72BB2DD44AA105D99FFBAD6 /* EasyRefresher-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A6D590FF994CC426B0C408D4D97A0B7F /* EasyRefresher-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F96F5EF8CBA42AE5BFF43D9CA2576A54 /* RefreshFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B49E12522D54A695B2B0DCD8B395AEF /* RefreshFooter.swift */; };
+		FACC58CC67E506EC8F393078ED4485E6 /* Displayable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A99D2B0EC2AF0220AEAA70E0699C13 /* Displayable.swift */; };
+		FF5D0F3A14756951BF7207E75F3EBA08 /* EasyRefresher.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9F2B3281C385A382415D38777F423167 /* EasyRefresher.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +37,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = BD3B9F80DC01FE7B83A33D4AB24538D2;
 			remoteInfo = "Pods-EasyRefresher_Example";
+		};
+		8B72EA69E260421BC28EAC205179FB95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A02FDFD119C7DC1836C9F5E97F27383;
+			remoteInfo = "EasyRefresher-EasyRefresher";
 		};
 		BDCCB10B32011FC54F94762E0CA843D4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -46,55 +55,57 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0273BAA0B011F93526FD5E949391E46C /* HasStateTitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HasStateTitle.swift; path = EasyRefresher/Classes/HasStateTitle.swift; sourceTree = "<group>"; };
+		021C62D87FB34FCAE40EEB699BE00297 /* EasyRefresher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyRefresher-prefix.pch"; sourceTree = "<group>"; };
+		03E67F1B9642CA9CBF417AF0DBB89ACC /* RefreshHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshHeader.swift; path = EasyRefresher/Classes/RefreshHeader.swift; sourceTree = "<group>"; };
 		115113A579095ADC64DAB4DCDCA0EAB9 /* Pods-EasyRefresher_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyRefresher_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		21B15277ECE3CEC254857012E7505F13 /* EasyRefresher.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = EasyRefresher.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		23AD9E30B5717576E74054EA0E5469C2 /* Pods-EasyRefresher_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EasyRefresher_Tests-umbrella.h"; sourceTree = "<group>"; };
-		3BA3FECA0CB336D866E486FB65E203B2 /* EasyRefresher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = EasyRefresher.framework; path = EasyRefresher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		40DEB24288E07EC80FE0686F3210D15B /* EasyRefresher-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyRefresher-prefix.pch"; sourceTree = "<group>"; };
-		45385F573BB911FABBB60FFCB52BA0EB /* RefreshComponent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshComponent.swift; path = EasyRefresher/Classes/RefreshComponent.swift; sourceTree = "<group>"; };
+		28EAD21CA3DAD419353600940BD374DF /* EasyRefresher.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = EasyRefresher.xcassets; path = EasyRefresher/Assets/EasyRefresher.xcassets; sourceTree = "<group>"; };
+		2B7F1A79D1B295DD5397BF17307F6629 /* HasActivityIndicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HasActivityIndicator.swift; path = EasyRefresher/Classes/HasActivityIndicator.swift; sourceTree = "<group>"; };
+		4103179DFF4193D84AC73B37A5D42DA5 /* AutoRefreshFooter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoRefreshFooter.swift; path = EasyRefresher/Classes/AutoRefreshFooter.swift; sourceTree = "<group>"; };
 		4B238B5AD0F56405323756A006D5B95D /* Pods-EasyRefresher_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EasyRefresher_Example.modulemap"; sourceTree = "<group>"; };
 		4C32DFE3281D6B21EFDF6A44A971780B /* Pods-EasyRefresher_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-EasyRefresher_Example-umbrella.h"; sourceTree = "<group>"; };
-		4DC06E516F9F5690375D845FCB7E0EEF /* EasyRefresher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EasyRefresher-dummy.m"; sourceTree = "<group>"; };
-		5582B347D2CFF70AA0DF18EEE39E4991 /* Pods_EasyRefresher_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EasyRefresher_Example.framework; path = "Pods-EasyRefresher_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		517A39BB06DAEBE97B68DCCFA2038875 /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Refresh.swift"; path = "EasyRefresher/Classes/UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		5206A5914E6AE53A12EAD79BFB2E05F3 /* RefreshComponent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshComponent.swift; path = EasyRefresher/Classes/RefreshComponent.swift; sourceTree = "<group>"; };
 		58FD3B5A09B4BF5CC7B6176AA6107BD9 /* Pods-EasyRefresher_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyRefresher_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		593DF47AA24ABAFF254C2B3E91D3AAA5 /* Pods_EasyRefresher_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EasyRefresher_Example.framework; path = "Pods-EasyRefresher_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B29DB36FABCC91AAA9D542366354042 /* Pods-EasyRefresher_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyRefresher_Example.release.xcconfig"; sourceTree = "<group>"; };
+		5C40880C43AE117C1AC36C5C374F8A6D /* EasyRefresher.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = EasyRefresher.modulemap; sourceTree = "<group>"; };
 		5CCD7E95DFB644775142CED8B5364C5E /* Pods-EasyRefresher_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EasyRefresher_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5F22E02E52AF464B71B34608495A8E17 /* Refreshable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Refreshable.swift; path = EasyRefresher/Classes/Refreshable.swift; sourceTree = "<group>"; };
-		60B26F99F2C53FD4451743E940D6CC36 /* RefreshFooter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshFooter.swift; path = EasyRefresher/Classes/RefreshFooter.swift; sourceTree = "<group>"; };
-		63705D4471A53D4B1E2BD798167140C1 /* UIScrollView+Refresh.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Refresh.swift"; path = "EasyRefresher/Classes/UIScrollView+Refresh.swift"; sourceTree = "<group>"; };
+		641730E32F51FE18842175D54317969F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		6B49E12522D54A695B2B0DCD8B395AEF /* RefreshFooter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshFooter.swift; path = EasyRefresher/Classes/RefreshFooter.swift; sourceTree = "<group>"; };
 		6DCB7F911D5BAA9CB52470B937B6609A /* Pods-EasyRefresher_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyRefresher_Example-Info.plist"; sourceTree = "<group>"; };
 		6DE5D9F25C847CC7F0C309B1B6BB8350 /* Pods-EasyRefresher_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-EasyRefresher_Tests.modulemap"; sourceTree = "<group>"; };
-		6F2998BF7DCEDD71D3A7E1D6885AFC0D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		75DC2D558117480F7641608967CAFDE8 /* Refreshable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Refreshable.swift; path = EasyRefresher/Classes/Refreshable.swift; sourceTree = "<group>"; };
+		76B6DEDD6F4381A4A808D365489380B6 /* EasyRefresher.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = EasyRefresher.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		7791E60BD8C23BDC63593B95486340FF /* HasStateTitle.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HasStateTitle.swift; path = EasyRefresher/Classes/HasStateTitle.swift; sourceTree = "<group>"; };
 		79E31825CD3A6CFF2CCFC98665236950 /* Pods-EasyRefresher_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EasyRefresher_Tests-dummy.m"; sourceTree = "<group>"; };
+		7FB41B343397A22ECFCBE29C0CA60D8E /* EasyRefresher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = EasyRefresher.framework; path = EasyRefresher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FD2A7A611E78232E3D1B359336CDA39 /* Pods-EasyRefresher_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyRefresher_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		8ACE159AD2AC8F406AD5E6295F3A64F4 /* Displayable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Displayable.swift; path = EasyRefresher/Classes/Displayable.swift; sourceTree = "<group>"; };
-		96C34A4F0FBA0439B0272DCE93A73F06 /* Refresh.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Refresh.swift; path = EasyRefresher/Classes/Refresh.swift; sourceTree = "<group>"; };
-		97802A181301A6A0FC219B546BDE139C /* AutoRefreshFooter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AutoRefreshFooter.swift; path = EasyRefresher/Classes/AutoRefreshFooter.swift; sourceTree = "<group>"; };
+		8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyRefresher.xcconfig; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DC1D380E9553F170E9FDC612E8AA410 /* EasyRefresher-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "EasyRefresher-Info.plist"; sourceTree = "<group>"; };
-		A2E4D456EBAFD7B4EDA87E751A6C6697 /* Pods_EasyRefresher_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EasyRefresher_Tests.framework; path = "Pods-EasyRefresher_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F2B3281C385A382415D38777F423167 /* EasyRefresher.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = EasyRefresher.bundle; path = "EasyRefresher-EasyRefresher.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0013231A7ED81E7C7B28EFF9C0116FB /* ResourceBundle-EasyRefresher-EasyRefresher-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-EasyRefresher-EasyRefresher-Info.plist"; sourceTree = "<group>"; };
+		A6D590FF994CC426B0C408D4D97A0B7F /* EasyRefresher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyRefresher-umbrella.h"; sourceTree = "<group>"; };
+		AE6FF43508926F2375992F0AB7FD44EA /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		B015C8EE8B611798D9CA0C0A1E897DA9 /* EasyRefresher-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "EasyRefresher-Info.plist"; sourceTree = "<group>"; };
 		B28678FA7742842BEDF1C9A654AB80E2 /* Pods-EasyRefresher_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-EasyRefresher_Example-dummy.m"; sourceTree = "<group>"; };
 		B3BA1B2360BCF7717A72C216B0497B09 /* Pods-EasyRefresher_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-EasyRefresher_Tests-Info.plist"; sourceTree = "<group>"; };
 		B47ABD47D01E128D7EAE5DD950DAF35E /* Pods-EasyRefresher_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-EasyRefresher_Example-frameworks.sh"; sourceTree = "<group>"; };
-		B9F9C6A45BDF58C1455D9A35E8BDB079 /* HasActivityIndicator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HasActivityIndicator.swift; path = EasyRefresher/Classes/HasActivityIndicator.swift; sourceTree = "<group>"; };
 		BFC90FC62D6C732618E016DA08874DB4 /* Pods-EasyRefresher_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-EasyRefresher_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C7FF3CD9B7495E578C7D2EE997C2878D /* EasyRefresher.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = EasyRefresher.xcconfig; sourceTree = "<group>"; };
+		C78354067BB4A392A65966838D76A25F /* EasyRefresher-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "EasyRefresher-dummy.m"; sourceTree = "<group>"; };
 		CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		DCA165E5D28633C17ADA9182701F283A /* RefreshHeader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RefreshHeader.swift; path = EasyRefresher/Classes/RefreshHeader.swift; sourceTree = "<group>"; };
-		E1699EAD64DA810A9337D5BBF38E99B7 /* EasyRefresher.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = EasyRefresher.modulemap; sourceTree = "<group>"; };
-		EBF09725A4A1B83B0A628585F20288F2 /* EasyRefresher-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "EasyRefresher-umbrella.h"; sourceTree = "<group>"; };
-		F61BDACAA14EB2BE4E617F919058A1D5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		D7A99D2B0EC2AF0220AEAA70E0699C13 /* Displayable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Displayable.swift; path = EasyRefresher/Classes/Displayable.swift; sourceTree = "<group>"; };
+		E4EE7745C52603FDCACFFF8E12455F3C /* Pods_EasyRefresher_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_EasyRefresher_Tests.framework; path = "Pods-EasyRefresher_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EFD4968770F8908C623B11A0E995310F /* Refresh.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Refresh.swift; path = EasyRefresher/Classes/Refresh.swift; sourceTree = "<group>"; };
 		F63B0756012DE677CD86F99EA586222D /* Pods-EasyRefresher_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyRefresher_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		FC1859A7DB43AB6A62A08481163A5A93 /* Pods-EasyRefresher_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-EasyRefresher_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0CD3495275AC620B04CD1EFE9B2EAB93 /* Frameworks */ = {
+		5C106571EC3B84DF299BD5487FE023AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4EFF93442B4163E087C6C4915085BED5 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,9 +125,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C21E2118AB6087FAC5C95FC19A563C8A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D2B8090720F2B3EFECE7EDE825E5911 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07D69E1E2BC219C2DEDD413CDB7014D6 /* EasyRefresher */ = {
+			isa = PBXGroup;
+			children = (
+				4103179DFF4193D84AC73B37A5D42DA5 /* AutoRefreshFooter.swift */,
+				D7A99D2B0EC2AF0220AEAA70E0699C13 /* Displayable.swift */,
+				2B7F1A79D1B295DD5397BF17307F6629 /* HasActivityIndicator.swift */,
+				7791E60BD8C23BDC63593B95486340FF /* HasStateTitle.swift */,
+				EFD4968770F8908C623B11A0E995310F /* Refresh.swift */,
+				75DC2D558117480F7641608967CAFDE8 /* Refreshable.swift */,
+				5206A5914E6AE53A12EAD79BFB2E05F3 /* RefreshComponent.swift */,
+				6B49E12522D54A695B2B0DCD8B395AEF /* RefreshFooter.swift */,
+				03E67F1B9642CA9CBF417AF0DBB89ACC /* RefreshHeader.swift */,
+				517A39BB06DAEBE97B68DCCFA2038875 /* UIScrollView+Refresh.swift */,
+				6AD107B272B5FEB3AFAD23DB32DE1F60 /* Pod */,
+				D0CCD74B194F763B131EA4FF64889202 /* Resources */,
+				739D54F17583C1ADDFCCD521C6E5F672 /* Support Files */,
+			);
+			name = EasyRefresher;
+			path = ../..;
+			sourceTree = "<group>";
+		};
 		2E902E2CEEFD8E770836A5A4CF2446C2 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,52 +166,40 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		428312BCF6CF9D98B86A005799B05198 /* Products */ = {
+		6AD107B272B5FEB3AFAD23DB32DE1F60 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				3BA3FECA0CB336D866E486FB65E203B2 /* EasyRefresher.framework */,
-				5582B347D2CFF70AA0DF18EEE39E4991 /* Pods_EasyRefresher_Example.framework */,
-				A2E4D456EBAFD7B4EDA87E751A6C6697 /* Pods_EasyRefresher_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7799260AEB8E5869071927F45FF741B2 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				832D37B924F207F2813C1C5B5355C2FD /* EasyRefresher */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		832D37B924F207F2813C1C5B5355C2FD /* EasyRefresher */ = {
-			isa = PBXGroup;
-			children = (
-				97802A181301A6A0FC219B546BDE139C /* AutoRefreshFooter.swift */,
-				8ACE159AD2AC8F406AD5E6295F3A64F4 /* Displayable.swift */,
-				B9F9C6A45BDF58C1455D9A35E8BDB079 /* HasActivityIndicator.swift */,
-				0273BAA0B011F93526FD5E949391E46C /* HasStateTitle.swift */,
-				96C34A4F0FBA0439B0272DCE93A73F06 /* Refresh.swift */,
-				5F22E02E52AF464B71B34608495A8E17 /* Refreshable.swift */,
-				45385F573BB911FABBB60FFCB52BA0EB /* RefreshComponent.swift */,
-				60B26F99F2C53FD4451743E940D6CC36 /* RefreshFooter.swift */,
-				DCA165E5D28633C17ADA9182701F283A /* RefreshHeader.swift */,
-				63705D4471A53D4B1E2BD798167140C1 /* UIScrollView+Refresh.swift */,
-				8D829B6D90DC918F78C5B3B8CF3079CC /* Pod */,
-				F2BAE5FC8752DD10AA196279D8ADE750 /* Support Files */,
-			);
-			name = EasyRefresher;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		8D829B6D90DC918F78C5B3B8CF3079CC /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				21B15277ECE3CEC254857012E7505F13 /* EasyRefresher.podspec */,
-				6F2998BF7DCEDD71D3A7E1D6885AFC0D /* LICENSE */,
-				F61BDACAA14EB2BE4E617F919058A1D5 /* README.md */,
+				76B6DEDD6F4381A4A808D365489380B6 /* EasyRefresher.podspec */,
+				641730E32F51FE18842175D54317969F /* LICENSE */,
+				AE6FF43508926F2375992F0AB7FD44EA /* README.md */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		739D54F17583C1ADDFCCD521C6E5F672 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C40880C43AE117C1AC36C5C374F8A6D /* EasyRefresher.modulemap */,
+				8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */,
+				C78354067BB4A392A65966838D76A25F /* EasyRefresher-dummy.m */,
+				B015C8EE8B611798D9CA0C0A1E897DA9 /* EasyRefresher-Info.plist */,
+				021C62D87FB34FCAE40EEB699BE00297 /* EasyRefresher-prefix.pch */,
+				A6D590FF994CC426B0C408D4D97A0B7F /* EasyRefresher-umbrella.h */,
+				A0013231A7ED81E7C7B28EFF9C0116FB /* ResourceBundle-EasyRefresher-EasyRefresher-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/EasyRefresher";
+			sourceTree = "<group>";
+		};
+		87DE8BF5E33B7E07FF165F5A9CCC3892 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9F2B3281C385A382415D38777F423167 /* EasyRefresher.bundle */,
+				7FB41B343397A22ECFCBE29C0CA60D8E /* EasyRefresher.framework */,
+				593DF47AA24ABAFF254C2B3E91D3AAA5 /* Pods_EasyRefresher_Example.framework */,
+				E4EE7745C52603FDCACFFF8E12455F3C /* Pods_EasyRefresher_Tests.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		8E8037AD7DFCC7406273F7405E4A099A /* Pods-EasyRefresher_Tests */ = {
@@ -188,6 +216,14 @@
 			);
 			name = "Pods-EasyRefresher_Tests";
 			path = "Target Support Files/Pods-EasyRefresher_Tests";
+			sourceTree = "<group>";
+		};
+		9AB21C6CA12876F1E30DBF0C1BA40739 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				07D69E1E2BC219C2DEDD413CDB7014D6 /* EasyRefresher */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		9B055D0CFEA43187E72B03DED11F5662 /* iOS */ = {
@@ -219,11 +255,19 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				7799260AEB8E5869071927F45FF741B2 /* Development Pods */,
+				9AB21C6CA12876F1E30DBF0C1BA40739 /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				428312BCF6CF9D98B86A005799B05198 /* Products */,
+				87DE8BF5E33B7E07FF165F5A9CCC3892 /* Products */,
 				2E902E2CEEFD8E770836A5A4CF2446C2 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		D0CCD74B194F763B131EA4FF64889202 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				28EAD21CA3DAD419353600940BD374DF /* EasyRefresher.xcassets */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
@@ -232,20 +276,6 @@
 				9B055D0CFEA43187E72B03DED11F5662 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		F2BAE5FC8752DD10AA196279D8ADE750 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				E1699EAD64DA810A9337D5BBF38E99B7 /* EasyRefresher.modulemap */,
-				C7FF3CD9B7495E578C7D2EE997C2878D /* EasyRefresher.xcconfig */,
-				4DC06E516F9F5690375D845FCB7E0EEF /* EasyRefresher-dummy.m */,
-				9DC1D380E9553F170E9FDC612E8AA410 /* EasyRefresher-Info.plist */,
-				40DEB24288E07EC80FE0686F3210D15B /* EasyRefresher-prefix.pch */,
-				EBF09725A4A1B83B0A628585F20288F2 /* EasyRefresher-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/EasyRefresher";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -267,11 +297,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D027092733600D527D0F27F187D769F3 /* Headers */ = {
+		C4F1EA53E92AB0EE26A461B14DCBBA61 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A70AAE0BC56CFB26D59AEE3F0BDE08B2 /* EasyRefresher-umbrella.h in Headers */,
+				F74978C4E72BB2DD44AA105D99FFBAD6 /* EasyRefresher-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,21 +310,39 @@
 /* Begin PBXNativeTarget section */
 		55C40C4D5BD01A7907F30E89B6B4DA27 /* EasyRefresher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 41DD1C770E44EE4C8EAF4BABCADFF3EB /* Build configuration list for PBXNativeTarget "EasyRefresher" */;
+			buildConfigurationList = 32741D42927A55A2E89033BED3B40DFC /* Build configuration list for PBXNativeTarget "EasyRefresher" */;
 			buildPhases = (
-				D027092733600D527D0F27F187D769F3 /* Headers */,
-				CCD85C2A786A3472495B1F10C94C0A81 /* Sources */,
-				0CD3495275AC620B04CD1EFE9B2EAB93 /* Frameworks */,
-				5FCB10C3697FCF18539B0D3C606D5850 /* Resources */,
+				C4F1EA53E92AB0EE26A461B14DCBBA61 /* Headers */,
+				F00C3C0504EE6E7C79C3010874A36A39 /* Sources */,
+				C21E2118AB6087FAC5C95FC19A563C8A /* Frameworks */,
+				A4EB7D945450D4D8CD7476A393451650 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F47AB1CB0FD0A2AEC55E2F714B5EDF07 /* PBXTargetDependency */,
+			);
+			name = EasyRefresher;
+			productName = EasyRefresher;
+			productReference = 7FB41B343397A22ECFCBE29C0CA60D8E /* EasyRefresher.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		5A02FDFD119C7DC1836C9F5E97F27383 /* EasyRefresher-EasyRefresher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2202E1662C0DAB39E64C4C124F771849 /* Build configuration list for PBXNativeTarget "EasyRefresher-EasyRefresher" */;
+			buildPhases = (
+				AC6334BB161D3BAF78153B7AD49682E4 /* Sources */,
+				5C106571EC3B84DF299BD5487FE023AB /* Frameworks */,
+				43B598319E8AD4D5E45018EFD052C09B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = EasyRefresher;
-			productName = EasyRefresher;
-			productReference = 3BA3FECA0CB336D866E486FB65E203B2 /* EasyRefresher.framework */;
-			productType = "com.apple.product-type.framework";
+			name = "EasyRefresher-EasyRefresher";
+			productName = "EasyRefresher-EasyRefresher";
+			productReference = 9F2B3281C385A382415D38777F423167 /* EasyRefresher.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		BD3B9F80DC01FE7B83A33D4AB24538D2 /* Pods-EasyRefresher_Example */ = {
 			isa = PBXNativeTarget;
@@ -312,7 +360,7 @@
 			);
 			name = "Pods-EasyRefresher_Example";
 			productName = "Pods-EasyRefresher_Example";
-			productReference = 5582B347D2CFF70AA0DF18EEE39E4991 /* Pods_EasyRefresher_Example.framework */;
+			productReference = 593DF47AA24ABAFF254C2B3E91D3AAA5 /* Pods_EasyRefresher_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		EBD245D7675BC3E6DD14E2E2D362504C /* Pods-EasyRefresher_Tests */ = {
@@ -331,7 +379,7 @@
 			);
 			name = "Pods-EasyRefresher_Tests";
 			productName = "Pods-EasyRefresher_Tests";
-			productReference = A2E4D456EBAFD7B4EDA87E751A6C6697 /* Pods_EasyRefresher_Tests.framework */;
+			productReference = E4EE7745C52603FDCACFFF8E12455F3C /* Pods_EasyRefresher_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -351,11 +399,12 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 428312BCF6CF9D98B86A005799B05198 /* Products */;
+			productRefGroup = 87DE8BF5E33B7E07FF165F5A9CCC3892 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				55C40C4D5BD01A7907F30E89B6B4DA27 /* EasyRefresher */,
+				5A02FDFD119C7DC1836C9F5E97F27383 /* EasyRefresher-EasyRefresher */,
 				BD3B9F80DC01FE7B83A33D4AB24538D2 /* Pods-EasyRefresher_Example */,
 				EBD245D7675BC3E6DD14E2E2D362504C /* Pods-EasyRefresher_Tests */,
 			);
@@ -370,10 +419,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5FCB10C3697FCF18539B0D3C606D5850 /* Resources */ = {
+		43B598319E8AD4D5E45018EFD052C09B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8DADB95B377C9101F6A189DC949400 /* EasyRefresher.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,24 +434,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A4EB7D945450D4D8CD7476A393451650 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF5D0F3A14756951BF7207E75F3EBA08 /* EasyRefresher.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		CCD85C2A786A3472495B1F10C94C0A81 /* Sources */ = {
+		AC6334BB161D3BAF78153B7AD49682E4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D47CF333E961AC0251F6F7DA88AE8F1 /* AutoRefreshFooter.swift in Sources */,
-				26BC9F072548FFEC43AE8C16667427E3 /* Displayable.swift in Sources */,
-				0D7B1E1DC8F461C71071940C129638CD /* EasyRefresher-dummy.m in Sources */,
-				87699795D196716E92588C96F1048D29 /* HasActivityIndicator.swift in Sources */,
-				5D1961AB9B8A7CCFBB7AD02F41B0D002 /* HasStateTitle.swift in Sources */,
-				40B546ECB9E41920C518184FF8F05344 /* Refresh.swift in Sources */,
-				01FDE0ABF2F291772910994997DDF6F1 /* Refreshable.swift in Sources */,
-				C5EC6412E54A4714EFC9670D6AD5F03D /* RefreshComponent.swift in Sources */,
-				F4120EB1D68B4B243AA9CF56AA0EC649 /* RefreshFooter.swift in Sources */,
-				0450B7F109A804BAE894EAF86232AFE4 /* RefreshHeader.swift in Sources */,
-				03DCD2CF459568135CE74C5D30915EE5 /* UIScrollView+Refresh.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +468,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F00C3C0504EE6E7C79C3010874A36A39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20BB8D060A912F47CC7D2147150FFE94 /* AutoRefreshFooter.swift in Sources */,
+				FACC58CC67E506EC8F393078ED4485E6 /* Displayable.swift in Sources */,
+				BE66DDA13E44A74A8B5FAAF7F9607266 /* EasyRefresher-dummy.m in Sources */,
+				5AD3E3D2949F3D3B077ED26F5379790B /* HasActivityIndicator.swift in Sources */,
+				C2257E93D629D7DBBB79DF6C20886FBC /* HasStateTitle.swift in Sources */,
+				AB73550688FB8E62DF85B43B0C670713 /* Refresh.swift in Sources */,
+				61A5D4900FE40EF433CC521705DB70D2 /* Refreshable.swift in Sources */,
+				1ED31907E713DE6F528D5E798FB71E11 /* RefreshComponent.swift in Sources */,
+				F96F5EF8CBA42AE5BFF43D9CA2576A54 /* RefreshFooter.swift in Sources */,
+				9BE98700224F261A8AC7345FC719D24F /* RefreshHeader.swift in Sources */,
+				4380F0B1CCDF4C173A4D28FE039FF522 /* UIScrollView+Refresh.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -435,6 +500,12 @@
 			name = EasyRefresher;
 			target = 55C40C4D5BD01A7907F30E89B6B4DA27 /* EasyRefresher */;
 			targetProxy = BDCCB10B32011FC54F94762E0CA843D4 /* PBXContainerItemProxy */;
+		};
+		F47AB1CB0FD0A2AEC55E2F714B5EDF07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "EasyRefresher-EasyRefresher";
+			target = 5A02FDFD119C7DC1836C9F5E97F27383 /* EasyRefresher-EasyRefresher */;
+			targetProxy = 8B72EA69E260421BC28EAC205179FB95 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -503,9 +574,42 @@
 			};
 			name = Debug;
 		};
-		1228A7EE776A48DDDC3626A9F53E43D0 /* Release */ = {
+		3B6798EA9BD51F5780FB44D543DBF517 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7FF3CD9B7495E578C7D2EE997C2878D /* EasyRefresher.xcconfig */;
+			baseConfigurationReference = F63B0756012DE677CD86F99EA586222D /* Pods-EasyRefresher_Example.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-EasyRefresher_Example/Pods-EasyRefresher_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-EasyRefresher_Example/Pods-EasyRefresher_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		40E4D5C9059250304E620BBBF344DD27 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -535,11 +639,26 @@
 			};
 			name = Release;
 		};
-		3B6798EA9BD51F5780FB44D543DBF517 /* Debug */ = {
+		4B49EB264BAE237E9ED33C2696698002 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F63B0756012DE677CD86F99EA586222D /* Pods-EasyRefresher_Example.debug.xcconfig */;
+			baseConfigurationReference = 8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/EasyRefresher";
+				INFOPLIST_FILE = "Target Support Files/EasyRefresher/ResourceBundle-EasyRefresher-EasyRefresher-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = EasyRefresher;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		8EC630B7425262834352DB44368BB957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */;
+			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -549,19 +668,18 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-EasyRefresher_Example/Pods-EasyRefresher_Example-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/EasyRefresher/EasyRefresher-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EasyRefresher/EasyRefresher-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-EasyRefresher_Example/Pods-EasyRefresher_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/EasyRefresher/EasyRefresher.modulemap";
+				PRODUCT_MODULE_NAME = EasyRefresher;
+				PRODUCT_NAME = EasyRefresher;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -695,37 +813,6 @@
 			};
 			name = Release;
 		};
-		EAF2CE630DF8F733648EA79B6B5F9C2D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = C7FF3CD9B7495E578C7D2EE997C2878D /* EasyRefresher.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/EasyRefresher/EasyRefresher-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/EasyRefresher/EasyRefresher-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/EasyRefresher/EasyRefresher.modulemap";
-				PRODUCT_MODULE_NAME = EasyRefresher;
-				PRODUCT_NAME = EasyRefresher;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		ED8AE7C82FA621D26E52C614C1662EE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7FD2A7A611E78232E3D1B359336CDA39 /* Pods-EasyRefresher_Tests.release.xcconfig */;
@@ -760,23 +847,48 @@
 			};
 			name = Release;
 		};
+		EF23FDF98033295EE3C09AA3223739CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8003729E6FE8F17F9C1826629B9D46B5 /* EasyRefresher.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/EasyRefresher";
+				INFOPLIST_FILE = "Target Support Files/EasyRefresher/ResourceBundle-EasyRefresher-EasyRefresher-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = EasyRefresher;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2202E1662C0DAB39E64C4C124F771849 /* Build configuration list for PBXNativeTarget "EasyRefresher-EasyRefresher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B49EB264BAE237E9ED33C2696698002 /* Debug */,
+				EF23FDF98033295EE3C09AA3223739CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32741D42927A55A2E89033BED3B40DFC /* Build configuration list for PBXNativeTarget "EasyRefresher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8EC630B7425262834352DB44368BB957 /* Debug */,
+				40E4D5C9059250304E620BBBF344DD27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		38AA84D1F9B510A3318E1A10F4B32CB1 /* Build configuration list for PBXNativeTarget "Pods-EasyRefresher_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A492682B5F1F254D0BFCACCF31A733FC /* Debug */,
 				ED8AE7C82FA621D26E52C614C1662EE3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		41DD1C770E44EE4C8EAF4BABCADFF3EB /* Build configuration list for PBXNativeTarget "EasyRefresher" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				EAF2CE630DF8F733648EA79B6B5F9C2D /* Debug */,
-				1228A7EE776A48DDDC3626A9F53E43D0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
