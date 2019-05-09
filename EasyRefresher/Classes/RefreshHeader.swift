@@ -41,8 +41,14 @@ open class RefreshHeader: RefreshComponent {
         
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top = self.idleInset.top + 54
-            scrollView._changedInset.top = 54
+            scrollView._changedInset.top.increase()
         }, completion: { _ in completion() })
+    }
+    
+    override func willEndRefreshing() {
+        guard let scrollView = scrollView else { return }
+        
+        scrollView._changedInset.top.decrease()
     }
 }
 
@@ -94,5 +100,16 @@ extension RefreshHeader {
             
             self.beginRefreshing()
         }
+    }
+}
+
+extension CGFloat {
+    
+    mutating func increase() {
+        self += 54
+    }
+    
+    mutating func decrease() {
+        self -= 54
     }
 }

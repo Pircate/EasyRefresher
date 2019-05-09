@@ -49,18 +49,31 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
+    private var isUpdateConstraint: Bool = false
+    
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
             if scrollView.contentSize.height > scrollView.bounds.height {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
-                scrollView._changedInset.bottom = 54
+                scrollView._changedInset.bottom.increase()
+                self.isUpdateConstraint = false
             } else {
-                scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top - 54
-                scrollView._changedInset.top = -54
+                self.constraintTop?.constant.decrease()
+                self.isUpdateConstraint = true
             }
         }, completion: { _ in completion() })
+    }
+    
+    override func willEndRefreshing() {
+        guard let scrollView = scrollView else { return }
+        
+        if isUpdateConstraint {
+            constraintTop?.constant.increase()
+        } else {
+            scrollView._changedInset.bottom.decrease()
+        }
     }
 }
 

@@ -51,6 +51,8 @@ open class RefreshComponent: UIView, Refresher {
     
     var arrowDirection: ArrowDirection { return .down }
     
+    private var isEnding: Bool = false
+    
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
         stackView.spacing = 8
@@ -95,17 +97,26 @@ open class RefreshComponent: UIView, Refresher {
     }
     
     public func beginRefreshing() {
+        guard !isRefreshing else { return }
+        
         prepare()
         state = .refreshing
         willBeginRefreshing { self.refreshClosure() }
     }
     
     public func endRefreshing() {
+        guard isRefreshing, !isEnding else { return }
+        
+        isEnding = true
+        
+        willEndRefreshing()
         state = .idle
         didEndRefreshing {}
     }
     
     func willBeginRefreshing(completion: @escaping () -> Void) {}
+    
+    func willEndRefreshing() {}
 }
 
 extension RefreshComponent {
@@ -132,10 +143,12 @@ extension RefreshComponent {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset = self.idleInset
-            scrollView._changedInset.top = 0
-            scrollView._changedInset.bottom = 0
-        }, completion: { _ in completion() })
+            scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top
+            scrollView.contentInset.bottom = self.idleInset.bottom + scrollView._changedInset.bottom
+        }, completion: { _ in
+            self.isEnding = false
+            completion()
+        })
     }
     
     private func rotateArrow(for state: RefreshState) {
