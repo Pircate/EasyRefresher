@@ -51,6 +51,10 @@ open class RefreshComponent: UIView {
     
     var arrowDirection: ArrowDirection { return .down }
     
+    private var scrollObservation: NSKeyValueObservation?
+    
+    private var panStateObservation: NSKeyValueObservation?
+    
     private var isEnding: Bool = false
     
     private lazy var stackView: UIStackView = {
@@ -112,7 +116,34 @@ open class RefreshComponent: UIView {
         heightAnchor.constraint(equalToConstant: 54).isActive = true
     }
     
-    func observe(_ scrollView: UIScrollView) {}
+    func observe(_ scrollView: UIScrollView) {
+        removeAllObservers()
+        
+        scrollObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
+            guard let `self` = self else { return }
+            
+            this.bringSubviewToFront(self)
+            
+            guard !self.isRefreshing else { return }
+            
+            self.scrollViewContentOffsetDidChange(scrollView)
+        }
+        
+        panStateObservation = scrollView.observe(
+        \.panGestureRecognizer.state) { [weak self] this, change in
+            guard let `self` = self else { return }
+            
+            self.scrollViewPanStateDidChange(scrollView)
+        }
+    }
+    
+    func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {}
+    
+    func scrollViewPanStateDidChange(_ scrollView: UIScrollView) {
+        guard scrollView.panGestureRecognizer.state == .ended, state == .willRefresh else { return }
+        
+        beginRefreshing()
+    }
 }
 
 extension RefreshComponent {
@@ -145,6 +176,11 @@ extension RefreshComponent {
             self.isEnding = false
             completion()
         })
+    }
+    
+    private func removeAllObservers() {
+        scrollObservation?.invalidate()
+        panStateObservation?.invalidate()
     }
     
     private func rotateArrow(for state: RefreshState) {
