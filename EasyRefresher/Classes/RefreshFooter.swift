@@ -49,7 +49,7 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    private var isUpdateConstraint: Bool = false
+    private var isTopDecrease: Bool = false
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
@@ -58,10 +58,11 @@ open class RefreshFooter: RefreshComponent {
             if scrollView.contentSize.height > scrollView.bounds.height {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
                 scrollView._changedInset.bottom.increase()
-                self.isUpdateConstraint = false
+                self.isTopDecrease = false
             } else {
-                self.constraintTop?.constant.decrease()
-                self.isUpdateConstraint = true
+                scrollView.contentInset.top = self.idleInset.top + scrollView._changedInset.top - 54
+                scrollView._changedInset.top.decrease()
+                self.isTopDecrease = true
             }
         }, completion: { _ in completion() })
     }
@@ -69,8 +70,8 @@ open class RefreshFooter: RefreshComponent {
     override func willEndRefreshing() {
         guard let scrollView = scrollView else { return }
         
-        if isUpdateConstraint {
-            constraintTop?.constant.increase()
+        if isTopDecrease {
+            scrollView._changedInset.top = scrollView._refreshHeader.isRefreshing ? 54 : 0
         } else {
             scrollView._changedInset.bottom.decrease()
         }

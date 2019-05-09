@@ -48,7 +48,7 @@ open class RefreshHeader: RefreshComponent {
     override func willEndRefreshing() {
         guard let scrollView = scrollView else { return }
         
-        scrollView._changedInset.top.decrease()
+        scrollView._changedInset.top = 0
     }
 }
 
