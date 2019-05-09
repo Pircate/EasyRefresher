@@ -25,7 +25,6 @@ open class RefreshComponent: UIView, Refresher {
                 stopRefreshing()
             case .refreshing:
                 refreshClosure()
-                
                 startRefreshing()
             default:
                 break
@@ -98,26 +97,10 @@ open class RefreshComponent: UIView, Refresher {
         build()
     }
     
-    func startRefreshing() {
-        activityIndicator.startAnimating()
-        
+    public func beginRefreshing() {
+        willChangeInset()
+        state = .refreshing
         didChangeInset()
-    }
-    
-    func stopRefreshing() {
-        activityIndicator.stopAnimating()
-        
-        resetInset()
-    }
-    
-    func willChangeInset() {
-        guard let scrollView = scrollView else { return }
-        
-        var contentInset = scrollView.contentInset
-        contentInset.top -= scrollView._refreshInset.top
-        contentInset.bottom -= scrollView._refreshInset.bottom
-        
-        idleInset = contentInset
     }
     
     func didChangeInset() {}
@@ -131,6 +114,26 @@ extension RefreshComponent {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    private func startRefreshing() {
+        activityIndicator.startAnimating()
+    }
+    
+    private func stopRefreshing() {
+        activityIndicator.stopAnimating()
+        
+        resetInset()
+    }
+    
+    private func willChangeInset() {
+        guard let scrollView = scrollView else { return }
+        
+        var contentInset = scrollView.contentInset
+        contentInset.top -= scrollView._refreshInset.top
+        contentInset.bottom -= scrollView._refreshInset.bottom
+        
+        idleInset = contentInset
     }
     
     private func resetInset() {

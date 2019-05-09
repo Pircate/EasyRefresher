@@ -106,8 +106,7 @@ extension RefreshFooter {
             self.constraintTop?.constant = constant
 
             if self.isAutoRefresh, this.isDragging, offset > 0 {
-                self.willChangeInset()
-                self.state = .refreshing
+                self.beginRefreshing()
                 return
             }
             
@@ -129,8 +128,7 @@ extension RefreshFooter {
             
             guard self.state == .willRefresh else { return }
             
-            self.willChangeInset()
-            self.state = .refreshing
+            self.beginRefreshing()
         }
     }
 }

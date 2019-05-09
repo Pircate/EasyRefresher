@@ -92,8 +92,7 @@ extension RefreshHeader {
             
             guard self.state == .willRefresh else { return }
             
-            self.willChangeInset()
-            self.state = .refreshing
+            self.beginRefreshing()
         }
     }
 }
