@@ -36,28 +36,29 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    private var isUpdateConstraint: Bool = false
+    private var isTransform: Bool = false
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        UIView.animate(withDuration: 0.25, animations: {
-            if scrollView.contentSize.height > scrollView.bounds.height {
+        if scrollView.contentSize.height > scrollView.bounds.height {
+            UIView.animate(withDuration: 0.25, animations: {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
                 scrollView.changed_inset.bottom += 54
-                self.isUpdateConstraint = false
-            } else {
-                self.constraintTop?.constant = self.constant(by: scrollView) - 54
-                self.isUpdateConstraint = true
-            }
-        }, completion: { _ in completion() })
+                self.isTransform = false
+            }, completion: { _ in completion() })
+        } else {
+            transform = CGAffineTransform(translationX: 0, y: -54)
+            isTransform = true
+            completion()
+        }
     }
     
     override func willEndRefreshing() {
         guard let scrollView = scrollView else { return }
         
-        if isUpdateConstraint {
-            constraintTop?.constant = constant(by: scrollView)
+        if isTransform {
+            transformIdentity()
         } else {
             scrollView.changed_inset.bottom -= 54
         }
@@ -68,7 +69,10 @@ open class RefreshFooter: RefreshComponent {
         let constant: CGFloat
         
         if scrollView.contentSize.height > scrollView.bounds.height {
-            offset = scrollView.contentOffset.y + scrollView.bounds.height - scrollView.contentSize.height
+            offset = scrollView.contentOffset.y
+                + scrollView.bounds.height
+                - scrollView.contentSize.height
+                - scrollView.contentInset.bottom
             constant = scrollView.contentSize.height
         } else {
             offset = scrollView.contentOffset.y + scrollView.contentInset.top
@@ -101,16 +105,9 @@ open class RefreshFooter: RefreshComponent {
 
 extension RefreshFooter {
     
-    func resetConstraint() {
-        guard isRefreshing, isUpdateConstraint, let scrollView = scrollView else { return }
-        
+    func transformIdentity() {
         UIView.animate(withDuration: 0.25) {
-            self.constraintTop?.constant = self.constant(by: scrollView)
-            self.layoutIfNeeded()
+            self.transform = .identity
         }
-    }
-    
-    private func constant(by scrollView: UIScrollView) -> CGFloat {
-        return scrollView.bounds.height - scrollView.contentInset.top
     }
 }
