@@ -23,6 +23,10 @@ it, simply add the following line to your Podfile:
 pod 'EasyRefresher'
 ```
 
+## Demo
+
+![](https://github.com/Pircate/EasyRefresher/blob/master/image.gif)
+
 ## Usage
 
 * Add Refresher
