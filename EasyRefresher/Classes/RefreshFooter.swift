@@ -41,7 +41,7 @@ open class RefreshFooter: RefreshComponent {
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        if scrollView.contentSize.height > scrollView.bounds.height {
+        if scrollView.contentInset.top + scrollView.contentSize.height + 54 >= scrollView.bounds.height {
             UIView.animate(withDuration: 0.25, animations: {
                 scrollView.contentInset.bottom = self.idleInset.bottom + 54
                 scrollView.changed_inset.bottom += 54
@@ -58,7 +58,7 @@ open class RefreshFooter: RefreshComponent {
         guard let scrollView = scrollView else { return }
         
         if isTransform {
-            transformIdentity()
+            transform = .identity
         } else {
             scrollView.changed_inset.bottom -= 54
         }

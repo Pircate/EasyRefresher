@@ -212,10 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 3BDD68D98V;
 						LastSwiftMigration = 0900;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = 3BDD68D98V;
 						LastSwiftMigration = 1020;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -481,6 +483,7 @@
 			baseConfigurationReference = 3EF78E31613BE7B26CCB6445 /* Pods-EasyRefresher_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				INFOPLIST_FILE = EasyRefresher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -496,6 +499,7 @@
 			baseConfigurationReference = E8C60BF0C683CE1F04E860B8 /* Pods-EasyRefresher_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				INFOPLIST_FILE = EasyRefresher/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -510,6 +514,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 246B4C44263073945549AEDE /* Pods-EasyRefresher_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -528,6 +533,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CAA7D06297B2D3AE6E49D2E0 /* Pods-EasyRefresher_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = 3BDD68D98V;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
