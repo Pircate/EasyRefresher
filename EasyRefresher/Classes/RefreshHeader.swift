@@ -39,7 +39,7 @@ open class RefreshHeader: RefreshComponent {
         
         guard let footer = scrollView.refresh_footer as? RefreshFooter else { return }
         
-        footer.transformIdentity()
+        footer.resetTransform()
     }
     
     override func add(into scrollView: UIScrollView) {
