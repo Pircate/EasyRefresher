@@ -28,7 +28,7 @@ open class RefreshFooter: RefreshComponent {
     override var arrowDirection: ArrowDirection { return .up }
     
     private lazy var constraintOfTopAnchor: NSLayoutConstraint? = {
-        guard let scrollView = scrollView else { return nil }
+        guard let scrollView = scrollView, scrollView.subviews.contains(self) else { return nil }
         
         let constraint = topAnchor.constraint(equalTo: scrollView.topAnchor)
         constraint.isActive = true
