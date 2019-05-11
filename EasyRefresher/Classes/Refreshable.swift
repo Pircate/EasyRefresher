@@ -1,6 +1,6 @@
 // 
 //  Refreshable.swift
-//  Refresher
+//  EasyRefresher
 //
 //  Created by Pircate(swifter.dev@gmail.com) on 2019/4/26
 //  Copyright © 2019 Pircate. All rights reserved.
