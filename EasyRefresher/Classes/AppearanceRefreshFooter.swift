@@ -45,7 +45,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.bottom = self.idleInset.bottom + 54
+            scrollView.contentInset.bottom = self.originalInset.bottom + 54
             scrollView.changed_inset.bottom = 54
         }, completion: { _ in completion() })
         
@@ -55,7 +55,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     override func willEndRefreshing() {}
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
-        scrollView.contentInset.bottom = idleInset.bottom + 54
+        scrollView.contentInset.bottom = originalInset.bottom + 54
         scrollView.changed_inset.bottom = 54
         
         super.scrollViewContentOffsetDidChange(scrollView)

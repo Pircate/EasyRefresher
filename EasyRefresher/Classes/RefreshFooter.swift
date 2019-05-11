@@ -41,7 +41,7 @@ open class RefreshFooter: RefreshComponent {
         
         if offsetOfContentGreaterThanScrollView(scrollView) >= -54 {
             UIView.animate(withDuration: 0.25, animations: {
-                scrollView.contentInset.bottom = self.idleInset.bottom + 54
+                scrollView.contentInset.bottom = self.originalInset.bottom + 54
                 scrollView.changed_inset.bottom += 54
                 self.isTransform = false
             }, completion: { _ in completion() })

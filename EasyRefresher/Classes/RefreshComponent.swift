@@ -34,20 +34,20 @@ open class RefreshComponent: UIView {
             } else {
                 stateLabel.text = title(for: state)
             }
-            
-            stateLabel.sizeToFit()
         }
     }
     
     public var refreshClosure: () -> Void = {}
     
     weak var scrollView: UIScrollView? {
-        didSet {
-            scrollView?.alwaysBounceVertical = true
-        }
+        didSet { scrollView?.alwaysBounceVertical = true }
     }
     
-    var idleInset: UIEdgeInsets = .zero
+    lazy var originalInset: UIEdgeInsets = {
+        guard let scrollView = scrollView else { return .zero }
+        
+        return scrollView.contentInset
+    }()
     
     var arrowDirection: ArrowDirection { return .down }
     
@@ -60,7 +60,6 @@ open class RefreshComponent: UIView {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
         stackView.spacing = 8
-        stackView.distribution = .fillProportionally
         stackView.alignment = .center
         return stackView
     }()
@@ -171,15 +170,15 @@ extension RefreshComponent {
         contentInset.top -= scrollView.changed_inset.top
         contentInset.bottom -= scrollView.changed_inset.bottom
         
-        idleInset = contentInset
+        originalInset = contentInset
     }
     
     private func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.top = self.idleInset.top + scrollView.changed_inset.top
-            scrollView.contentInset.bottom = self.idleInset.bottom + scrollView.changed_inset.bottom
+            scrollView.contentInset.top = self.originalInset.top + scrollView.changed_inset.top
+            scrollView.contentInset.bottom = self.originalInset.bottom + scrollView.changed_inset.bottom
         }, completion: { _ in
             self.isEnding = false
             completion()
