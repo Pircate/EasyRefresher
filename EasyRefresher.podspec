@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'EasyRefresher'
-  s.version          = '0.6.6'
+  s.version          = '0.7.0'
   s.summary          = 'A refresh control for UIScrollView.'
   s.homepage         = 'https://github.com/Pircate/EasyRefresher'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
