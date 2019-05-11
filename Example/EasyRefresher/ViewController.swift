@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         
         tableView.refresh.header.beginRefreshing()
         
-        tableView.refresh.footer = AutoRefreshFooter {
+        tableView.refresh.footer = AppearanceRefreshFooter {
             self.reqeust {
                 self.tableView.refresh.footer.endRefreshing()
             }

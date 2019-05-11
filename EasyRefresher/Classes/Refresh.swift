@@ -6,8 +6,6 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-import UIKit
-
 public struct Refresh<Base> {
     
     let base: Base

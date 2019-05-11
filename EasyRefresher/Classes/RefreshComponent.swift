@@ -150,6 +150,12 @@ open class RefreshComponent: UIView {
 
 extension RefreshComponent {
     
+    var isAddedIntoScrollView: Bool {
+        guard let scrollView = scrollView else { return false }
+        
+        return scrollView.subviews.contains(self)
+    }
+    
     private func build() {
         addSubview(stackView)
         
@@ -212,6 +218,10 @@ extension RefreshComponent: Refresher {
     }
     
     public func beginRefreshing() {
+        guard isAddedIntoScrollView else {
+            fatalError("Please add refresher to UIScrollView before begin refreshing")
+        }
+        
         guard !isRefreshing else { return }
         
         prepare()
@@ -220,6 +230,10 @@ extension RefreshComponent: Refresher {
     }
     
     public func endRefreshing() {
+        guard isAddedIntoScrollView else {
+            fatalError("Please add refresher to UIScrollView before end refreshing")
+        }
+        
         guard isRefreshing, !isEnding else { return }
         
         isEnding = true

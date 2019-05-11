@@ -6,8 +6,6 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-import UIKit
-
 open class RefreshFooter: RefreshComponent {
     
     public override var stateTitles: [RefreshState : String] {
@@ -78,7 +76,7 @@ open class RefreshFooter: RefreshComponent {
             offset = scrollView.contentOffset.y + scrollView.contentInset.top
         }
         
-        updateConstraintOfTopAnchor(equalTo: scrollView)
+        updateConstraintOfTopAnchorIfNeeded()
         
         if isAutoRefresh, scrollView.isDragging, offset > 0 {
             beginRefreshing()
@@ -100,6 +98,21 @@ open class RefreshFooter: RefreshComponent {
         
         super.scrollViewPanStateDidChange(scrollView)
     }
+    
+    func constantOfTopAnchor(equalTo scrollView: UIScrollView) -> CGFloat {
+        return offsetOfContentGreaterThanScrollView(scrollView) >= 0
+            ? scrollView.contentSize.height
+            : scrollView.bounds.height - scrollView.contentInset.top
+    }
+}
+
+extension RefreshFooter {
+    
+    func updateConstraintOfTopAnchorIfNeeded() {
+        guard let scrollView = scrollView else { return }
+        
+        constraintOfTopAnchor?.constant = constantOfTopAnchor(equalTo: scrollView)
+    }
 }
 
 extension RefreshFooter {
@@ -109,17 +122,7 @@ extension RefreshFooter {
             self.transform = .identity
         }
         
-        updateConstraintOfTopAnchor(equalTo: scrollView)
-    }
-    
-    private func updateConstraintOfTopAnchor(equalTo scrollView: UIScrollView?) {
-        guard let scrollView = scrollView else { return }
-        
-        let constant = offsetOfContentGreaterThanScrollView(scrollView) >= 0
-            ? scrollView.contentSize.height
-            : scrollView.bounds.height - scrollView.contentInset.top
-        
-        constraintOfTopAnchor?.constant = constant
+        updateConstraintOfTopAnchorIfNeeded()
     }
     
     private func offsetOfContentGreaterThanScrollView(_ scrollView: UIScrollView) -> CGFloat {

@@ -6,8 +6,6 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-import Foundation
-
 public enum RefreshState {
     case idle
     case pulling
