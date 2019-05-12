@@ -9,14 +9,14 @@
 open class AppearanceRefreshFooter: RefreshFooter {
     
     public override var state: RefreshState {
-        didSet {
-            switch state {
-            case .idle:
-                state = .pulling
-                updateConstraintOfTopAnchorIfNeeded()
-            default:
-                break
+        get { return super.state }
+        set {
+            guard newValue == .idle else {
+                super.state = newValue
+                return
             }
+            
+            super.state = .pulling
         }
     }
     
@@ -48,8 +48,6 @@ open class AppearanceRefreshFooter: RefreshFooter {
             scrollView.contentInset.bottom = self.originalInset.bottom + 54
             scrollView.changed_inset.bottom = 54
         }, completion: { _ in completion() })
-        
-        updateConstraintOfTopAnchorIfNeeded()
     }
     
     override func willEndRefreshing() {}
@@ -59,6 +57,12 @@ open class AppearanceRefreshFooter: RefreshFooter {
         scrollView.changed_inset.bottom = 54
         
         super.scrollViewContentOffsetDidChange(scrollView)
+    }
+    
+    override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
+        super.scrollViewContentSizeDidChange(scrollView)
+        
+        updateConstraintOfTopAnchorIfNeeded()
     }
     
     override func constantOfTopAnchor(equalTo scrollView: UIScrollView) -> CGFloat {

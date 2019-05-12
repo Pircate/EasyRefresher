@@ -51,7 +51,9 @@ open class RefreshComponent: UIView {
     
     var arrowDirection: ArrowDirection { return .down }
     
-    private var scrollObservation: NSKeyValueObservation?
+    private var contentOffsetObservation: NSKeyValueObservation?
+    
+    private var contentSizeObservation: NSKeyValueObservation?
     
     private var panStateObservation: NSKeyValueObservation?
     
@@ -120,25 +122,33 @@ open class RefreshComponent: UIView {
     func observe(_ scrollView: UIScrollView) {
         removeAllObservers()
         
-        scrollObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
+        contentOffsetObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
             guard let `self` = self else { return }
             
             this.bringSubviewToFront(self)
             
             guard !self.isRefreshing else { return }
             
-            self.scrollViewContentOffsetDidChange(scrollView)
+            self.scrollViewContentOffsetDidChange(this)
+        }
+        
+        contentSizeObservation = scrollView.observe(\.contentSize) { [weak self] this, change in
+            guard let `self` = self else { return }
+            
+            self.scrollViewContentSizeDidChange(this)
         }
         
         panStateObservation = scrollView.observe(
         \.panGestureRecognizer.state) { [weak self] this, change in
             guard let `self` = self else { return }
             
-            self.scrollViewPanStateDidChange(scrollView)
+            self.scrollViewPanStateDidChange(this)
         }
     }
     
     func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {}
+    
+    func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {}
     
     func scrollViewPanStateDidChange(_ scrollView: UIScrollView) {
         guard scrollView.panGestureRecognizer.state == .ended, state == .willRefresh else { return }
@@ -186,7 +196,8 @@ extension RefreshComponent {
     }
     
     private func removeAllObservers() {
-        scrollObservation?.invalidate()
+        contentOffsetObservation?.invalidate()
+        contentSizeObservation?.invalidate()
         panStateObservation?.invalidate()
     }
     
