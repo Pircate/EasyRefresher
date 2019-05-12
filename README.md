@@ -58,6 +58,31 @@ tableView.refresh.header.beginRefreshing()
 tableView.refresh.header.setTitle("loading...", for: .refreshing)
 ```
 
+* UIActivityIndicatorView Style
+
+```swift
+tableView.refresh.header.activityIndicatorStyle = .white
+```
+
+* Custom State View
+
+```swift
+class CustomStateView: UIView, RefreshStateful {
+    
+    var state: RefreshState = .idle {
+        didSet {
+            // do something
+        }
+    }
+}
+
+tableView.refresh.footer = AppearanceRefreshFooter(stateView: CustomStateView()) {
+    self.reqeust {
+        self.tableView.refresh.footer.endRefreshing()
+    }
+}
+```
+
 ## Author
 
 Pircate, swifter.dev@gmail.com

@@ -260,21 +260,23 @@ extension RefreshComponent: Refresher {
 
 extension RefreshComponent {
     
-    public convenience init(customView: UIView,
-                            stateChanged: @escaping (RefreshState) -> Void,
-                            refreshClosure: @escaping () -> Void) {
+    public convenience init<T>(
+        stateView: T,
+        refreshClosure: @escaping () -> Void)
+        where T: UIView, T: RefreshStateful
+    {
         self.init(refreshClosure: refreshClosure)
         stackView.removeFromSuperview()
         
-        self.stateChanged = stateChanged
+        addSubview(stateView)
         
-        addSubview(customView)
+        stateView.translatesAutoresizingMaskIntoConstraints = false
+        stateView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        customView.translatesAutoresizingMaskIntoConstraints = false
-        customView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        customView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        customView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        customView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        self.stateChanged = { stateView.state = $0 }
     }
 }
 
