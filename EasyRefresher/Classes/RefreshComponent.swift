@@ -20,6 +20,8 @@ open class RefreshComponent: UIView {
         didSet {
             guard state != oldValue else { return }
             
+            stateChanged(state)
+            
             switch state {
             case .refreshing:
                 activityIndicator.startAnimating()
@@ -83,6 +85,8 @@ open class RefreshComponent: UIView {
         stateLabel.textAlignment = .center
         return stateLabel
     }()
+    
+    private var stateChanged: (RefreshState) -> Void = { _ in }
     
     public required init(refreshClosure: @escaping () -> Void) {
         self.refreshClosure = refreshClosure
@@ -251,6 +255,26 @@ extension RefreshComponent: Refresher {
         willEndRefreshing()
         state = .idle
         didEndRefreshing {}
+    }
+}
+
+extension RefreshComponent {
+    
+    public convenience init(customView: UIView,
+                            stateChanged: @escaping (RefreshState) -> Void,
+                            refreshClosure: @escaping () -> Void) {
+        self.init(refreshClosure: refreshClosure)
+        stackView.removeFromSuperview()
+        
+        self.stateChanged = stateChanged
+        
+        addSubview(customView)
+        
+        customView.translatesAutoresizingMaskIntoConstraints = false
+        customView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        customView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        customView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        customView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
 }
 
