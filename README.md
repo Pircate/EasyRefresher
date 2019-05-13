@@ -69,7 +69,7 @@ tableView.refresh.header.activityIndicatorStyle = .white
 ```swift
 class CustomStateView: UIView, RefreshStateful {
     
-    var state: RefreshState = .idle {
+    var refreshState: RefreshState = .idle {
         didSet {
             // do something
         }

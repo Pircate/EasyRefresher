@@ -8,5 +8,5 @@
 
 public protocol RefreshStateful: class {
     
-    var state: RefreshState { get set }
+    var refreshState: RefreshState { get set }
 }

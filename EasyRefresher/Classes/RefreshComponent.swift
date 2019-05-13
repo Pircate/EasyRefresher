@@ -126,7 +126,7 @@ open class RefreshComponent: UIView {
     func observe(_ scrollView: UIScrollView) {
         removeAllObservers()
         
-        contentOffsetObservation = scrollView.observe(\.contentOffset) { [weak self] this, change in
+        contentOffsetObservation = scrollView.observe(\.contentOffset) { [weak self] this, _ in
             guard let `self` = self else { return }
             
             this.bringSubviewToFront(self)
@@ -136,14 +136,13 @@ open class RefreshComponent: UIView {
             self.scrollViewContentOffsetDidChange(this)
         }
         
-        contentSizeObservation = scrollView.observe(\.contentSize) { [weak self] this, change in
+        contentSizeObservation = scrollView.observe(\.contentSize) { [weak self] this, _ in
             guard let `self` = self else { return }
             
             self.scrollViewContentSizeDidChange(this)
         }
         
-        panStateObservation = scrollView.observe(
-        \.panGestureRecognizer.state) { [weak self] this, change in
+        panStateObservation = scrollView.observe(\.panGestureRecognizer.state) { [weak self] this, _ in
             guard let `self` = self else { return }
             
             self.scrollViewPanStateDidChange(this)
@@ -193,10 +192,7 @@ extension RefreshComponent {
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top = self.originalInset.top + scrollView.changed_inset.top
             scrollView.contentInset.bottom = self.originalInset.bottom + scrollView.changed_inset.bottom
-        }, completion: { _ in
-            self.isEnding = false
-            completion()
-        })
+        }, completion: { _ in completion() })
     }
     
     private func removeAllObservers() {
@@ -254,7 +250,7 @@ extension RefreshComponent: Refresher {
         
         willEndRefreshing()
         state = .idle
-        didEndRefreshing {}
+        didEndRefreshing { self.isEnding = false }
     }
 }
 
@@ -276,7 +272,7 @@ extension RefreshComponent {
         stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        self.stateChanged = { stateView.state = $0 }
+        stateChanged = { stateView.refreshState = $0 }
     }
 }
 

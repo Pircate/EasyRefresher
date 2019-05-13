@@ -15,6 +15,8 @@ public enum RefreshState {
 
 public protocol Refreshable: class {
     
+    var state: RefreshState { get set }
+    
     var isRefreshing: Bool { get }
     
     var refreshClosure: () -> Void { get set }
@@ -28,7 +30,7 @@ public protocol Refreshable: class {
     func endRefreshing()
 }
 
-public extension Refreshable where Self: RefreshStateful {
+public extension Refreshable {
     
     var isRefreshing: Bool {
         return state == .refreshing

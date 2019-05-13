@@ -9,7 +9,7 @@
 import UIKit
 import ObjectiveC
 
-public typealias Refresher = Refreshable & RefreshStateful & HasStateTitle & HasActivityIndicator & Displayable
+public typealias Refresher = Refreshable & HasStateTitle & HasActivityIndicator & Displayable
 
 extension UIScrollView {
     
