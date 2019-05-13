@@ -23,6 +23,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     public override init(refreshClosure: @escaping () -> Void) {
         super.init(refreshClosure: refreshClosure)
         
+        self.alpha = 1
         configurateStateTitles()
         addTapGestureRecognizer()
     }
@@ -30,6 +31,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     public override init(frame: CGRect) {
         super.init(frame: frame)
         
+        self.alpha = 1
         configurateStateTitles()
         addTapGestureRecognizer()
     }
@@ -37,6 +39,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
+        self.alpha = 1
         configurateStateTitles()
         addTapGestureRecognizer()
     }
@@ -50,13 +53,12 @@ open class AppearanceRefreshFooter: RefreshFooter {
         }, completion: { _ in completion() })
     }
     
-    override func willEndRefreshing() {}
-    
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.bottom += scrollView.changed_inset.bottom
+            scrollView.changed_inset.bottom = 54
         }, completion: { _ in completion() })
     }
     
@@ -67,14 +69,13 @@ open class AppearanceRefreshFooter: RefreshFooter {
         super.scrollViewContentOffsetDidChange(scrollView)
     }
     
-    override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
-        super.scrollViewContentSizeDidChange(scrollView)
-        
-        updateConstraintOfTopAnchorIfNeeded()
-    }
-    
-    override func constantOfTopAnchor(equalTo scrollView: UIScrollView) -> CGFloat {
-        return scrollView.contentSize.height
+    override func changeState(by offset: CGFloat) {
+        switch offset {
+        case 54...:
+            state = .willRefresh
+        default:
+            state = .pulling
+        }
     }
 }
 

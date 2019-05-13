@@ -36,33 +36,39 @@ open class RefreshFooter: RefreshComponent {
     
     private var isTransform: Bool = false
     
+    public override init(refreshClosure: @escaping () -> Void) {
+        super.init(refreshClosure: refreshClosure)
+        
+        self.alpha = 0
+    }
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        self.alpha = 0
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        self.alpha = 0
+    }
+    
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        if offsetOfContentGreaterThanScrollView(scrollView) >= -54 {
-            UIView.animate(withDuration: 0.25, animations: {
-                scrollView.contentInset.bottom = self.originalInset.bottom + 54
-                scrollView.changed_inset.bottom = 54
-                self.isTransform = false
-            }, completion: { _ in completion() })
-            
-            constraintOfTopAnchor?.constant = scrollView.contentSize.height
-        } else {
-            transform = CGAffineTransform(translationX: 0, y: -54)
-            isTransform = true
-            completion()
-        }
-    }
-    
-    override func willEndRefreshing() {
-        guard isTransform else { return }
-        
-        transform = .identity
+        UIView.animate(withDuration: 0.25, animations: {
+            self.alpha = 1
+            scrollView.contentInset.bottom = self.originalInset.bottom + 54
+            scrollView.changed_inset.bottom = 54
+            self.isTransform = false
+        }, completion: { _ in completion() })
     }
     
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
+        alpha = 0
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
             scrollView.changed_inset.bottom = 0
@@ -88,14 +94,13 @@ open class RefreshFooter: RefreshComponent {
             return
         }
         
-        switch offset {
-        case 54...:
-            state = .willRefresh
-        case 0..<54:
-            state = .pulling
-        default:
-            state = .idle
-        }
+        changeState(by: offset)
+    }
+    
+    override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
+        super.scrollViewContentSizeDidChange(scrollView)
+        
+        updateConstraintOfTopAnchorIfNeeded()
     }
     
     override func scrollViewPanStateDidChange(_ scrollView: UIScrollView) {
@@ -104,28 +109,27 @@ open class RefreshFooter: RefreshComponent {
         super.scrollViewPanStateDidChange(scrollView)
     }
     
-    func constantOfTopAnchor(equalTo scrollView: UIScrollView) -> CGFloat {
-        return offsetOfContentGreaterThanScrollView(scrollView) >= 0
-            ? scrollView.contentSize.height
-            : scrollView.bounds.height - scrollView.refreshInset.top
+    func changeState(by offset: CGFloat) {
+        switch offset {
+        case 54...:
+            state = .willRefresh
+            alpha = 1
+        case 0..<54:
+            state = .pulling
+            alpha = offset / 54
+        default:
+            state = .idle
+            alpha = 0
+        }
     }
 }
 
 extension RefreshFooter {
     
-    func updateConstraintOfTopAnchorIfNeeded() {
+    private func updateConstraintOfTopAnchorIfNeeded() {
         guard let scrollView = scrollView else { return }
         
-        constraintOfTopAnchor?.constant = constantOfTopAnchor(equalTo: scrollView)
-    }
-}
-
-extension RefreshFooter {
-    
-    func reset() {
-        UIView.animate(withDuration: 0.25) { self.transform = .identity }
-        
-        updateConstraintOfTopAnchorIfNeeded()
+        constraintOfTopAnchor?.constant = scrollView.contentSize.height
     }
     
     private func offsetOfContentGreaterThanScrollView(_ scrollView: UIScrollView) -> CGFloat {

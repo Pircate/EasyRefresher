@@ -114,8 +114,6 @@ open class RefreshComponent: UIView {
     
     func willBeginRefreshing(completion: @escaping () -> Void) {}
     
-    func willEndRefreshing() {}
-    
     func didEndRefreshing(completion: @escaping () -> Void) {}
     
     func add(into scrollView: UIScrollView) {
@@ -245,7 +243,6 @@ extension RefreshComponent: Refresher {
         
         isEnding = true
         
-        willEndRefreshing()
         state = .idle
         didEndRefreshing { self.isEnding = false }
     }

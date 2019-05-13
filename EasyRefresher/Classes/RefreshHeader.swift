@@ -30,13 +30,6 @@ open class RefreshHeader: RefreshComponent {
         }, completion: { _ in completion() })
     }
     
-    override func willEndRefreshing() {
-        guard let footer = scrollView?.refresh_footer as? RefreshFooter,
-            footer.isDescendantOfScrollView else { return }
-        
-        footer.reset()
-    }
-    
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
