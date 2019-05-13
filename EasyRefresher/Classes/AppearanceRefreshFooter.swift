@@ -20,6 +20,8 @@ open class AppearanceRefreshFooter: RefreshFooter {
         }
     }
     
+    override var alwaysAtBottom: Bool { return false }
+    
     public override init(refreshClosure: @escaping () -> Void) {
         super.init(refreshClosure: refreshClosure)
         
