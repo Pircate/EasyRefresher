@@ -36,8 +36,6 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    private var isTransform: Bool = false
-    
     public override init(refreshClosure: @escaping () -> Void) {
         super.init(refreshClosure: refreshClosure)
         
@@ -63,7 +61,6 @@ open class RefreshFooter: RefreshComponent {
             self.alpha = 1
             scrollView.contentInset.bottom = self.originalInset.bottom + 54
             scrollView.changed_inset.bottom = 54
-            self.isTransform = false
         }, completion: { _ in completion() })
     }
     
