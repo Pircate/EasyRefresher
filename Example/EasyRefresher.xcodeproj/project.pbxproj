@@ -14,6 +14,12 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		6C8198302289257B005B51F6 /* AutoRefreshFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C81982E2289257B005B51F6 /* AutoRefreshFooterViewController.swift */; };
+		6C8198312289257B005B51F6 /* AutoRefreshFooterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C81982F2289257B005B51F6 /* AutoRefreshFooterViewController.xib */; };
+		6C81983422893C65005B51F6 /* GIFRefreshHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C81983222893C65005B51F6 /* GIFRefreshHeaderViewController.swift */; };
+		6C81983522893C65005B51F6 /* GIFRefreshHeaderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C81983322893C65005B51F6 /* GIFRefreshHeaderViewController.xib */; };
+		6C81983822893E26005B51F6 /* AppearanceRefreshFooterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C81983622893E26005B51F6 /* AppearanceRefreshFooterViewController.swift */; };
+		6C81983922893E26005B51F6 /* AppearanceRefreshFooterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C81983722893E26005B51F6 /* AppearanceRefreshFooterViewController.xib */; };
 		7ED2375A381E4873B03FAC3F /* Pods_EasyRefresher_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CE153BDBC9F2F8E1B214223 /* Pods_EasyRefresher_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +49,12 @@
 		607FACE51AFB9204008FA782 /* EasyRefresher_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyRefresher_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		6C81982E2289257B005B51F6 /* AutoRefreshFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoRefreshFooterViewController.swift; sourceTree = "<group>"; };
+		6C81982F2289257B005B51F6 /* AutoRefreshFooterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AutoRefreshFooterViewController.xib; sourceTree = "<group>"; };
+		6C81983222893C65005B51F6 /* GIFRefreshHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFRefreshHeaderViewController.swift; sourceTree = "<group>"; };
+		6C81983322893C65005B51F6 /* GIFRefreshHeaderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GIFRefreshHeaderViewController.xib; sourceTree = "<group>"; };
+		6C81983622893E26005B51F6 /* AppearanceRefreshFooterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceRefreshFooterViewController.swift; sourceTree = "<group>"; };
+		6C81983722893E26005B51F6 /* AppearanceRefreshFooterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppearanceRefreshFooterViewController.xib; sourceTree = "<group>"; };
 		B26B5401BD9A148C92428788 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		CAA7D06297B2D3AE6E49D2E0 /* Pods-EasyRefresher_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyRefresher_Tests.release.xcconfig"; path = "Target Support Files/Pods-EasyRefresher_Tests/Pods-EasyRefresher_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E8C60BF0C683CE1F04E860B8 /* Pods-EasyRefresher_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyRefresher_Example.release.xcconfig"; path = "Target Support Files/Pods-EasyRefresher_Example/Pods-EasyRefresher_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,6 +118,12 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				6C81982E2289257B005B51F6 /* AutoRefreshFooterViewController.swift */,
+				6C81982F2289257B005B51F6 /* AutoRefreshFooterViewController.xib */,
+				6C81983622893E26005B51F6 /* AppearanceRefreshFooterViewController.swift */,
+				6C81983722893E26005B51F6 /* AppearanceRefreshFooterViewController.xib */,
+				6C81983222893C65005B51F6 /* GIFRefreshHeaderViewController.swift */,
+				6C81983322893C65005B51F6 /* GIFRefreshHeaderViewController.xib */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -250,7 +268,10 @@
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
+				6C81983522893C65005B51F6 /* GIFRefreshHeaderViewController.xib in Resources */,
+				6C8198312289257B005B51F6 /* AutoRefreshFooterViewController.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				6C81983922893E26005B51F6 /* AppearanceRefreshFooterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +351,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C81983422893C65005B51F6 /* GIFRefreshHeaderViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				6C81983822893E26005B51F6 /* AppearanceRefreshFooterViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
+				6C8198302289257B005B51F6 /* AutoRefreshFooterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

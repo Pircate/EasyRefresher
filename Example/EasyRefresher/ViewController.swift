@@ -13,7 +13,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var dataArray: [String] = ["", "", "", "", ""]
+    var dataArray: [String] = [
+        "AutoRefreshFooter",
+        "AppearanceRefreshFooter",
+        "GIFRefreshHeader"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +29,7 @@ class ViewController: UIViewController {
             }
         }
         
-        tableView.refresh.header.beginRefreshing()
-        
-        tableView.refresh.footer = AppearanceRefreshFooter {
+        tableView.refresh.footer = RefreshFooter {
             self.reqeust {
                 self.tableView.refresh.footer.endRefreshing()
             }
@@ -38,14 +39,6 @@ class ViewController: UIViewController {
     private func reqeust(completion: @escaping () -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             DispatchQueue.main.async {
-                if self.tableView.refresh.header.isRefreshing {
-                    self.dataArray = ["", "", "", "", ""]
-                } else {
-                    (0...10).forEach { _ in self.dataArray.append("") }
-                }
-                
-                self.tableView.reloadData()
-                
                 completion()
             }
         }
@@ -53,13 +46,38 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataArray.count
+        return dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellID")!
-        cell.textLabel?.text = "\(indexPath.row)"
+        cell.textLabel?.text = dataArray[indexPath.row]
         return cell
+    }
+}
+
+extension UIViewController: UITableViewDelegate {
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            navigationController?.pushViewController(
+                AutoRefreshFooterViewController(),
+                animated: true)
+        case 1:
+            navigationController?.pushViewController(
+                AppearanceRefreshFooterViewController(),
+                animated: true)
+        case 2:
+            navigationController?.pushViewController(
+                GIFRefreshHeaderViewController(),
+                animated: true)
+        default:
+            break
+        }
     }
 }
