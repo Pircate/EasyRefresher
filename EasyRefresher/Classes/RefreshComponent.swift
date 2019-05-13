@@ -39,7 +39,7 @@ open class RefreshComponent: UIView {
         }
     }
     
-    public var refreshClosure: () -> Void = {}
+    public var refreshClosure: () -> Void
     
     weak var scrollView: UIScrollView? {
         didSet { scrollView?.alwaysBounceVertical = true }
@@ -88,7 +88,7 @@ open class RefreshComponent: UIView {
     
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
-    public required init(refreshClosure: @escaping () -> Void) {
+    public init(refreshClosure: @escaping () -> Void) {
         self.refreshClosure = refreshClosure
         
         super.init(frame: CGRect.zero)
@@ -97,12 +97,16 @@ open class RefreshComponent: UIView {
     }
     
     public override init(frame: CGRect) {
+        self.refreshClosure = {}
+        
         super.init(frame: frame)
         
         build()
     }
     
     public required init?(coder aDecoder: NSCoder) {
+        self.refreshClosure = {}
+        
         super.init(coder: aDecoder)
         
         build()

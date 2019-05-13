@@ -15,13 +15,11 @@ public enum RefreshState {
 
 public protocol Refreshable: class {
     
-    var state: RefreshState { get set }
+    var state: RefreshState { get }
     
     var isRefreshing: Bool { get }
     
     var refreshClosure: () -> Void { get set }
-    
-    init(refreshClosure: @escaping () -> Void)
     
     func addRefreshClosure(_ refreshClosure: @escaping () -> Void)
     

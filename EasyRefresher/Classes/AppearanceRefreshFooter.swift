@@ -20,7 +20,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
         }
     }
     
-    public required init(refreshClosure: @escaping () -> Void) {
+    public override init(refreshClosure: @escaping () -> Void) {
         super.init(refreshClosure: refreshClosure)
         
         configurateStateTitles()
