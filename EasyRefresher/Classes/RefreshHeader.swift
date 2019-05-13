@@ -35,9 +35,10 @@ open class RefreshHeader: RefreshComponent {
         
         scrollView.changed_inset.top -= 54
         
-        guard let footer = scrollView.refresh_footer as? RefreshFooter else { return }
+        guard let footer = scrollView.refresh_footer as? RefreshFooter,
+            footer.isDescendantOfScrollView else { return }
         
-        footer.resetTransform()
+        footer.reset()
     }
     
     override func add(into scrollView: UIScrollView) {

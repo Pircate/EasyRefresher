@@ -166,10 +166,10 @@ open class RefreshComponent: UIView {
 
 extension RefreshComponent {
     
-    var isAddedIntoScrollView: Bool {
+    var isDescendantOfScrollView: Bool {
         guard let scrollView = scrollView else { return false }
         
-        return scrollView.subviews.contains(self)
+        return isDescendant(of: scrollView)
     }
     
     private func build() {
@@ -232,7 +232,7 @@ extension RefreshComponent: Refresher {
     }
     
     public func beginRefreshing() {
-        guard isAddedIntoScrollView else {
+        guard isDescendantOfScrollView else {
             fatalError("Please add refresher to UIScrollView before begin refreshing")
         }
         
@@ -244,7 +244,7 @@ extension RefreshComponent: Refresher {
     }
     
     public func endRefreshing() {
-        guard isAddedIntoScrollView else {
+        guard isDescendantOfScrollView else {
             fatalError("Please add refresher to UIScrollView before end refreshing")
         }
         

@@ -29,7 +29,9 @@ extension UIScrollView {
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.header)
             
-            guard let header = newValue as? RefreshComponent else { return }
+            guard let header = newValue as? RefreshHeader else {
+                fatalError("Please use RefreshHeader or it's subclass.")
+            }
             
             header.scrollView = self
             header.add(into: self)
@@ -53,7 +55,9 @@ extension UIScrollView {
         set {
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.footer)
             
-            guard let footer = newValue as? RefreshComponent else { return }
+            guard let footer = newValue as? RefreshFooter else {
+                fatalError("Please use RefreshFooter or it's subclass.")
+            }
             
             footer.scrollView = self
             footer.add(into: self)
