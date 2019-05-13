@@ -116,6 +116,8 @@ open class RefreshComponent: UIView {
     
     func willEndRefreshing() {}
     
+    func didEndRefreshing(completion: @escaping () -> Void) {}
+    
     func add(into scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
         
@@ -188,15 +190,6 @@ extension RefreshComponent {
         contentInset.bottom -= scrollView.changed_inset.bottom
         
         originalInset = contentInset
-    }
-    
-    private func didEndRefreshing(completion: @escaping () -> Void) {
-        guard let scrollView = scrollView else { return }
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.top = self.originalInset.top + scrollView.changed_inset.top
-            scrollView.contentInset.bottom = self.originalInset.bottom + scrollView.changed_inset.bottom
-        }, completion: { _ in completion() })
     }
     
     private func removeAllObservers() {

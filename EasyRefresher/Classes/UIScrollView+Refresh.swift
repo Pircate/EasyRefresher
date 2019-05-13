@@ -100,3 +100,14 @@ struct AssociatedKeys {
     
     static var changedInset = "com.pircate.github.changed.inset"
 }
+
+extension UIScrollView {
+    
+    var refreshInset: UIEdgeInsets {
+        guard #available(iOS 11.0, *) else {
+            return contentInset
+        }
+        
+        return adjustedContentInset
+    }
+}

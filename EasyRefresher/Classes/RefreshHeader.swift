@@ -26,19 +26,24 @@ open class RefreshHeader: RefreshComponent {
         
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top = self.originalInset.top + 54
-            scrollView.changed_inset.top += 54
+            scrollView.changed_inset.top = 54
         }, completion: { _ in completion() })
     }
     
     override func willEndRefreshing() {
-        guard let scrollView = scrollView else { return }
-        
-        scrollView.changed_inset.top -= 54
-        
-        guard let footer = scrollView.refresh_footer as? RefreshFooter,
+        guard let footer = scrollView?.refresh_footer as? RefreshFooter,
             footer.isDescendantOfScrollView else { return }
         
         footer.reset()
+    }
+    
+    override func didEndRefreshing(completion: @escaping () -> Void) {
+        guard let scrollView = scrollView else { return }
+        
+        UIView.animate(withDuration: 0.25, animations: {
+            scrollView.contentInset.top -= scrollView.changed_inset.top
+            scrollView.changed_inset.top = 0
+        }, completion: { _ in completion() })
     }
     
     override func add(into scrollView: UIScrollView) {
@@ -48,7 +53,7 @@ open class RefreshHeader: RefreshComponent {
     }
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y + scrollView.contentInset.top
+        let offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         
         switch offset {
         case 0...:
