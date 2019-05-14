@@ -31,11 +31,7 @@ open class RefreshComponent: UIView {
             
             rotateArrow(for: state)
             
-            if let attributedTitle = attributedTitle(for: state) {
-                stateLabel.attributedText = attributedTitle
-            } else {
-                stateLabel.text = title(for: state)
-            }
+            changeStateTitle(for: state)
         }
     }
     
@@ -208,6 +204,18 @@ extension RefreshComponent {
         }
         
         UIView.animate(withDuration: 0.25) { self.arrowImageView.transform = transform }
+    }
+    
+    private func changeStateTitle(for state: RefreshState) {
+        if let attributedTitle = attributedTitle(for: state) {
+            stateLabel.isHidden = false
+            stateLabel.attributedText = attributedTitle
+        } else if let title = title(for: state) {
+            stateLabel.isHidden = false
+            stateLabel.text = title
+        } else {
+            stateLabel.isHidden = true
+        }
     }
 }
 

@@ -24,6 +24,8 @@ open class RefreshHeader: RefreshComponent {
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
+        alpha = 1
+        
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top = self.originalInset.top + 54
             scrollView.changed_inset.top = 54
@@ -32,6 +34,8 @@ open class RefreshHeader: RefreshComponent {
     
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
+        
+        alpha = 0
         
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.top -= scrollView.changed_inset.top
@@ -51,10 +55,13 @@ open class RefreshHeader: RefreshComponent {
         switch offset {
         case 0...:
             state = .idle
+            alpha = 0
         case -54..<0:
             state = .pulling
+            alpha = -offset / 54
         default:
             state = .willRefresh
+            alpha = 1
         }
     }
 }
