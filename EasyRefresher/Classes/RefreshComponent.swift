@@ -236,9 +236,7 @@ extension RefreshComponent: Refresher {
     }
     
     public func beginRefreshing() {
-        guard isDescendantOfScrollView else {
-            fatalError("Please add refresher to UIScrollView before begin refreshing")
-        }
+        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing")
         
         guard !isRefreshing else { return }
         
@@ -248,9 +246,7 @@ extension RefreshComponent: Refresher {
     }
     
     public func endRefreshing() {
-        guard isDescendantOfScrollView else {
-            fatalError("Please add refresher to UIScrollView before end refreshing")
-        }
+        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing")
         
         guard isRefreshing, !isEnding else { return }
         
