@@ -23,15 +23,25 @@ class GIFRefreshHeaderViewController: UIViewController {
         
         tableView.refresh.header = RefreshHeader(stateView: GIFStateView(gifImages: images)) {
             self.reqeust {
+                self.dataArray = ["", "", "", "", ""]
                 self.tableView.refresh.header.endRefreshing()
+                self.tableView.reloadData()
             }
         }
         
         tableView.refresh.header.beginRefreshing()
+        
+        tableView.refresh.footer.addRefreshClosure {
+            self.reqeust {
+                self.dataArray.append(contentsOf: ["", "", "", "", ""])
+                self.tableView.refresh.footer.endRefreshing()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     private func reqeust(completion: @escaping () -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
             DispatchQueue.main.async {
                 completion()
             }

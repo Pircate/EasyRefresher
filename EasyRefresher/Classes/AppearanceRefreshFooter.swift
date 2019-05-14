@@ -44,15 +44,6 @@ open class AppearanceRefreshFooter: RefreshFooter {
         addTapGestureRecognizer()
     }
     
-    override func willBeginRefreshing(completion: @escaping () -> Void) {
-        guard let scrollView = scrollView else { return }
-        
-        UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.bottom = self.originalInset.bottom + 54
-            scrollView.changed_inset.bottom = 54
-        }, completion: { _ in completion() })
-    }
-    
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
     
     override func changeState(by offset: CGFloat) {

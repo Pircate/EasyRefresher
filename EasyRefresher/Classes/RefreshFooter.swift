@@ -55,8 +55,9 @@ open class RefreshFooter: RefreshComponent {
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
+        alpha = 1
+        
         UIView.animate(withDuration: 0.25, animations: {
-            self.alpha = 1
             scrollView.contentInset.bottom = self.originalInset.bottom + 54
             scrollView.changed_inset.bottom = 54
         }, completion: { _ in completion() })
@@ -66,6 +67,7 @@ open class RefreshFooter: RefreshComponent {
         guard let scrollView = scrollView else { return }
         
         alpha = 0
+        
         UIView.animate(withDuration: 0.25, animations: {
             scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
             scrollView.changed_inset.bottom = 0
