@@ -34,7 +34,7 @@ extension UIScrollView {
             }
             
             header.scrollView = self
-            header.add(into: self)
+            header.add(to: self)
             header.observe(self)
         }
     }
@@ -60,7 +60,7 @@ extension UIScrollView {
             }
             
             footer.scrollView = self
-            footer.add(into: self)
+            footer.add(to: self)
             footer.observe(self)
         }
     }

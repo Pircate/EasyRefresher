@@ -39,8 +39,8 @@ open class RefreshHeader: RefreshComponent {
         }, completion: { _ in completion() })
     }
     
-    override func add(into scrollView: UIScrollView) {
-        super.add(into: scrollView)
+    override func add(to scrollView: UIScrollView) {
+        super.add(to: scrollView)
         
         bottomAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
     }

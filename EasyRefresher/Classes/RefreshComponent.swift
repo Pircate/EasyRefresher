@@ -116,7 +116,7 @@ open class RefreshComponent: UIView {
     
     func didEndRefreshing(completion: @escaping () -> Void) {}
     
-    func add(into scrollView: UIScrollView) {
+    func add(to scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
         
         scrollView.addSubview(self)
@@ -218,7 +218,7 @@ extension RefreshComponent: Refresher {
         
         guard let scrollView = scrollView else { return }
         
-        add(into: scrollView)
+        add(to: scrollView)
         observe(scrollView)
     }
     
