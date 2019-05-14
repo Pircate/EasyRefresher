@@ -90,6 +90,7 @@ open class RefreshComponent: UIView {
         super.init(frame: CGRect.zero)
         
         build()
+        prepare()
     }
     
     public override init(frame: CGRect) {
@@ -98,6 +99,7 @@ open class RefreshComponent: UIView {
         super.init(frame: frame)
         
         build()
+        prepare()
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -106,11 +108,8 @@ open class RefreshComponent: UIView {
         super.init(coder: aDecoder)
         
         build()
+        prepare()
     }
-    
-    func willBeginRefreshing(completion: @escaping () -> Void) {}
-    
-    func didEndRefreshing(completion: @escaping () -> Void) {}
     
     func add(to scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
@@ -149,6 +148,12 @@ open class RefreshComponent: UIView {
         }
     }
     
+    func prepare() {}
+    
+    func willBeginRefreshing(completion: @escaping () -> Void) {}
+    
+    func didEndRefreshing(completion: @escaping () -> Void) {}
+    
     func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {}
     
     func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {}
@@ -176,7 +181,7 @@ extension RefreshComponent {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    private func prepare() {
+    private func prepareForRefreshing() {
         guard let scrollView = scrollView else { return }
         
         var contentInset = scrollView.contentInset
@@ -237,7 +242,7 @@ extension RefreshComponent: Refresher {
         
         guard !isRefreshing else { return }
         
-        prepare()
+        prepareForRefreshing()
         state = .refreshing
         willBeginRefreshing { self.refreshClosure() }
     }

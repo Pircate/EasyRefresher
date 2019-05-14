@@ -20,28 +20,12 @@ open class AppearanceRefreshFooter: RefreshFooter {
         }
     }
     
-    public override init(refreshClosure: @escaping () -> Void) {
-        super.init(refreshClosure: refreshClosure)
-        
-        self.alpha = 1
-        configurateStateTitles()
+    override func prepare() {
+        alpha = 1
         addTapGestureRecognizer()
-    }
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.alpha = 1
-        configurateStateTitles()
-        addTapGestureRecognizer()
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.alpha = 1
-        configurateStateTitles()
-        addTapGestureRecognizer()
+        stateTitles = [.pulling: "点击或上拉加载更多",
+                       .willRefresh: "松开立即加载更多",
+                       .refreshing: "正在加载更多的数据..."]
     }
     
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
@@ -57,12 +41,6 @@ open class AppearanceRefreshFooter: RefreshFooter {
 }
 
 extension AppearanceRefreshFooter {
-    
-    private func configurateStateTitles() {
-        stateTitles = [.pulling: "点击或上拉加载更多",
-                       .willRefresh: "松开立即加载更多",
-                       .refreshing: "正在加载更多的数据..."]
-    }
     
     private func addTapGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(

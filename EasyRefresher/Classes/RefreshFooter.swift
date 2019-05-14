@@ -8,19 +8,6 @@
 
 open class RefreshFooter: RefreshComponent {
     
-    public override var stateTitles: [RefreshState : String] {
-        get {
-            guard super.stateTitles.isEmpty else { return super.stateTitles }
-            
-            return [.pulling: "上拉可以加载更多",
-                    .willRefresh: "松开立即加载更多",
-                    .refreshing: "正在加载更多的数据..."]
-        }
-        set {
-            super.stateTitles = newValue
-        }
-    }
-    
     var isAutoRefresh: Bool { return false }
     
     override var arrowDirection: ArrowDirection { return .up }
@@ -34,22 +21,11 @@ open class RefreshFooter: RefreshComponent {
         return constraint
     }()
     
-    public override init(refreshClosure: @escaping () -> Void) {
-        super.init(refreshClosure: refreshClosure)
-        
-        self.alpha = 0
-    }
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        self.alpha = 0
-    }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        self.alpha = 0
+    override func prepare() {
+        alpha = 0
+        stateTitles = [.pulling: "上拉可以加载更多",
+                       .willRefresh: "松开立即加载更多",
+                       .refreshing: "正在加载更多的数据..."]
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {

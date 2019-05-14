@@ -8,17 +8,17 @@
 
 open class RefreshHeader: RefreshComponent {
     
-    public override var stateTitles: [RefreshState : String] {
-        get {
-            guard super.stateTitles.isEmpty else { return super.stateTitles }
-            
-            return [.pulling: "下拉可以刷新",
-                    .willRefresh: "松开立即刷新",
-                    .refreshing: "正在刷新数据中..."]
-        }
-        set {
-            super.stateTitles = newValue
-        }
+    override func add(to scrollView: UIScrollView) {
+        super.add(to: scrollView)
+        
+        bottomAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+    }
+    
+    override func prepare() {
+        alpha = 0
+        stateTitles = [.pulling: "下拉可以刷新",
+                       .willRefresh: "松开立即刷新",
+                       .refreshing: "正在刷新数据中..."]
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
@@ -41,12 +41,6 @@ open class RefreshHeader: RefreshComponent {
             scrollView.contentInset.top -= scrollView.changed_inset.top
             scrollView.changed_inset.top = 0
         }, completion: { _ in completion() })
-    }
-    
-    override func add(to scrollView: UIScrollView) {
-        super.add(to: scrollView)
-        
-        bottomAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
     }
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
