@@ -42,9 +42,8 @@ open class RefreshFooter: RefreshComponent {
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        alpha = 0
-        
         UIView.animate(withDuration: 0.25, animations: {
+            self.alpha = 0
             scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
             scrollView.changed_inset.bottom = 0
         }, completion: { _ in completion() })
@@ -83,16 +82,16 @@ open class RefreshFooter: RefreshComponent {
     }
     
     func changeState(by offset: CGFloat) {
-        switch offset {
-        case 54...:
-            state = .willRefresh
-            alpha = 1
-        case 0..<54:
+        switch -offset {
+        case 0...:
+            state = .idle
+            alpha = 0
+        case -54..<0:
             state = .pulling
             alpha = offset / 54
         default:
-            state = .idle
-            alpha = 0
+            state = .willRefresh
+            alpha = 1
         }
     }
 }

@@ -31,8 +31,8 @@ open class AppearanceRefreshFooter: RefreshFooter {
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
     
     override func changeState(by offset: CGFloat) {
-        switch offset {
-        case 54...:
+        switch -offset {
+        case ..<(-54):
             state = .willRefresh
         default:
             state = .pulling

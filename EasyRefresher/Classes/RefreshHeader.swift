@@ -35,9 +35,8 @@ open class RefreshHeader: RefreshComponent {
     override func didEndRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
-        alpha = 0
-        
         UIView.animate(withDuration: 0.25, animations: {
+            self.alpha = 0
             scrollView.contentInset.top -= scrollView.changed_inset.top
             scrollView.changed_inset.top = 0
         }, completion: { _ in completion() })
