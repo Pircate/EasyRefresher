@@ -23,8 +23,6 @@ open class RefreshFooter: RefreshComponent {
     
     var isAutoRefresh: Bool { return false }
     
-    var alwaysAtBottom: Bool { return true }
-    
     override var arrowDirection: ArrowDirection { return .up }
     
     private lazy var constraintOfTopAnchor: NSLayoutConstraint? = {
@@ -128,17 +126,6 @@ extension RefreshFooter {
     private func updateConstraintOfTopAnchorIfNeeded() {
         guard let scrollView = scrollView else { return }
         
-        let constant: CGFloat
-        if alwaysAtBottom {
-            let height = scrollView.bounds.height
-                - scrollView.refreshInset.top
-                - scrollView.contentSize.height
-                - 54
-            constant = scrollView.contentSize.height + (height > 0 ? height : 0)
-        } else {
-            constant = scrollView.contentSize.height
-        }
-        
-        constraintOfTopAnchor?.constant = constant
+        constraintOfTopAnchor?.constant = scrollView.contentSize.height
     }
 }
