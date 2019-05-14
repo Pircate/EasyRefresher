@@ -84,8 +84,6 @@ open class RefreshFooter: RefreshComponent {
             offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         }
         
-        updateConstraintOfTopAnchorIfNeeded()
-        
         if isAutoRefresh, scrollView.isDragging, offset > 0 {
             beginRefreshing()
             return

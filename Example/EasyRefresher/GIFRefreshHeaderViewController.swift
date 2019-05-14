@@ -53,28 +53,7 @@ extension GIFRefreshHeaderViewController: UITableViewDataSource {
 }
 
 
-public class GIFStateView: UIView, RefreshStateful {
-    
-    public var refreshState: RefreshState = .idle {
-        didSet {
-            switch refreshState {
-            case .idle:
-                gifImageView.isHidden = true
-                gifImageView.stopAnimating()
-            case .pulling:
-                gifImageView.isHidden = false
-                gifImageView.stopAnimating()
-                gifImageView.image = gifImageView.animationImages?.first
-            case .willRefresh:
-                gifImageView.isHidden = false
-                gifImageView.stopAnimating()
-                gifImageView.image = gifImageView.animationImages?.last
-            case .refreshing:
-                gifImageView.isHidden = false
-                gifImageView.startAnimating()
-            }
-        }
-    }
+public class GIFStateView: UIView {
     
     private lazy var gifImageView: UIImageView = {
         return UIImageView()
@@ -96,5 +75,27 @@ public class GIFStateView: UIView, RefreshStateful {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension GIFStateView: RefreshStateful {
+    
+    public func refresher(_ refresher: Refresher, didChangeState state: RefreshState) {
+        switch state {
+        case .idle:
+            gifImageView.isHidden = true
+            gifImageView.stopAnimating()
+        case .pulling:
+            gifImageView.isHidden = false
+            gifImageView.stopAnimating()
+            gifImageView.image = gifImageView.animationImages?.first
+        case .willRefresh:
+            gifImageView.isHidden = false
+            gifImageView.stopAnimating()
+            gifImageView.image = gifImageView.animationImages?.last
+        case .refreshing:
+            gifImageView.isHidden = false
+            gifImageView.startAnimating()
+        }
     }
 }

@@ -8,5 +8,5 @@
 
 public protocol RefreshStateful: class {
     
-    var refreshState: RefreshState { get set }
+    func refresher(_ refresher: Refresher, didChangeState state: RefreshState)
 }

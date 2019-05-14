@@ -53,6 +53,8 @@ open class RefreshComponent: UIView {
     
     var arrowDirection: ArrowDirection { return .down }
     
+    private var stateChanged: (RefreshState) -> Void = { _ in }
+    
     private var contentOffsetObservation: NSKeyValueObservation?
     
     private var contentSizeObservation: NSKeyValueObservation?
@@ -85,8 +87,6 @@ open class RefreshComponent: UIView {
         stateLabel.textAlignment = .center
         return stateLabel
     }()
-    
-    private var stateChanged: (RefreshState) -> Void = { _ in }
     
     public init(refreshClosure: @escaping () -> Void) {
         self.refreshClosure = refreshClosure
@@ -266,7 +266,7 @@ extension RefreshComponent {
         stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        stateChanged = { stateView.refreshState = $0 }
+        stateChanged = { stateView.refresher(self, didChangeState: $0) }
     }
 }
 
