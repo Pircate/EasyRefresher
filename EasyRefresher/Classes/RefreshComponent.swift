@@ -93,6 +93,28 @@ open class RefreshComponent: UIView {
         prepare()
     }
     
+    public init<T>(
+        stateView: T,
+        refreshClosure: @escaping () -> Void)
+        where T: UIView, T: RefreshStateful
+    {
+        self.refreshClosure = refreshClosure
+        
+        super.init(frame: .zero)
+        
+        prepare()
+        
+        addSubview(stateView)
+        
+        stateView.translatesAutoresizingMaskIntoConstraints = false
+        stateView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        stateChanged = { stateView.refresher(self, didChangeState: $0) }
+    }
+    
     public override init(frame: CGRect) {
         self.refreshClosure = {}
         
@@ -254,28 +276,6 @@ extension RefreshComponent: Refresher {
         
         state = .idle
         didEndRefreshing { self.isEnding = false }
-    }
-}
-
-extension RefreshComponent {
-    
-    public convenience init<T>(
-        stateView: T,
-        refreshClosure: @escaping () -> Void)
-        where T: UIView, T: RefreshStateful
-    {
-        self.init(refreshClosure: refreshClosure)
-        stackView.removeFromSuperview()
-        
-        addSubview(stateView)
-        
-        stateView.translatesAutoresizingMaskIntoConstraints = false
-        stateView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
-        stateChanged = { stateView.refresher(self, didChangeState: $0) }
     }
 }
 
