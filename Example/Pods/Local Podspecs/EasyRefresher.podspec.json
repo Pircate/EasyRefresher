@@ -17,7 +17,8 @@
   "source_files": "EasyRefresher/Classes/**/*",
   "resource_bundles": {
     "EasyRefresher": [
-      "EasyRefresher/Assets/*"
+      "EasyRefresher/Assets/*.xcassets",
+      "EasyRefresher/Assets/**/*.strings"
     ]
   },
   "platforms": {

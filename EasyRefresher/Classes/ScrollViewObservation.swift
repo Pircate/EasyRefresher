@@ -11,14 +11,14 @@ final class ScrollViewObservation {
     enum KeyPath {
         case contentOffset
         case contentSize
-        case panState
+        case panGestureState
     }
     
     private var contentOffsetObservation: NSKeyValueObservation?
     
     private var contentSizeObservation: NSKeyValueObservation?
     
-    private var panStateObservation: NSKeyValueObservation?
+    private var panGestureStateObservation: NSKeyValueObservation?
     
     func observe(_ scrollView: UIScrollView, changeHandler: @escaping (UIScrollView, KeyPath) -> Void) {
         contentOffsetObservation = scrollView.observe(\.contentOffset) { this, _ in
@@ -29,14 +29,14 @@ final class ScrollViewObservation {
             changeHandler(this, .contentSize)
         }
         
-        panStateObservation = scrollView.observe(\.panGestureRecognizer.state) { this, _ in
-            changeHandler(this, .panState)
+        panGestureStateObservation = scrollView.observe(\.panGestureRecognizer.state) { this, _ in
+            changeHandler(this, .panGestureState)
         }
     }
     
     func invalidate() {
         contentOffsetObservation?.invalidate()
         contentSizeObservation?.invalidate()
-        panStateObservation?.invalidate()
+        panGestureStateObservation?.invalidate()
     }
 }

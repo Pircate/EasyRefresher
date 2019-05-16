@@ -155,8 +155,8 @@ open class RefreshComponent: UIView {
                 self.scrollViewContentOffsetDidChange(this)
             case .contentSize:
                 self.scrollViewContentSizeDidChange(this)
-            case .panState:
-                self.scrollViewPanStateDidChange(this)
+            case .panGestureState:
+                self.scrollViewPanGestureStateDidChange(this)
             }
         }
     }
@@ -171,7 +171,7 @@ open class RefreshComponent: UIView {
     
     func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {}
     
-    func scrollViewPanStateDidChange(_ scrollView: UIScrollView) {
+    func scrollViewPanGestureStateDidChange(_ scrollView: UIScrollView) {
         guard scrollView.panGestureRecognizer.state == .ended, state == .willRefresh else { return }
         
         beginRefreshing()

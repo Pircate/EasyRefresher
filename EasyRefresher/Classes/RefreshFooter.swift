@@ -75,10 +75,10 @@ open class RefreshFooter: RefreshComponent {
         updateConstraintOfTopAnchorIfNeeded()
     }
     
-    override func scrollViewPanStateDidChange(_ scrollView: UIScrollView) {
+    override func scrollViewPanGestureStateDidChange(_ scrollView: UIScrollView) {
         guard !isAutoRefresh else { return }
         
-        super.scrollViewPanStateDidChange(scrollView)
+        super.scrollViewPanGestureStateDidChange(scrollView)
     }
     
     func changeState(by offset: CGFloat) {
