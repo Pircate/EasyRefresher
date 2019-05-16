@@ -23,9 +23,9 @@ open class AppearanceRefreshFooter: RefreshFooter {
     override func prepare() {
         alpha = 1
         addTapGestureRecognizer()
-        stateTitles = [.pulling: "点击或上拉加载更多",
-                       .willRefresh: "松开立即加载更多",
-                       .refreshing: "正在加载更多的数据..."]
+        stateTitles = [.pulling: "tap_or_pull_up_to_load_more".localized(),
+                       .willRefresh: "release_to_load_more".localized(),
+                       .refreshing: "loading".localized()]
     }
     
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }

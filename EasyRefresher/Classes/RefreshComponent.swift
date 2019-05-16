@@ -271,14 +271,3 @@ extension RefreshComponent {
         case down
     }
 }
-
-private extension Bundle {
-    
-    static var current: Bundle? {
-        guard let resourcePath = Bundle(for: RefreshComponent.self).resourcePath,
-            let bundle = Bundle(path: "\(resourcePath)/EasyRefresher.bundle") else {
-                return nil
-        }
-        return bundle
-    }
-}

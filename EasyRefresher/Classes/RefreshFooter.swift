@@ -23,9 +23,9 @@ open class RefreshFooter: RefreshComponent {
     
     override func prepare() {
         alpha = 0
-        stateTitles = [.pulling: "上拉可以加载更多",
-                       .willRefresh: "松开立即加载更多",
-                       .refreshing: "正在加载更多的数据..."]
+        stateTitles = [.pulling: "pull_up_to_load_more".localized(),
+                       .willRefresh: "release_to_load_more".localized(),
+                       .refreshing: "loading".localized()]
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {

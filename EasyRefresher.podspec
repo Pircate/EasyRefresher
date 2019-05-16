@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Pircate' => 'gao497868860@gmail.com' }
   s.source           = { :git => 'https://github.com/Pircate/EasyRefresher.git', :tag => s.version.to_s }
   s.source_files     = 'EasyRefresher/Classes/**/*'
-  s.resource_bundles = { 'EasyRefresher' => ['EasyRefresher/Assets/*.xcassets'] }
+  s.resource_bundles = { 'EasyRefresher' => ['EasyRefresher/Assets/*'] }
   s.ios.deployment_target = '9.0'
   s.swift_versions = ['4.2', '5.0']
 end

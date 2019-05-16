@@ -16,9 +16,9 @@ open class RefreshHeader: RefreshComponent {
     
     override func prepare() {
         alpha = 0
-        stateTitles = [.pulling: "下拉可以刷新",
-                       .willRefresh: "松开立即刷新",
-                       .refreshing: "正在刷新数据中..."]
+        stateTitles = [.pulling: "pull_down_to_refresh".localized(),
+                       .willRefresh: "release_to_refresh".localized(),
+                       .refreshing: "loading".localized()]
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
