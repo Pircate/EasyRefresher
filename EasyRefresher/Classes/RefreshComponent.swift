@@ -51,13 +51,9 @@ open class RefreshComponent: UIView {
     
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
-    private var contentOffsetObservation: NSKeyValueObservation?
-    
-    private var contentSizeObservation: NSKeyValueObservation?
-    
-    private var panStateObservation: NSKeyValueObservation?
-    
     private var isEnding: Bool = false
+    
+    private lazy var observation: ScrollViewObservation = { ScrollViewObservation() }()
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
@@ -145,28 +141,23 @@ open class RefreshComponent: UIView {
     }
     
     func observe(_ scrollView: UIScrollView) {
-        removeAllObservers()
+        observation.invalidate()
         
-        contentOffsetObservation = scrollView.observe(\.contentOffset) { [weak self] this, _ in
+        observation.observe(scrollView) { [weak self] this, keyPath in
             guard let `self` = self else { return }
             
-            this.bringSubviewToFront(self)
-            
-            guard !self.isRefreshing else { return }
-            
-            self.scrollViewContentOffsetDidChange(this)
-        }
-        
-        contentSizeObservation = scrollView.observe(\.contentSize) { [weak self] this, _ in
-            guard let `self` = self else { return }
-            
-            self.scrollViewContentSizeDidChange(this)
-        }
-        
-        panStateObservation = scrollView.observe(\.panGestureRecognizer.state) { [weak self] this, _ in
-            guard let `self` = self else { return }
-            
-            self.scrollViewPanStateDidChange(this)
+            switch keyPath {
+            case .contentOffset:
+                this.bringSubviewToFront(self)
+                
+                guard !self.isRefreshing else { return }
+                
+                self.scrollViewContentOffsetDidChange(this)
+            case .contentSize:
+                self.scrollViewContentSizeDidChange(this)
+            case .panState:
+                self.scrollViewPanStateDidChange(this)
+            }
         }
     }
     
@@ -211,12 +202,6 @@ extension RefreshComponent {
         contentInset.bottom -= scrollView.changed_inset.bottom
         
         originalInset = contentInset
-    }
-    
-    private func removeAllObservers() {
-        contentOffsetObservation?.invalidate()
-        contentSizeObservation?.invalidate()
-        panStateObservation?.invalidate()
     }
     
     private func rotateArrow(for state: RefreshState) {
