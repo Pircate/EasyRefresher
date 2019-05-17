@@ -22,10 +22,11 @@ open class RefreshFooter: RefreshComponent {
     }()
     
     override func prepare() {
+        super.prepare()
+        
         alpha = 0
-        stateTitles = [.pulling: "pull_up_to_load_more".localized(),
-                       .willRefresh: "release_to_load_more".localized(),
-                       .refreshing: "loading".localized()]
+        setTitle("pull_up_to_load_more".localized(), for: .pulling)
+        setTitle("release_to_load_more".localized(), for: .willRefresh)
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {

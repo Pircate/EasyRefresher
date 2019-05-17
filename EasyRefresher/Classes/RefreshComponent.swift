@@ -161,7 +161,9 @@ open class RefreshComponent: UIView {
         }
     }
     
-    func prepare() {}
+    func prepare() {
+        setTitle("loading".localized(), for: .refreshing)
+    }
     
     func willBeginRefreshing(completion: @escaping () -> Void) {}
     

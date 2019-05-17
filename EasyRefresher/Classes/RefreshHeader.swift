@@ -15,10 +15,11 @@ open class RefreshHeader: RefreshComponent {
     }
     
     override func prepare() {
+        super.prepare()
+        
         alpha = 0
-        stateTitles = [.pulling: "pull_down_to_refresh".localized(),
-                       .willRefresh: "release_to_refresh".localized(),
-                       .refreshing: "loading".localized()]
+        setTitle("pull_down_to_refresh".localized(), for: .pulling)
+        setTitle("release_to_refresh".localized(), for: .willRefresh)
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {

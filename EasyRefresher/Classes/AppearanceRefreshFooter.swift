@@ -21,11 +21,11 @@ open class AppearanceRefreshFooter: RefreshFooter {
     }
     
     override func prepare() {
+        super.prepare()
+        
         alpha = 1
         addTapGestureRecognizer()
-        stateTitles = [.pulling: "tap_or_pull_up_to_load_more".localized(),
-                       .willRefresh: "release_to_load_more".localized(),
-                       .refreshing: "loading".localized()]
+        setTitle("tap_or_pull_up_to_load_more".localized(), for: .pulling)
     }
     
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
