@@ -259,8 +259,10 @@ extension RefreshComponent: Refresher {
         
         isEnding = true
         
-        state = .idle
-        didEndRefreshing { self.isEnding = false }
+        didEndRefreshing {
+            self.state = .idle
+            self.isEnding = false
+        }
     }
 }
 
