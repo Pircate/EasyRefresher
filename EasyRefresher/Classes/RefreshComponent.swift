@@ -65,8 +65,7 @@ open class RefreshComponent: UIView {
     }()
     
     private lazy var arrowImageView: UIImageView = {
-        let image = UIImage(named: "refresh_arrow_down", in: Bundle.current, compatibleWith: nil)
-        let arrowImageView = UIImageView(image: image)
+        let arrowImageView = UIImageView(image: "refresh_arrow_down".bundleImage())
         arrowImageView.isHidden = true
         return arrowImageView
     }()
