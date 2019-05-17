@@ -8,6 +8,11 @@
 
 open class AppearanceRefreshFooter: RefreshFooter {
     
+    public override var automaticallyChangeAlpha: Bool {
+        get { return false }
+        set {}
+    }
+    
     public override var state: RefreshState {
         get { return super.state }
         set {

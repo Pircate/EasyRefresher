@@ -13,3 +13,4 @@
 "tap_or_pull_up_to_load_more" = "点击或上拉加载更多";
 "pull_up_to_load_more" = "上拉可以加载更多";
 "release_to_load_more" = "松开立即加载更多";
+"no_more_data" = "没有更多数据";

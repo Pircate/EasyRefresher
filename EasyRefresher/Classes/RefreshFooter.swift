@@ -62,6 +62,10 @@ open class RefreshFooter: RefreshComponent {
             offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         }
         
+        changeAlpha(by: -offset)
+        
+        if isDisabled { return }
+        
         if isAutoRefresh, scrollView.isDragging, offset > 0 {
             beginRefreshing()
             return
@@ -86,13 +90,10 @@ open class RefreshFooter: RefreshComponent {
         switch -offset {
         case 0...:
             state = .idle
-            alpha = 0
         case -54..<0:
             state = .pulling
-            alpha = offset / 54
         default:
             state = .willRefresh
-            alpha = 1
         }
     }
 }

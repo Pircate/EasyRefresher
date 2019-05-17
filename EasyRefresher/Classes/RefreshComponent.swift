@@ -12,6 +12,8 @@ open class RefreshComponent: UIView {
         didSet { activityIndicator.style = activityIndicatorStyle }
     }
     
+    public var automaticallyChangeAlpha: Bool = true
+    
     public var stateTitles: [RefreshState : String] = [:]
     
     public var stateAttributedTitles: [RefreshState : NSAttributedString] = [:]
@@ -163,6 +165,7 @@ open class RefreshComponent: UIView {
     
     func prepare() {
         setTitle("loading".localized(), for: .refreshing)
+        setTitle("no_more_data".localized(), for: .disabled)
     }
     
     func willBeginRefreshing(completion: @escaping () -> Void) {}
@@ -188,6 +191,22 @@ extension RefreshComponent {
         return isDescendant(of: scrollView)
     }
     
+    func changeAlpha(by offset: CGFloat) {
+        guard automaticallyChangeAlpha else {
+            alpha = 1
+            return
+        }
+        
+        switch offset {
+        case 0...:
+            alpha = 0
+        case -54..<0:
+            alpha = -offset / 54
+        default:
+            alpha = 1
+        }
+    }
+    
     private func build() {
         addSubview(stackView)
         
@@ -206,8 +225,21 @@ extension RefreshComponent {
         originalInset = contentInset
     }
     
+    private func endRefreshing(to state: RefreshState) {
+        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing")
+        
+        guard isRefreshing, !isEnding else { return }
+        
+        isEnding = true
+        
+        didEndRefreshing {
+            self.state = state
+            self.isEnding = false
+        }
+    }
+    
     private func rotateArrow(for state: RefreshState) {
-        arrowImageView.isHidden = state == .idle || state == .refreshing
+        arrowImageView.isHidden = state == .idle || isRefreshing || isDisabled
         
         let transform: CGAffineTransform
         switch arrowDirection {
@@ -247,7 +279,7 @@ extension RefreshComponent: Refresher {
     public func beginRefreshing() {
         assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing")
         
-        guard !isRefreshing else { return }
+        guard !isRefreshing, !isDisabled else { return }
         
         prepareForRefreshing()
         state = .refreshing
@@ -255,16 +287,17 @@ extension RefreshComponent: Refresher {
     }
     
     public func endRefreshing() {
-        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing")
+        endRefreshing(to: .idle)
+    }
+    
+    public func enable() {
+        guard isDisabled else { return }
         
-        guard isRefreshing, !isEnding else { return }
-        
-        isEnding = true
-        
-        didEndRefreshing {
-            self.state = .idle
-            self.isEnding = false
-        }
+        state = .idle
+    }
+    
+    public func disable() {
+        endRefreshing(to: .disabled)
     }
 }
 

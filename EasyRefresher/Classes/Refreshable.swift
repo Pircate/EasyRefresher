@@ -11,6 +11,7 @@ public enum RefreshState {
     case pulling
     case willRefresh
     case refreshing
+    case disabled
 }
 
 public protocol Refreshable: class {
@@ -19,6 +20,8 @@ public protocol Refreshable: class {
     
     var isRefreshing: Bool { get }
     
+    var isDisabled: Bool { get }
+    
     var refreshClosure: () -> Void { get set }
     
     func addRefreshClosure(_ refreshClosure: @escaping () -> Void)
@@ -26,11 +29,19 @@ public protocol Refreshable: class {
     func beginRefreshing()
     
     func endRefreshing()
+    
+    func enable()
+    
+    func disable()
 }
 
 public extension Refreshable {
     
     var isRefreshing: Bool {
         return state == .refreshing
+    }
+    
+    var isDisabled: Bool {
+        return state == .disabled
     }
 }

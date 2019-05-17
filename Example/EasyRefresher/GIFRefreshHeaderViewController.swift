@@ -106,6 +106,8 @@ extension GIFStateView: RefreshStateful {
         case .refreshing:
             gifImageView.isHidden = false
             gifImageView.startAnimating()
+        case .disabled:
+            break
         }
     }
 }
