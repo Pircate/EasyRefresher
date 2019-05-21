@@ -64,6 +64,16 @@ tableView.refresh.header.setTitle("loading...", for: .refreshing)
 tableView.refresh.header.activityIndicatorStyle = .white
 ```
 
+* Disabled
+
+```swift
+tableView.refresh.footer.setTitle("No more data", for: .disabled)
+
+self.tableView.refresh.footer.disable()
+
+self.tableView.refresh.footer.enable()
+```
+
 * Custom State View
 
 ```swift
