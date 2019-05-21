@@ -13,7 +13,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
         set {}
     }
     
-    public override var state: RefreshState {
+    internal(set) public override var state: RefreshState {
         get { return super.state }
         set {
             guard newValue == .idle else {
@@ -37,7 +37,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     
     override func changeState(by offset: CGFloat) {
         switch -offset {
-        case ..<(-54):
+        case ..<(-height):
             state = .willRefresh
         default:
             state = .pulling

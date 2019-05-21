@@ -35,8 +35,8 @@ open class RefreshFooter: RefreshComponent {
         alpha = 1
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.bottom = self.originalInset.bottom + 54
-            scrollView.changed_inset.bottom = 54
+            scrollView.contentInset.bottom = self.originalInset.bottom + self.height
+            scrollView.changed_inset.bottom = self.height
         }, completion: { _ in completion() })
     }
     
@@ -90,7 +90,7 @@ open class RefreshFooter: RefreshComponent {
         switch -offset {
         case 0...:
             state = .idle
-        case -54..<0:
+        case -height..<0:
             state = .pulling
         default:
             state = .willRefresh

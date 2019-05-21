@@ -18,7 +18,7 @@ open class RefreshComponent: UIView {
     
     public var stateAttributedTitles: [RefreshState : NSAttributedString] = [:]
     
-    public var state: RefreshState = .idle {
+    internal(set) public var state: RefreshState = .idle {
         didSet {
             guard state != oldValue else { return }
             
@@ -50,6 +50,8 @@ open class RefreshComponent: UIView {
     }()
     
     var arrowDirection: ArrowDirection { return .down }
+    
+    let height: CGFloat = 54
     
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
@@ -138,7 +140,7 @@ open class RefreshComponent: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
         widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        heightAnchor.constraint(equalToConstant: 54).isActive = true
+        heightAnchor.constraint(equalToConstant: height).isActive = true
     }
     
     func observe(_ scrollView: UIScrollView) {
@@ -199,8 +201,8 @@ extension RefreshComponent {
         switch offset {
         case 0...:
             alpha = 0
-        case -54..<0:
-            alpha = -offset / 54
+        case -height..<0:
+            alpha = -offset / height
         default:
             alpha = 1
         }

@@ -28,8 +28,8 @@ open class RefreshHeader: RefreshComponent {
         alpha = 1
         
         UIView.animate(withDuration: 0.25, animations: {
-            scrollView.contentInset.top = self.originalInset.top + 54
-            scrollView.changed_inset.top = 54
+            scrollView.contentInset.top = self.originalInset.top + self.height
+            scrollView.changed_inset.top = self.height
         }, completion: { _ in completion() })
     }
     
@@ -53,7 +53,7 @@ open class RefreshHeader: RefreshComponent {
         switch offset {
         case 0...:
             state = .idle
-        case -54..<0:
+        case -height..<0:
             state = .pulling
         default:
             state = .willRefresh

@@ -1,6 +1,6 @@
 {
   "name": "EasyRefresher",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "summary": "A refresh control for UIScrollView.",
   "homepage": "https://github.com/Pircate/EasyRefresher",
   "license": {
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/Pircate/EasyRefresher.git",
-    "tag": "0.8.0"
+    "tag": "0.8.1"
   },
   "source_files": "EasyRefresher/Classes/**/*",
   "resource_bundles": {
