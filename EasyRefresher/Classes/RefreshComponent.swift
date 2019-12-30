@@ -263,6 +263,7 @@ extension RefreshComponent {
             stateLabel.attributedText = attributedTitle
         } else if let title = title(for: state) {
             stateLabel.isHidden = false
+            stateLabel.attributedText = nil
             stateLabel.text = title
         } else {
             stateLabel.isHidden = true
