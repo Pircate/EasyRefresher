@@ -37,6 +37,10 @@ class AppearanceRefreshFooterViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        tableView.refresh.footer.setAttributedTitle(
+            NSAttributedString(string: "已到最后一页", attributes: [.foregroundColor: UIColor.red]), for: .disabled
+        )
     }
     
     private func reqeust(completion: @escaping () -> Void) {

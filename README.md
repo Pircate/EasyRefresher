@@ -56,6 +56,10 @@ tableView.refresh.header.beginRefreshing()
 
 ```swift
 tableView.refresh.header.setTitle("loading...", for: .refreshing)
+
+tableView.refresh.footer.setAttributedTitle(
+    NSAttributedString(string: "正在加载中", attributes: [.foregroundColor: UIColor.red]), for: .refreshing
+)
 ```
 
 * UIActivityIndicatorView Style

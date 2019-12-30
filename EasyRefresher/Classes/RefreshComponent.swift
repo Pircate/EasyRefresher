@@ -8,8 +8,9 @@
 
 open class RefreshComponent: UIView {
     
-    public var activityIndicatorStyle: UIActivityIndicatorView.Style = .gray {
-        didSet { activityIndicator.style = activityIndicatorStyle }
+    public var activityIndicatorStyle: UIActivityIndicatorView.Style {
+        get { activityIndicator.style }
+        set { activityIndicator.style = newValue }
     }
     
     public var automaticallyChangeAlpha: Bool = true
@@ -76,7 +77,7 @@ open class RefreshComponent: UIView {
         if #available(iOS 13.0, *) {
             return UIActivityIndicatorView(style: .medium)
         } else {
-            return UIActivityIndicatorView(style: activityIndicatorStyle)
+            return UIActivityIndicatorView(style: .gray)
         }
     }()
     
