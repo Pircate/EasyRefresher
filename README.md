@@ -69,9 +69,7 @@ tableView.refresh.header.activityIndicatorStyle = .white
 ```swift
 tableView.refresh.footer.setTitle("No more data", for: .disabled)
 
-self.tableView.refresh.footer.disable()
-
-self.tableView.refresh.footer.enable()
+self.tableView.refresh.footer.isEnabled = false
 ```
 
 * Custom State View

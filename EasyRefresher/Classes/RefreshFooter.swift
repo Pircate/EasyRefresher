@@ -64,7 +64,7 @@ open class RefreshFooter: RefreshComponent {
         
         changeAlpha(by: -offset)
         
-        if isDisabled { return }
+        guard isEnabled else { return }
         
         if isAutoRefresh, scrollView.isDragging, offset > 0 {
             beginRefreshing()

@@ -22,7 +22,7 @@ class AppearanceRefreshFooterViewController: UIViewController {
         tableView.refresh.header.addRefreshClosure {
             self.reqeust {
                 self.dataArray = ["", "", "", "", ""]
-                self.tableView.refresh.footer.enable()
+                self.tableView.refresh.footer.isEnabled = true
                 self.tableView.refresh.header.endRefreshing()
                 self.tableView.reloadData()
             }
@@ -33,7 +33,7 @@ class AppearanceRefreshFooterViewController: UIViewController {
         tableView.refresh.footer = AppearanceRefreshFooter {
             self.reqeust {
                 self.dataArray.append(contentsOf: ["", "", "", "", ""])
-                self.tableView.refresh.footer.disable()
+                self.tableView.refresh.footer.isEnabled = false
                 self.tableView.reloadData()
             }
         }

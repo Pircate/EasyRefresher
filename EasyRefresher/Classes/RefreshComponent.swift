@@ -240,7 +240,7 @@ extension RefreshComponent {
     }
     
     private func rotateArrow(for state: RefreshState) {
-        arrowImageView.isHidden = state == .idle || isRefreshing || isDisabled
+        arrowImageView.isHidden = state == .idle || isRefreshing || !isEnabled
         
         let transform: CGAffineTransform
         switch arrowDirection {
@@ -268,6 +268,19 @@ extension RefreshComponent {
 
 extension RefreshComponent: Refresher {
     
+    public var isEnabled: Bool {
+        get { state != .disabled }
+        set {
+            if newValue {
+                guard state == .disabled else { return }
+                
+                state = .idle
+            } else {
+                endRefreshing(to: .disabled)
+            }
+        }
+    }
+    
     public func addRefreshClosure(_ refreshClosure: @escaping () -> Void) {
         self.refreshClosure = refreshClosure
         
@@ -280,7 +293,7 @@ extension RefreshComponent: Refresher {
     public func beginRefreshing() {
         assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing")
         
-        guard !isRefreshing, !isDisabled else { return }
+        guard !isRefreshing, isEnabled else { return }
         
         prepareForRefreshing()
         state = .refreshing
@@ -289,16 +302,6 @@ extension RefreshComponent: Refresher {
     
     public func endRefreshing() {
         endRefreshing(to: .idle)
-    }
-    
-    public func enable() {
-        guard isDisabled else { return }
-        
-        state = .idle
-    }
-    
-    public func disable() {
-        endRefreshing(to: .disabled)
     }
 }
 
