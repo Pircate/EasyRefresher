@@ -8,9 +8,9 @@
 
 open class RefreshFooter: RefreshComponent {
     
-    var isAutoRefresh: Bool { return false }
+    var isAutoRefresh: Bool { false }
     
-    override var arrowDirection: ArrowDirection { return .up }
+    override var arrowDirection: ArrowDirection { .up }
     
     private lazy var constraintOfTopAnchor: NSLayoutConstraint? = {
         guard let scrollView = scrollView, isDescendant(of: scrollView) else { return nil }

@@ -49,7 +49,7 @@ open class RefreshComponent: UIView {
         return scrollView.contentInset
     }()
     
-    var arrowDirection: ArrowDirection { return .down }
+    var arrowDirection: ArrowDirection { .down }
     
     let height: CGFloat = 54
     
@@ -94,9 +94,8 @@ open class RefreshComponent: UIView {
     
     public init<T>(
         stateView: T,
-        refreshClosure: @escaping () -> Void)
-        where T: UIView, T: RefreshStateful
-    {
+        refreshClosure: @escaping () -> Void
+    ) where T: UIView, T: RefreshStateful {
         self.refreshClosure = refreshClosure
         
         super.init(frame: .zero)
