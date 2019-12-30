@@ -73,7 +73,11 @@ open class RefreshComponent: UIView {
     }()
     
     private lazy var activityIndicator: UIActivityIndicatorView = {
-        UIActivityIndicatorView(style: activityIndicatorStyle)
+        if #available(iOS 13.0, *) {
+            return UIActivityIndicatorView(style: .medium)
+        } else {
+            return UIActivityIndicatorView(style: activityIndicatorStyle)
+        }
     }()
     
     private lazy var stateLabel: UILabel = {
