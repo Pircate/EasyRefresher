@@ -58,7 +58,7 @@ tableView.refresh.header.beginRefreshing()
 tableView.refresh.header.setTitle("loading...", for: .refreshing)
 
 tableView.refresh.footer.setAttributedTitle(
-    NSAttributedString(string: "正在加载中", attributes: [.foregroundColor: UIColor.red]), for: .refreshing
+    NSAttributedString(string: "已到最后一页", attributes: [.foregroundColor: UIColor.red]), for: .disabled
 )
 ```
 
@@ -71,8 +71,6 @@ tableView.refresh.header.activityIndicatorStyle = .white
 * Disabled
 
 ```swift
-tableView.refresh.footer.setTitle("No more data", for: .disabled)
-
 // End refreshing and set state to disabled
 self.tableView.refresh.footer.isEnabled = false
 ```
