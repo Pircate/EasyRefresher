@@ -8,9 +8,12 @@
 
 public protocol Displayable {
     
+    /// The alpha value of refresher's view.
     var alpha: CGFloat { get set }
     
+    /// The background color of refresher's view.
     var backgroundColor: UIColor? { get set }
     
+    /// A Boolean value indicating whether the refresher automatically change view's alpha value when pulling.
     var automaticallyChangeAlpha: Bool { get set }
 }
