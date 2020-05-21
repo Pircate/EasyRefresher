@@ -81,7 +81,11 @@ self.tableView.refresh.footer.isEnabled = false
 extension CustomStateView: RefreshStateful {
     
     public func refresher(_ refresher: Refresher, didChangeState state: RefreshState) {
-        
+    
+    }
+    
+    public func refresher(_ refresher: Refresher, didChangeOffset offset: CGFloat) {
+    
     }
 }
 
