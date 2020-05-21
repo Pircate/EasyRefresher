@@ -8,8 +8,12 @@
 
 extension String {
     
-    func localized(value: String? = nil, table: String = "Localizable") -> String {
-        guard let path = Bundle.current?.path(forResource: Language.current.rawValue, ofType: "lproj") else {
+    func localized(
+        _ language: Language = .current,
+        value: String? = nil,
+        table: String = "Localizable"
+    ) -> String {
+        guard let path = Bundle.current?.path(forResource: language.rawValue, ofType: "lproj") else {
             return self
         }
         

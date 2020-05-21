@@ -56,6 +56,8 @@ open class RefreshComponent: UIView {
     
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
+    private var offsetChanged: ((CGFloat) -> Void)?
+    
     private var isEnding: Bool = false
     
     private lazy var observation: ScrollViewObservation = { ScrollViewObservation() }()
@@ -115,7 +117,17 @@ open class RefreshComponent: UIView {
         stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        stateChanged = { stateView.refresher(self, didChangeState: $0) }
+        stateChanged = { [weak self] in
+            guard let self = self else { return }
+            
+            stateView.refresher(self, didChangeState: $0)
+        }
+        
+        offsetChanged = { [weak self] in
+            guard let self = self else { return }
+            
+            stateView.refresher(self, didChangeOffset: $0)
+        }
     }
     
     public override init(frame: CGRect) {
@@ -206,6 +218,7 @@ extension RefreshComponent {
         case 0...:
             alpha = 0
         case -height..<0:
+            offsetChanged?(-offset)
             alpha = -offset / height
         default:
             alpha = 1

@@ -89,6 +89,9 @@ public class GIFStateView: UIView {
 }
 
 extension GIFStateView: RefreshStateful {
+    public func refresher(_ refresher: Refresher, didChangeOffset offset: CGFloat) {
+        gifImageView.image = gifImageView.animationImages?[Int((offset / 54) * 60 - 1)]
+    }
     
     public func refresher(_ refresher: Refresher, didChangeState state: RefreshState) {
         switch state {
@@ -98,7 +101,6 @@ extension GIFStateView: RefreshStateful {
         case .pulling:
             gifImageView.isHidden = false
             gifImageView.stopAnimating()
-            gifImageView.image = gifImageView.animationImages?.first
         case .willRefresh:
             gifImageView.isHidden = false
             gifImageView.stopAnimating()
