@@ -50,13 +50,6 @@ open class RefreshHeader: RefreshComponent {
         
         guard isEnabled else { return }
         
-        switch offset {
-        case 0...:
-            state = .idle
-        case -height..<0:
-            state = .pulling
-        default:
-            state = .willRefresh
-        }
+        changeState(by: offset)
     }
 }

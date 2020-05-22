@@ -185,6 +185,17 @@ open class RefreshComponent: UIView {
         setTitle("no_more_data".localized(), for: .disabled)
     }
     
+    func changeState(by offset: CGFloat) {
+        switch offset {
+        case 0...:
+            state = .idle
+        case -height..<0:
+            state = .pulling
+        default:
+            state = .willRefresh
+        }
+    }
+    
     func willBeginRefreshing(completion: @escaping () -> Void) {}
     
     func didEndRefreshing(completion: @escaping () -> Void) {}

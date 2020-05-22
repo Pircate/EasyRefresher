@@ -71,7 +71,7 @@ open class RefreshFooter: RefreshComponent {
             return
         }
         
-        changeState(by: offset)
+        changeState(by: -offset)
     }
     
     override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
@@ -84,17 +84,6 @@ open class RefreshFooter: RefreshComponent {
         guard !isAutoRefresh else { return }
         
         super.scrollViewPanGestureStateDidChange(scrollView)
-    }
-    
-    func changeState(by offset: CGFloat) {
-        switch -offset {
-        case 0...:
-            state = .idle
-        case -height..<0:
-            state = .pulling
-        default:
-            state = .willRefresh
-        }
     }
 }
 
