@@ -45,9 +45,9 @@ open class AppearanceRefreshFooter: RefreshFooter {
     }
 }
 
-extension AppearanceRefreshFooter {
+private extension AppearanceRefreshFooter {
     
-    private func addTapGestureRecognizer() {
+    func addTapGestureRecognizer() {
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(tapGestureAction(sender:))
@@ -55,7 +55,7 @@ extension AppearanceRefreshFooter {
         addGestureRecognizer(tapGesture)
     }
     
-    @objc private func tapGestureAction(sender: UITapGestureRecognizer) {
+    @objc func tapGestureAction(sender: UITapGestureRecognizer) {
         beginRefreshing()
     }
 }

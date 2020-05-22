@@ -67,7 +67,10 @@ extension GIFRefreshHeaderViewController: UITableViewDataSource {
 extension RefreshHeader {
     
     convenience init(animationImages: [UIImage], refreshClosure: @escaping () -> Void) {
-        self.init(stateView: AnimatedStateView(animationImages: animationImages), refreshClosure: refreshClosure)
+        self.init(
+            stateView: AnimatedStateView(animationImages: animationImages),
+            refreshClosure: refreshClosure
+        )
     }
 }
 
@@ -121,6 +124,7 @@ extension AnimatedStateView: RefreshStateful {
     public func refresher(_ refresher: Refresher, didChangeOffset offset: CGFloat) {
         guard let animationImages = gifImageView.animationImages else { return }
         
-        gifImageView.image = animationImages[Int(offset / 54 * CGFloat(animationImages.count) - 1)]
+        let index = Int(offset / refresher.height * CGFloat(animationImages.count) - 1)
+        gifImageView.image = animationImages[index]
     }
 }

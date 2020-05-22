@@ -10,6 +10,8 @@ open class RefreshFooter: RefreshComponent {
     
     var isAutoRefresh: Bool { false }
     
+    var triggerPercent: CGFloat = 0
+    
     override var arrowDirection: ArrowDirection { .up }
     
     private lazy var constraintOfTopAnchor: NSLayoutConstraint? = {
@@ -66,7 +68,7 @@ open class RefreshFooter: RefreshComponent {
         
         guard isEnabled else { return }
         
-        if isAutoRefresh, scrollView.isDragging, offset > 0 {
+        if triggerAutoRefresh(by: offset, isDragging: scrollView.isDragging) {
             beginRefreshing()
             return
         }
@@ -87,9 +89,17 @@ open class RefreshFooter: RefreshComponent {
     }
 }
 
-extension RefreshFooter {
+private extension RefreshFooter {
     
-    private func updateConstraintOfTopAnchorIfNeeded() {
+    func triggerAutoRefresh(by offset: CGFloat, isDragging: Bool) -> Bool {
+        guard isAutoRefresh, isDragging, offset > 0, offset / height > triggerPercent else {
+            return false
+        }
+        
+        return true
+    }
+    
+    func updateConstraintOfTopAnchorIfNeeded() {
         guard let scrollView = scrollView else { return }
         
         constraintOfTopAnchor?.constant = scrollView.contentSize.height

@@ -9,9 +9,29 @@
 open class AutoRefreshFooter: RefreshFooter {
 
     override var isAutoRefresh: Bool { true }
+    
+    public init(triggerPercent: CGFloat, height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
+        super.init(height: height, refreshClosure: refreshClosure)
+        
+        self.triggerPercent = triggerPercent
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
 
 open class AppearanceAutoRefreshFooter: AppearanceRefreshFooter {
     
     override var isAutoRefresh: Bool { true }
+    
+    public init(triggerPercent: CGFloat, height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
+        super.init(height: height, refreshClosure: refreshClosure)
+        
+        self.triggerPercent = triggerPercent
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
