@@ -209,6 +209,10 @@ extension RefreshComponent {
     }
     
     func changeAlpha(by offset: CGFloat) {
+        if offset < 0, offset >= -height {
+            offsetChanged?(-offset)
+        }
+        
         guard automaticallyChangeAlpha else {
             alpha = 1
             return
@@ -218,7 +222,6 @@ extension RefreshComponent {
         case 0...:
             alpha = 0
         case -height..<0:
-            offsetChanged?(-offset)
             alpha = -offset / height
         default:
             alpha = 1
