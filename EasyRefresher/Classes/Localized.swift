@@ -28,13 +28,14 @@ extension String {
 enum Language: String {
     case en
     case zhHans = "zh-Hans"
+    case zhHant = "zh-Hant"
     
     static var current: Language {
         guard let language = NSLocale.preferredLanguages.first else { return .en }
         
-        if language.contains(Language.zhHans.rawValue) { return .zhHans }
+        if language.contains("zh-HK") { return .zhHant }
         
-        return .en
+        return Language(rawValue: language) ?? .en
     }
 }
 
