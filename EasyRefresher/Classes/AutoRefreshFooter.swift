@@ -10,7 +10,11 @@ open class AutoRefreshFooter: RefreshFooter {
 
     override var isAutoRefresh: Bool { true }
     
-    public init(triggerPercent: CGFloat, height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
+    public init(
+        triggerPercent: CGFloat = 0,
+        height: CGFloat = 54,
+        refreshClosure: @escaping () -> Void
+    ) {
         super.init(height: height, refreshClosure: refreshClosure)
         
         self.triggerPercent = triggerPercent
@@ -25,7 +29,11 @@ open class AppearanceAutoRefreshFooter: AppearanceRefreshFooter {
     
     override var isAutoRefresh: Bool { true }
     
-    public init(triggerPercent: CGFloat, height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
+    public init(
+        triggerPercent: CGFloat = 0,
+        height: CGFloat = 54,
+        refreshClosure: @escaping () -> Void
+    ) {
         super.init(height: height, refreshClosure: refreshClosure)
         
         self.triggerPercent = triggerPercent
