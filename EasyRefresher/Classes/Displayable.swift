@@ -16,4 +16,6 @@ public protocol Displayable {
     
     /// A Boolean value indicating whether the refresher automatically change view's alpha value when pulling.
     var automaticallyChangeAlpha: Bool { get set }
+    
+    var height: CGFloat { get }
 }

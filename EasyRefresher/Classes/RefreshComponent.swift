@@ -38,6 +38,8 @@ open class RefreshComponent: UIView {
         }
     }
     
+    public let height: CGFloat
+    
     public var refreshClosure: () -> Void
     
     weak var scrollView: UIScrollView? {
@@ -51,8 +53,6 @@ open class RefreshComponent: UIView {
     }()
     
     var arrowDirection: ArrowDirection { .down }
-    
-    let height: CGFloat = 54
     
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
@@ -90,7 +90,8 @@ open class RefreshComponent: UIView {
         return stateLabel
     }()
     
-    public init(refreshClosure: @escaping () -> Void) {
+    public init(height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
+        self.height = height
         self.refreshClosure = refreshClosure
         
         super.init(frame: CGRect.zero)
@@ -101,8 +102,10 @@ open class RefreshComponent: UIView {
     
     public init<T>(
         stateView: T,
+        height: CGFloat = 54,
         refreshClosure: @escaping () -> Void
     ) where T: UIView, T: RefreshStateful {
+        self.height = height
         self.refreshClosure = refreshClosure
         
         super.init(frame: .zero)
@@ -131,6 +134,7 @@ open class RefreshComponent: UIView {
     }
     
     public override init(frame: CGRect) {
+        self.height = 54
         self.refreshClosure = {}
         
         super.init(frame: frame)
@@ -140,6 +144,7 @@ open class RefreshComponent: UIView {
     }
     
     public required init?(coder aDecoder: NSCoder) {
+        self.height = 54
         self.refreshClosure = {}
         
         super.init(coder: aDecoder)
