@@ -38,7 +38,7 @@ tableView.refresh.header.addRefreshClosure {
     }
 }
 
-tableView.refresh.footer = AutoRefreshFooter {
+tableView.refresh.footer = AutoRefreshFooter(triggerPercent: 0.5) {
     self.reqeust {
         self.tableView.refresh.footer.endRefreshing()
     }
