@@ -21,13 +21,15 @@ class GIFRefreshHeaderViewController: UIViewController {
         
         let images = (1...60).compactMap { UIImage(named: "dropdown_anim__000\($0)") }
         
-        tableView.refresh.header = RefreshHeader(stateView: GIFStateView(gifImages: images)) {
+        tableView.refresh.header = RefreshHeader(animationImages: images) {
             self.reqeust {
                 self.dataArray = ["", "", "", "", ""]
                 self.tableView.refresh.header.endRefreshing()
                 self.tableView.reloadData()
             }
         }
+        
+        tableView.refresh.header.automaticallyChangeAlpha = false
         
         tableView.refresh.header.beginRefreshing()
         
@@ -62,17 +64,23 @@ extension GIFRefreshHeaderViewController: UITableViewDataSource {
     }
 }
 
+extension RefreshHeader {
+    
+    convenience init(animationImages: [UIImage], refreshClosure: @escaping () -> Void) {
+        self.init(stateView: AnimatedStateView(animationImages: animationImages), refreshClosure: refreshClosure)
+    }
+}
 
-public class GIFStateView: UIView {
+public class AnimatedStateView: UIView {
     
     private lazy var gifImageView: UIImageView = {
         return UIImageView()
     }()
     
-    public init(gifImages: [UIImage]) {
+    public init(animationImages: [UIImage]) {
         super.init(frame: .zero)
         
-        self.gifImageView.animationImages = gifImages
+        self.gifImageView.animationImages = animationImages
         
         addSubview(gifImageView)
         
@@ -88,10 +96,7 @@ public class GIFStateView: UIView {
     }
 }
 
-extension GIFStateView: RefreshStateful {
-    public func refresher(_ refresher: Refresher, didChangeOffset offset: CGFloat) {
-        gifImageView.image = gifImageView.animationImages?[Int((offset / 54) * 60 - 1)]
-    }
+extension AnimatedStateView: RefreshStateful {
     
     public func refresher(_ refresher: Refresher, didChangeState state: RefreshState) {
         switch state {
@@ -111,5 +116,11 @@ extension GIFStateView: RefreshStateful {
         case .disabled:
             break
         }
+    }
+    
+    public func refresher(_ refresher: Refresher, didChangeOffset offset: CGFloat) {
+        guard let animationImages = gifImageView.animationImages else { return }
+        
+        gifImageView.image = animationImages[Int(offset / 54 * CGFloat(animationImages.count) - 1)]
     }
 }
