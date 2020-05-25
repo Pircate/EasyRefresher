@@ -30,13 +30,13 @@ enum Language: String {
     case zhHans = "zh-Hans"
     case zhHant = "zh-Hant"
     
-    static var current: Language {
-        guard let language = NSLocale.preferredLanguages.first else { return .en }
+    static let current: Language = {
+        guard let language = Locale.preferredLanguages.first else { return .en }
         
         if language.contains("zh-HK") { return .zhHant }
         
         return Language(rawValue: language) ?? .en
-    }
+    }()
 }
 
 private extension Bundle {
