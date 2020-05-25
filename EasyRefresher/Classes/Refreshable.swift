@@ -22,13 +22,13 @@ public protocol Refreshable: class {
     /// A Boolean value indicating whether the refresher's state is refreshing.
     var isRefreshing: Bool { get }
     
-    /// default is true. if false, end refreshing and set state to disabled.
+    /// Default is true. If false, end refreshing and set state to disabled.
     var isEnabled: Bool { get set }
     
     /// The callback in refresh.
     var refreshClosure: () -> Void { get set }
     
-    /// add a refresh callback to refresher.
+    /// Add a refresh callback to refresher.
     /// - Parameter refreshClosure: The callback in refresh.
     func addRefreshClosure(_ refreshClosure: @escaping () -> Void)
     

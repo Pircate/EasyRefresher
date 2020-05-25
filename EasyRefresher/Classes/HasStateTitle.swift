@@ -20,7 +20,7 @@ public protocol HasStateTitle: class {
     
     /// Sets the styled title to use for the specified state.
     /// - Parameters:
-    ///   - title: The styled text string so use for the title.
+    ///   - title: The styled text string to use for the title.
     ///   - state: The state that uses the specified title. The possible values are described in RefreshState.
     func setAttributedTitle(_ title: NSAttributedString?, for state: RefreshState)
     

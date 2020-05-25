@@ -10,7 +10,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     
     public override var automaticallyChangeAlpha: Bool {
         get { false }
-        set {}
+        set { fatalError("AppearanceRefreshFooter is always displayed, unsupport set this property.") }
     }
     
     internal(set) public override var state: RefreshState {
