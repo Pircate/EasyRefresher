@@ -29,7 +29,7 @@ class AutoRefreshFooterViewController: UIViewController {
         
         tableView.refresh.header.beginRefreshing()
         
-        tableView.refresh.footer = AutoRefreshFooter(triggerPercent: 0.5) {
+        tableView.refresh.footer = AutoRefreshFooter(triggerMode: .percent(0.5)) {
             self.reqeust {
                 self.dataArray.append(contentsOf: ["", "", "", "", ""])
                 self.tableView.refresh.footer.endRefreshing()

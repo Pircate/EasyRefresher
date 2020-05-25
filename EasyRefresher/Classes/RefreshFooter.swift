@@ -64,7 +64,7 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         
         guard isEnabled else { return }
         
-        if triggerAutoRefresh(by: offset, isDragging: scrollView.isDragging) {
+        if scrollView.isDragging, triggerAutoRefresh(by: offset) {
             beginRefreshing()
             return
         }
@@ -78,7 +78,7 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         updateConstraintOfTopAnchorIfNeeded()
     }
     
-    func triggerAutoRefresh(by offset: CGFloat, isDragging: Bool) -> Bool { false }
+    func triggerAutoRefresh(by offset: CGFloat) -> Bool { false }
 }
 
 private extension RefreshFooter {

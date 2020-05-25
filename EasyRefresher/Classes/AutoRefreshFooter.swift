@@ -6,45 +6,52 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+/// The trigger mode of automatic refresh
+public enum TriggerMode {
+    case percent(CGFloat)
+    case offset(CGFloat)
+}
+
 open class AutoRefreshFooter: RefreshFooter {
     
-    private let triggerPercent: CGFloat
+    private let triggerMode: TriggerMode
     
     public init(
-        triggerPercent: CGFloat = 0,
+        triggerMode: TriggerMode = .percent(0),
         height: CGFloat = 54,
         refreshClosure: @escaping () -> Void
     ) {
-        self.triggerPercent = (0...1).clamp(triggerPercent)
+        self.triggerMode = triggerMode
         
         super.init(height: height, refreshClosure: refreshClosure)
     }
     
     public init<T>(
         stateView: T,
-        triggerPercent: CGFloat = 0,
+        triggerMode: TriggerMode = .percent(0),
         height: CGFloat = 54,
         refreshClosure: @escaping () -> Void
     ) where T : UIView, T : RefreshStateful {
-        self.triggerPercent = (0...1).clamp(triggerPercent)
+        self.triggerMode = triggerMode
         
         super.init(stateView: stateView, height: height, refreshClosure: refreshClosure)
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        self.triggerPercent = 0
+        self.triggerMode = .percent(0)
         
         super.init(coder: aDecoder)
     }
     
     override func scrollViewPanGestureStateDidChange(_ scrollView: UIScrollView) {}
     
-    override func triggerAutoRefresh(by offset: CGFloat, isDragging: Bool) -> Bool {
-        guard isDragging, offset > 0, offset / height > triggerPercent else {
-            return false
+    override func triggerAutoRefresh(by offset: CGFloat) -> Bool {
+        switch triggerMode {
+        case .percent(let value):
+            return offset > 0 && offset / height > (0...1).clamp(value)
+        case .offset(let value):
+            return value < height ? offset > value : offset > height
         }
-        
-        return true
     }
 }
 
