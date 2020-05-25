@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshHeader: RefreshComponent {
+open class RefreshHeader: RefreshComponent, HeaderRefresher {
     
     override func add(to scrollView: UIScrollView) {
         super.add(to: scrollView)

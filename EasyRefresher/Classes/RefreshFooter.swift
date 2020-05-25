@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshFooter: RefreshComponent {
+open class RefreshFooter: RefreshComponent, FooterRefresher {
     
     override var arrowDirection: ArrowDirection { .up }
     
