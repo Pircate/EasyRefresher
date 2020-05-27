@@ -91,6 +91,7 @@ open class RefreshComponent: UIView {
         return stateLabel
     }()
     
+    // MARK: - life cycle
     public init(height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
         self.height = height
         self.refreshClosure = refreshClosure
@@ -148,6 +149,7 @@ open class RefreshComponent: UIView {
         prepare()
     }
     
+    // MARK: - override
     func add(to scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
         
@@ -157,27 +159,6 @@ open class RefreshComponent: UIView {
         leftAnchor.constraint(equalTo: scrollView.leftAnchor).isActive = true
         widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         heightAnchor.constraint(equalToConstant: height).isActive = true
-    }
-    
-    func observe(_ scrollView: UIScrollView) {
-        observation.invalidate()
-        
-        observation.observe(scrollView) { [weak self] this, keyPath in
-            guard let `self` = self else { return }
-            
-            switch keyPath {
-            case .contentOffset:
-                this.bringSubviewToFront(self)
-                
-                guard !self.isRefreshing else { return }
-                
-                self.scrollViewContentOffsetDidChange(this)
-            case .contentSize:
-                self.scrollViewContentSizeDidChange(this)
-            case .panGestureState:
-                self.scrollViewPanGestureStateDidChange(this)
-            }
-        }
     }
     
     func prepare() {
@@ -213,12 +194,6 @@ open class RefreshComponent: UIView {
 
 extension RefreshComponent {
     
-    var isDescendantOfScrollView: Bool {
-        guard let scrollView = scrollView else { return false }
-        
-        return isDescendant(of: scrollView)
-    }
-    
     func changeAlpha(by offset: CGFloat) {
         if offset < 0, offset >= -height {
             offsetChanged?(-offset)
@@ -239,7 +214,38 @@ extension RefreshComponent {
         }
     }
     
-    private func build() {
+    func observe(_ scrollView: UIScrollView) {
+        observation.invalidate()
+        
+        observation.observe(scrollView) { [weak self] this, keyPath in
+            guard let `self` = self else { return }
+            
+            switch keyPath {
+            case .contentOffset:
+                this.bringSubviewToFront(self)
+                
+                guard !self.isRefreshing else { return }
+                
+                self.scrollViewContentOffsetDidChange(this)
+            case .contentSize:
+                self.scrollViewContentSizeDidChange(this)
+            case .panGestureState:
+                self.scrollViewPanGestureStateDidChange(this)
+            }
+        }
+    }
+}
+
+// MARK: - private
+private extension RefreshComponent {
+    
+    var isDescendantOfScrollView: Bool {
+        guard let scrollView = scrollView else { return false }
+        
+        return isDescendant(of: scrollView)
+    }
+    
+    func build() {
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +253,7 @@ extension RefreshComponent {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    private func addStateView(_ stateView: UIView) {
+    func addStateView(_ stateView: UIView) {
         addSubview(stateView)
         
         stateView.translatesAutoresizingMaskIntoConstraints = false
@@ -257,7 +263,7 @@ extension RefreshComponent {
         stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    private func prepareForRefreshing() {
+    func prepareForRefreshing() {
         guard let scrollView = scrollView else { return }
         
         var contentInset = scrollView.contentInset
@@ -267,7 +273,7 @@ extension RefreshComponent {
         originalInset = contentInset
     }
     
-    private func endRefreshing(to state: RefreshState) {
+    func endRefreshing(to state: RefreshState) {
         assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing")
         
         guard isRefreshing, !isEnding else { return }
@@ -280,7 +286,7 @@ extension RefreshComponent {
         }
     }
     
-    private func rotateArrow(for state: RefreshState) {
+    func rotateArrow(for state: RefreshState) {
         arrowImageView.isHidden = state == .idle || isRefreshing || !isEnabled
         
         UIView.animate(withDuration: 0.25) {
@@ -288,7 +294,7 @@ extension RefreshComponent {
         }
     }
     
-    private func changeStateTitle(for state: RefreshState) {
+    func changeStateTitle(for state: RefreshState) {
         if let attributedTitle = attributedTitle(for: state) {
             stateLabel.isHidden = false
             stateLabel.attributedText = attributedTitle
@@ -302,6 +308,7 @@ extension RefreshComponent {
     }
 }
 
+// MARK: - Refresher
 extension RefreshComponent: Refresher {
     
     public var isEnabled: Bool {
