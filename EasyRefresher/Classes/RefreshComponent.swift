@@ -72,6 +72,7 @@ open class RefreshComponent: UIView {
     private lazy var arrowImageView: UIImageView = {
         let arrowImageView = UIImageView(image: "refresh_arrow_down".bundleImage())
         arrowImageView.isHidden = true
+        arrowImageView.transform = arrowDirection.reversedTransform(when: false)
         return arrowImageView
     }()
     
@@ -112,13 +113,7 @@ open class RefreshComponent: UIView {
         
         prepare()
         
-        addSubview(stateView)
-        
-        stateView.translatesAutoresizingMaskIntoConstraints = false
-        stateView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        addStateView(stateView)
         
         stateChanged = { [weak self] in
             guard let self = self else { return }
@@ -252,6 +247,16 @@ extension RefreshComponent {
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
+    private func addStateView(_ stateView: UIView) {
+        addSubview(stateView)
+        
+        stateView.translatesAutoresizingMaskIntoConstraints = false
+        stateView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
     private func prepareForRefreshing() {
         guard let scrollView = scrollView else { return }
         
@@ -278,15 +283,9 @@ extension RefreshComponent {
     private func rotateArrow(for state: RefreshState) {
         arrowImageView.isHidden = state == .idle || isRefreshing || !isEnabled
         
-        let transform: CGAffineTransform
-        switch arrowDirection {
-        case .up:
-            transform = state == .willRefresh ? .identity : CGAffineTransform(rotationAngle: .pi)
-        case .down:
-            transform = state == .willRefresh ? CGAffineTransform(rotationAngle: .pi) : .identity
+        UIView.animate(withDuration: 0.25) {
+            self.arrowImageView.transform = self.arrowDirection.reversedTransform(when: state == .willRefresh)
         }
-        
-        UIView.animate(withDuration: 0.25) { self.arrowImageView.transform = transform }
     }
     
     private func changeStateTitle(for state: RefreshState) {
@@ -347,5 +346,17 @@ extension RefreshComponent {
     enum ArrowDirection {
         case up
         case down
+    }
+}
+
+private extension RefreshComponent.ArrowDirection {
+    
+    func reversedTransform(when willRefresh: Bool) -> CGAffineTransform {
+        switch self {
+        case .up:
+            return willRefresh ? .identity : CGAffineTransform(rotationAngle: .pi)
+        case .down:
+            return willRefresh ? CGAffineTransform(rotationAngle: .pi) : .identity
+        }
     }
 }
