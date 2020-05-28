@@ -19,6 +19,14 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         return constraint
     }()
     
+    open override func updateConstraints() {
+        super.updateConstraints()
+        
+        guard let scrollView = scrollView else { return }
+        
+        constraintOfTopAnchor?.constant = scrollView.contentSize.height
+    }
+    
     override func prepare() {
         super.prepare()
         
@@ -75,17 +83,8 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
     override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {
         super.scrollViewContentSizeDidChange(scrollView)
         
-        updateConstraintOfTopAnchorIfNeeded()
+        setNeedsUpdateConstraints()
     }
     
     func triggerAutoRefresh(by offset: CGFloat) -> Bool { false }
-}
-
-private extension RefreshFooter {
-    
-    func updateConstraintOfTopAnchorIfNeeded() {
-        guard let scrollView = scrollView else { return }
-        
-        constraintOfTopAnchor?.constant = scrollView.contentSize.height
-    }
 }
