@@ -33,6 +33,12 @@ open class AppearanceRefreshFooter: RefreshFooter {
         setTitle("tap_or_pull_up_to_load_more".localized(), for: .pulling)
     }
     
+    override func add(to scrollView: UIScrollView) {
+        super.add(to: scrollView)
+        
+        willBeginRefreshing {}
+    }
+    
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
     
     override func changeState(by offset: CGFloat) {
