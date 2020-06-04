@@ -37,6 +37,9 @@ public protocol Refreshable: class {
     
     /// End Refreshing and set state to idle.
     func endRefreshing()
+    
+    /// Remove refresher from scroll view.
+    func removeFromScrollView()
 }
 
 public extension Refreshable {

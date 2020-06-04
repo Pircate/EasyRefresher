@@ -353,6 +353,14 @@ extension RefreshComponent: Refresher {
     public func endRefreshing() {
         endRefreshing(to: .idle)
     }
+    
+    public func removeFromScrollView() {
+        guard let scrollView = superview as? UIScrollView else { return }
+        
+        scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
+        scrollView.changed_inset.bottom = 0
+        removeFromSuperview()
+    }
 }
 
 extension RefreshComponent {
