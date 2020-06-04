@@ -150,6 +150,16 @@ open class RefreshComponent: UIView {
     }
     
     // MARK: - override
+    open override func willMove(toSuperview newSuperview: UIView?) {
+        super.willMove(toSuperview: newSuperview)
+        
+        observation.invalidate()
+        
+        guard let scrollView = newSuperview as? UIScrollView else { return }
+        
+        observe(scrollView)
+    }
+    
     func add(to scrollView: UIScrollView) {
         guard !scrollView.subviews.contains(self) else { return }
         
@@ -213,27 +223,6 @@ extension RefreshComponent {
             alpha = 1
         }
     }
-    
-    func observe(_ scrollView: UIScrollView) {
-        observation.invalidate()
-        
-        observation.observe(scrollView) { [weak self] this, keyPath in
-            guard let `self` = self else { return }
-            
-            switch keyPath {
-            case .contentOffset:
-                this.bringSubviewToFront(self)
-                
-                guard !self.isRefreshing else { return }
-                
-                self.scrollViewContentOffsetDidChange(this)
-            case .contentSize:
-                self.scrollViewContentSizeDidChange(this)
-            case .panGestureState:
-                self.scrollViewPanGestureStateDidChange(this)
-            }
-        }
-    }
 }
 
 // MARK: - private
@@ -251,6 +240,25 @@ private extension RefreshComponent {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    func observe(_ scrollView: UIScrollView) {
+        observation.observe(scrollView) { [weak self] this, keyPath in
+            guard let `self` = self else { return }
+            
+            switch keyPath {
+            case .contentOffset:
+                this.bringSubviewToFront(self)
+                
+                guard !self.isRefreshing else { return }
+                
+                self.scrollViewContentOffsetDidChange(this)
+            case .contentSize:
+                self.scrollViewContentSizeDidChange(this)
+            case .panGestureState:
+                self.scrollViewPanGestureStateDidChange(this)
+            }
+        }
     }
     
     func addStateView(_ stateView: UIView) {
@@ -330,7 +338,6 @@ extension RefreshComponent: Refresher {
         guard let scrollView = scrollView else { return }
         
         add(to: scrollView)
-        observe(scrollView)
     }
     
     public func beginRefreshing() {

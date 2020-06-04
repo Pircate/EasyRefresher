@@ -35,6 +35,12 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         setTitle("release_to_load_more".localized(), for: .willRefresh)
     }
     
+    override func add(to scrollView: UIScrollView) {
+        super.add(to: scrollView)
+        
+        didEndRefreshing {}
+    }
+    
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         

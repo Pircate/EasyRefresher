@@ -31,6 +31,10 @@ extension UIScrollView {
             return header
         }
         set {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshHeader {
+                obj.removeFromSuperview()
+            }
+            
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.header)
             
             guard let header = newValue as? RefreshHeader else {
@@ -39,7 +43,6 @@ extension UIScrollView {
             
             header.scrollView = self
             header.add(to: self)
-            header.observe(self)
         }
     }
     
@@ -57,6 +60,10 @@ extension UIScrollView {
             return footer
         }
         set {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? RefreshFooter {
+                obj.removeFromSuperview()
+            }
+            
             objcSetAssociatedObject(newValue, for: &AssociatedKeys.footer)
             
             guard let footer = newValue as? RefreshFooter else {
@@ -65,7 +72,6 @@ extension UIScrollView {
             
             footer.scrollView = self
             footer.add(to: self)
-            footer.observe(self)
         }
     }
     
