@@ -191,6 +191,8 @@ open class RefreshComponent: UIView {
     
     func didEndRefreshing(completion: @escaping () -> Void) {}
     
+    func scrollViewContentInsetDidReset(_ scrollView: UIScrollView) {}
+    
     func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {}
     
     func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {}
@@ -357,8 +359,8 @@ extension RefreshComponent: Refresher {
     public func removeFromScrollView() {
         guard let scrollView = superview as? UIScrollView else { return }
         
-        scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
-        scrollView.changed_inset.bottom = 0
+        scrollViewContentInsetDidReset(scrollView)
+        
         removeFromSuperview()
     }
 }

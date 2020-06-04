@@ -43,6 +43,11 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
         }, completion: { _ in completion() })
     }
     
+    override func scrollViewContentInsetDidReset(_ scrollView: UIScrollView) {
+        scrollView.contentInset.top -= scrollView.changed_inset.top
+        scrollView.changed_inset.top = 0
+    }
+    
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         

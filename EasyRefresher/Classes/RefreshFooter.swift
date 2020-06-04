@@ -35,12 +35,6 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         setTitle("release_to_load_more".localized(), for: .willRefresh)
     }
     
-    override func add(to scrollView: UIScrollView) {
-        super.add(to: scrollView)
-        
-        didEndRefreshing {}
-    }
-    
     override func willBeginRefreshing(completion: @escaping () -> Void) {
         guard let scrollView = scrollView else { return }
         
@@ -60,6 +54,11 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
             scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
             scrollView.changed_inset.bottom = 0
         }, completion: { _ in completion() })
+    }
+    
+    override func scrollViewContentInsetDidReset(_ scrollView: UIScrollView) {
+        scrollView.contentInset.bottom -= scrollView.changed_inset.bottom
+        scrollView.changed_inset.bottom = 0
     }
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
