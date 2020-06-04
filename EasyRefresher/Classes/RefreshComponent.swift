@@ -115,18 +115,7 @@ open class RefreshComponent: UIView {
         prepare()
         
         addStateView(stateView)
-        
-        stateChanged = { [weak self] in
-            guard let self = self else { return }
-            
-            stateView.refresher(self, didChangeState: $0)
-        }
-        
-        offsetChanged = { [weak self] in
-            guard let self = self else { return }
-            
-            stateView.refresher(self, didChangeOffset: $0)
-        }
+        didChangeStateView(stateView)
     }
     
     public override init(frame: CGRect) {
@@ -271,6 +260,20 @@ private extension RefreshComponent {
         stateView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         stateView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         stateView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
+    
+    func didChangeStateView(_ stateView: RefreshStateful) {
+        stateChanged = { [weak self] in
+            guard let self = self else { return }
+            
+            stateView.refresher(self, didChangeState: $0)
+        }
+        
+        offsetChanged = { [weak self] in
+            guard let self = self else { return }
+            
+            stateView.refresher(self, didChangeOffset: $0)
+        }
     }
     
     func prepareForRefreshing() {

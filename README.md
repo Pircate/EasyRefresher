@@ -72,7 +72,13 @@ tableView.refresh.header.activityIndicatorStyle = .white
 
 ```swift
 // End refreshing and set state to disabled
-self.tableView.refresh.footer.isEnabled = false
+tableView.refresh.footer.isEnabled = false
+```
+
+* Remove
+
+```swift
+tableView.refresh.footer.removeFromScrollView()
 ```
 
 * Custom State View
