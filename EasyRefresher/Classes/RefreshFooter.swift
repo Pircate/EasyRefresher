@@ -73,7 +73,7 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
             offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         }
         
-        changeAlpha(by: -offset)
+        didChangeAlpha(by: -offset)
         
         guard isEnabled else { return }
         
@@ -82,7 +82,7 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
             return
         }
         
-        changeState(by: -offset)
+        didChangeState(by: -offset)
     }
     
     override func scrollViewContentSizeDidChange(_ scrollView: UIScrollView) {

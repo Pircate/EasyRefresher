@@ -25,16 +25,11 @@ open class RefreshComponent: UIView {
             
             stateChanged(state)
             
-            switch state {
-            case .refreshing:
-                activityIndicator.startAnimating()
-            default:
-                activityIndicator.stopAnimating()
-            }
-            
+            startAnimating(when: state == .refreshing)
+
             rotateArrow(for: state)
             
-            changeStateTitle(for: state)
+            didChangeStateTitle(for: state)
         }
     }
     
@@ -165,7 +160,7 @@ open class RefreshComponent: UIView {
         setTitle("no_more_data".localized(), for: .disabled)
     }
     
-    func changeState(by offset: CGFloat) {
+    func didChangeState(by offset: CGFloat) {
         switch offset {
         case 0...:
             state = .idle
@@ -195,7 +190,7 @@ open class RefreshComponent: UIView {
 
 extension RefreshComponent {
     
-    func changeAlpha(by offset: CGFloat) {
+    func didChangeAlpha(by offset: CGFloat) {
         if offset < 0, offset >= -height {
             offsetChanged?(-offset)
         }
@@ -287,7 +282,7 @@ private extension RefreshComponent {
     }
     
     func endRefreshing(to state: RefreshState) {
-        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing")
+        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before end refreshing.")
         
         guard isRefreshing, !isEnding else { return }
         
@@ -299,6 +294,14 @@ private extension RefreshComponent {
         }
     }
     
+    func startAnimating(when refreshing: Bool) {
+        if refreshing {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
+    }
+    
     func rotateArrow(for state: RefreshState) {
         arrowImageView.isHidden = state == .idle || isRefreshing || !isEnabled
         
@@ -307,7 +310,7 @@ private extension RefreshComponent {
         }
     }
     
-    func changeStateTitle(for state: RefreshState) {
+    func didChangeStateTitle(for state: RefreshState) {
         if let attributedTitle = attributedTitle(for: state) {
             stateLabel.isHidden = false
             stateLabel.attributedText = attributedTitle
@@ -346,7 +349,7 @@ extension RefreshComponent: Refresher {
     }
     
     public func beginRefreshing() {
-        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing")
+        assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing.")
         
         guard !isRefreshing, isEnabled else { return }
         

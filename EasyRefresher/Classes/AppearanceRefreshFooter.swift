@@ -41,7 +41,7 @@ open class AppearanceRefreshFooter: RefreshFooter {
     
     override func didEndRefreshing(completion: @escaping () -> Void) { completion() }
     
-    override func changeState(by offset: CGFloat) {
+    override func didChangeState(by offset: CGFloat) {
         switch offset {
         case ..<(-height):
             state = .willRefresh

@@ -51,10 +51,10 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         
-        changeAlpha(by: offset)
+        didChangeAlpha(by: offset)
         
         guard isEnabled else { return }
         
-        changeState(by: offset)
+        didChangeState(by: offset)
     }
 }
