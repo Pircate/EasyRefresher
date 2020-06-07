@@ -52,7 +52,7 @@ open class RefreshComponent: RefreshView {
     ) where T: UIView, T: RefreshStateful {
         self.refreshClosure = refreshClosure
         
-        super.init(height: height)
+        super.init(noBuild: height)
         
         prepare()
         

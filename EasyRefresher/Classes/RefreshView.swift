@@ -62,6 +62,12 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
         build()
     }
     
+    public init(noBuild height: CGFloat) {
+        self.height = height
+        
+        super.init(frame: .zero)
+    }
+    
     public override init(frame: CGRect) {
         self.height = 54
         
