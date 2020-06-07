@@ -8,16 +8,14 @@
 
 open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     
-    public let height: CGFloat
-    
-    public var activityIndicatorStyle: UIActivityIndicatorView.Style {
+    open var activityIndicatorStyle: UIActivityIndicatorView.Style {
         get { activityIndicator.style }
         set { activityIndicator.style = newValue }
     }
     
-    public var automaticallyChangeAlpha: Bool = true
+    open var automaticallyChangeAlpha: Bool = true
     
-    public var impactFeedbackMode: ImpactFeedbackMode = .off
+    open var impactFeedbackMode: ImpactFeedbackMode = .off
     
     public var stateTitles: [RefreshState : String] = [:]
     
@@ -53,6 +51,8 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
         stateLabel.textAlignment = .center
         return stateLabel
     }()
+    
+    public let height: CGFloat
     
     public init(height: CGFloat) {
         self.height = height

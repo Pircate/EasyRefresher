@@ -6,24 +6,17 @@
 //  Copyright © 2020 Pircate. All rights reserved.
 //
 
-open class StatefulRefreshComponent: RefreshComponent {
+open class RefreshStatefulView: RefreshView {
     
-    internal(set) public override var state: RefreshState {
-        didSet {
-            guard state != oldValue else { return }
-            
-            startAnimating(when: state == .refreshing)
-            
-            impactOccurred(when: state == .willRefresh)
-
-            rotateArrow(for: state)
-            
-            didChangeStateTitle(for: state)
-        }
+    func stateDidChange(_ state: RefreshState) {
+        startAnimating(when: state == .refreshing)
+        impactOccurred(when: state == .willRefresh)
+        rotateArrow(for: state)
+        didChangeStateTitle(for: state)
     }
 }
 
-private extension StatefulRefreshComponent {
+private extension RefreshStatefulView {
     
     func startAnimating(when refreshing: Bool) {
         if refreshing {
@@ -42,7 +35,7 @@ private extension StatefulRefreshComponent {
     }
     
     func rotateArrow(for state: RefreshState) {
-        arrowImageView.isHidden = state == .idle || isRefreshing || !isEnabled
+        arrowImageView.isHidden = state == .idle || state == .refreshing || state == .disabled
         
         UIView.animate(withDuration: 0.25) {
             self.arrowImageView.transform = self.arrowDirection.reversedTransform(when: state == .willRefresh)

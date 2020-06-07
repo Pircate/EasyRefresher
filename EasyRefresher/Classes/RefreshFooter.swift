@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshFooter: StatefulRefreshComponent, FooterRefresher {
+open class RefreshFooter: RefreshComponent, FooterRefresher {
     
     override var arrowDirection: ArrowDirection { .up }
     
@@ -72,6 +72,8 @@ open class RefreshFooter: StatefulRefreshComponent, FooterRefresher {
         } else {
             offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         }
+        
+        offsetDidChange(-offset)
         
         didChangeAlpha(by: -offset)
         

@@ -6,13 +6,15 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshComponent: RefreshView {
+open class RefreshComponent: RefreshStatefulView {
     
     internal(set) public var state: RefreshState = .idle {
         didSet {
             guard state != oldValue else { return }
             
             stateChanged(state)
+            
+            stateDidChange(state)
         }
     }
     
@@ -133,11 +135,13 @@ open class RefreshComponent: RefreshView {
 
 extension RefreshComponent {
     
+    func offsetDidChange(_ offset: CGFloat) {
+        guard offset < 0, offset >= -height else { return }
+           
+        offsetChanged?(-offset)
+    }
+    
     func didChangeAlpha(by offset: CGFloat) {
-        if offset < 0, offset >= -height {
-            offsetChanged?(-offset)
-        }
-        
         guard automaticallyChangeAlpha else {
             alpha = 1
             return

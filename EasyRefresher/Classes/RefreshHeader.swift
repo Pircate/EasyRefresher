@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshHeader: StatefulRefreshComponent, HeaderRefresher {
+open class RefreshHeader: RefreshComponent, HeaderRefresher {
     
     override func add(to scrollView: UIScrollView) {
         super.add(to: scrollView)
@@ -50,6 +50,8 @@ open class RefreshHeader: StatefulRefreshComponent, HeaderRefresher {
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y + scrollView.refreshInset.top
+        
+        offsetDidChange(offset)
         
         didChangeAlpha(by: offset)
         
