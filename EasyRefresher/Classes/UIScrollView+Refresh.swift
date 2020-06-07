@@ -23,7 +23,7 @@ extension UIScrollView {
                 return obj
             }
             
-            let header = RefreshHeader()
+            let header = RefreshHeader(frame: .zero)
             header.scrollView = self
             
             objcSetAssociatedObject(header, for: &AssociatedKeys.header)
@@ -52,7 +52,7 @@ extension UIScrollView {
                 return obj
             }
             
-            let footer = RefreshFooter()
+            let footer = RefreshFooter(frame: .zero)
             footer.scrollView = self
             
             objcSetAssociatedObject(footer, for: &AssociatedKeys.footer)

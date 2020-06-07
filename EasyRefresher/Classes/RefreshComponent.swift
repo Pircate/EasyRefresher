@@ -6,20 +6,7 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
-open class RefreshComponent: UIView {
-    
-    public var activityIndicatorStyle: UIActivityIndicatorView.Style {
-        get { activityIndicator.style }
-        set { activityIndicator.style = newValue }
-    }
-    
-    public var automaticallyChangeAlpha: Bool = true
-    
-    public var impactFeedbackMode: ImpactFeedbackMode = .off
-    
-    public var stateTitles: [RefreshState : String] = [:]
-    
-    public var stateAttributedTitles: [RefreshState : NSAttributedString] = [:]
+open class RefreshComponent: RefreshView {
     
     internal(set) public var state: RefreshState = .idle {
         didSet {
@@ -37,8 +24,6 @@ open class RefreshComponent: UIView {
         }
     }
     
-    public let height: CGFloat
-    
     public var refreshClosure: () -> Void
     
     weak var scrollView: UIScrollView? {
@@ -51,8 +36,6 @@ open class RefreshComponent: UIView {
         return scrollView.contentInset
     }()
     
-    var arrowDirection: ArrowDirection { .down }
-    
     private var stateChanged: (RefreshState) -> Void = { _ in }
     
     private var offsetChanged: ((CGFloat) -> Void)?
@@ -61,43 +44,12 @@ open class RefreshComponent: UIView {
     
     private lazy var observation: ScrollViewObservation = { ScrollViewObservation() }()
     
-    private lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
-        stackView.spacing = 8
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    private lazy var arrowImageView: UIImageView = {
-        let arrowImageView = UIImageView(image: "refresh_arrow_down".bundleImage())
-        arrowImageView.isHidden = true
-        arrowImageView.transform = arrowDirection.reversedTransform(when: false)
-        return arrowImageView
-    }()
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        if #available(iOS 13.0, *) {
-            return UIActivityIndicatorView(style: .medium)
-        } else {
-            return UIActivityIndicatorView(style: .gray)
-        }
-    }()
-    
-    private lazy var stateLabel: UILabel = {
-        let stateLabel = UILabel()
-        stateLabel.font = UIFont.systemFont(ofSize: 14)
-        stateLabel.textAlignment = .center
-        return stateLabel
-    }()
-    
     // MARK: - life cycle
     public init(height: CGFloat = 54, refreshClosure: @escaping () -> Void) {
-        self.height = height
         self.refreshClosure = refreshClosure
         
-        super.init(frame: CGRect.zero)
+        super.init(height: height)
         
-        build()
         prepare()
     }
     
@@ -106,10 +58,9 @@ open class RefreshComponent: UIView {
         height: CGFloat = 54,
         refreshClosure: @escaping () -> Void
     ) where T: UIView, T: RefreshStateful {
-        self.height = height
         self.refreshClosure = refreshClosure
         
-        super.init(frame: .zero)
+        super.init(height: height)
         
         prepare()
         
@@ -118,22 +69,18 @@ open class RefreshComponent: UIView {
     }
     
     public override init(frame: CGRect) {
-        self.height = 54
         self.refreshClosure = {}
         
         super.init(frame: frame)
         
-        build()
         prepare()
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        self.height = 54
         self.refreshClosure = {}
         
         super.init(coder: aDecoder)
         
-        build()
         prepare()
     }
     
@@ -222,14 +169,6 @@ private extension RefreshComponent {
         guard let scrollView = scrollView else { return false }
         
         return isDescendant(of: scrollView)
-    }
-    
-    func build() {
-        addSubview(stackView)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        stackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
     func observe(_ scrollView: UIScrollView) {
@@ -337,7 +276,7 @@ private extension RefreshComponent {
 }
 
 // MARK: - Refresher
-extension RefreshComponent: Refresher {
+extension RefreshComponent: Refreshable {
     
     public var isEnabled: Bool {
         get { state != .disabled }
@@ -380,25 +319,5 @@ extension RefreshComponent: Refresher {
         scrollViewContentInsetDidReset(scrollView)
         
         removeFromSuperview()
-    }
-}
-
-extension RefreshComponent {
-    
-    enum ArrowDirection {
-        case up
-        case down
-    }
-}
-
-private extension RefreshComponent.ArrowDirection {
-    
-    func reversedTransform(when willRefresh: Bool) -> CGAffineTransform {
-        switch self {
-        case .up:
-            return willRefresh ? .identity : CGAffineTransform(rotationAngle: .pi)
-        case .down:
-            return willRefresh ? CGAffineTransform(rotationAngle: .pi) : .identity
-        }
     }
 }
