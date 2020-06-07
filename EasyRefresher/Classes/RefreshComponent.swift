@@ -15,6 +15,8 @@ open class RefreshComponent: UIView {
     
     public var automaticallyChangeAlpha: Bool = true
     
+    public var impactFeedbackMode: ImpactFeedbackMode = .off
+    
     public var stateTitles: [RefreshState : String] = [:]
     
     public var stateAttributedTitles: [RefreshState : NSAttributedString] = [:]
@@ -26,6 +28,8 @@ open class RefreshComponent: UIView {
             stateChanged(state)
             
             startAnimating(when: state == .refreshing)
+            
+            impactOccurred(when: state == .willRefresh)
 
             rotateArrow(for: state)
             
@@ -300,6 +304,14 @@ private extension RefreshComponent {
         } else {
             activityIndicator.stopAnimating()
         }
+    }
+    
+    func impactOccurred(when willRefresh: Bool) {
+        guard willRefresh, case let .on(style) = impactFeedbackMode else { return }
+        
+        let feedbackGenerator = UIImpactFeedbackGenerator(style: style)
+        feedbackGenerator.prepare()
+        feedbackGenerator.impactOccurred()
     }
     
     func rotateArrow(for state: RefreshState) {

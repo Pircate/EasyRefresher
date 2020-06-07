@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         }
         
         tableView.refresh.header.automaticallyChangeAlpha = false
+        tableView.refresh.header.impactFeedbackMode = .on(style: .heavy)
         
         tableView.refresh.footer = RefreshFooter {
             self.reqeust {
