@@ -12,8 +12,6 @@ open class RefreshComponent: RefreshStatefulView {
         didSet {
             guard state != oldValue else { return }
             
-            stateChanged(state)
-            
             stateDidChange(state)
         }
     }
@@ -29,10 +27,6 @@ open class RefreshComponent: RefreshStatefulView {
         
         return scrollView.contentInset
     }()
-    
-    private var stateChanged: (RefreshState) -> Void = { _ in }
-    
-    private var offsetChanged: ((CGFloat) -> Void)?
     
     private var isEnding: Bool = false
     
@@ -62,18 +56,18 @@ open class RefreshComponent: RefreshStatefulView {
         didChangeStateView(stateView)
     }
     
-    public override init(frame: CGRect) {
-        self.refreshClosure = {}
-        
-        super.init(frame: frame)
-        
-        prepare()
-    }
-    
     public required init?(coder aDecoder: NSCoder) {
         self.refreshClosure = {}
         
         super.init(coder: aDecoder)
+        
+        prepare()
+    }
+    
+    override init(height: CGFloat = 54) {
+        self.refreshClosure = {}
+        
+        super.init(height: height)
         
         prepare()
     }
@@ -134,12 +128,6 @@ open class RefreshComponent: RefreshStatefulView {
 }
 
 extension RefreshComponent {
-    
-    func offsetDidChange(_ offset: CGFloat) {
-        guard offset < 0, offset >= -height else { return }
-           
-        offsetChanged?(-offset)
-    }
     
     func didChangeAlpha(by offset: CGFloat) {
         guard automaticallyChangeAlpha else {

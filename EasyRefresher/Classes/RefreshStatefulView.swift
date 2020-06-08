@@ -8,11 +8,23 @@
 
 open class RefreshStatefulView: RefreshView {
     
+    var stateChanged: ((RefreshState) -> Void)?
+    
+    var offsetChanged: ((CGFloat) -> Void)?
+    
     func stateDidChange(_ state: RefreshState) {
+        stateChanged?(state)
+        
         startAnimating(when: state == .refreshing)
         impactOccurred(when: state == .willRefresh)
         rotateArrow(for: state)
         didChangeStateTitle(for: state)
+    }
+    
+    func offsetDidChange(_ offset: CGFloat) {
+        guard offset < 0, offset >= -height else { return }
+           
+        offsetChanged?(-offset)
     }
 }
 
