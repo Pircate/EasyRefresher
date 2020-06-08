@@ -81,6 +81,12 @@ tableView.refresh.footer.isEnabled = false
 tableView.refresh.footer.removeFromScrollView()
 ```
 
+* Impact feedback
+
+```swift
+tableView.refresh.header.impactFeedbackMode = .on(style: .medium)
+```
+
 * Custom State View
 
 ```swift
