@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 open class RefreshFooter: RefreshComponent, FooterRefresher {
     
     override var arrowDirection: ArrowDirection { .up }

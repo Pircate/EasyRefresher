@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 final class ScrollViewObservation {
     
     enum KeyPath {

@@ -6,6 +6,8 @@
 //  Copyright © 2020 Pircate. All rights reserved.
 //
 
+import UIKit
+
 open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     
     open var activityIndicatorStyle: UIActivityIndicatorView.Style {
@@ -31,7 +33,8 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     }()
     
     lazy var arrowImageView: UIImageView = {
-        let arrowImageView = UIImageView(image: "refresh_arrow_down".bundleImage())
+        let image = UIImage(named: "refresh_arrow_down", in: .current, compatibleWith: nil)
+        let arrowImageView = UIImageView(image: image)
         arrowImageView.isHidden = true
         arrowImageView.transform = arrowDirection.reversedTransform(when: false)
         return arrowImageView

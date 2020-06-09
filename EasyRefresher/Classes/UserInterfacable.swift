@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 public enum ImpactFeedbackMode {
     case off
     case on(style: UIImpactFeedbackGenerator.FeedbackStyle)

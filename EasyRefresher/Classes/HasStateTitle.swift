@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import Foundation
+
 public protocol HasStateTitle: class {
     
     var stateTitles: [RefreshState: String] { get set }

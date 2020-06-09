@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import Foundation
+
 extension String {
     
     func localized(
@@ -18,10 +20,6 @@ extension String {
         }
         
         return Bundle(path: path)?.localizedString(forKey: self, value: value, table: table) ?? self
-    }
-    
-    func bundleImage() -> UIImage? {
-        return UIImage(named: self, in: Bundle.current, compatibleWith: nil)
     }
 }
 
@@ -39,11 +37,11 @@ enum Language: String {
     }()
 }
 
-private extension Bundle {
+extension Bundle {
     
-    static var current: Bundle? {
+    static let current: Bundle? = {
         guard let resourcePath = Bundle(for: RefreshComponent.self).resourcePath else { return nil }
         
         return Bundle(path: "\(resourcePath)/EasyRefresher.bundle")
-    }
+    }()
 }

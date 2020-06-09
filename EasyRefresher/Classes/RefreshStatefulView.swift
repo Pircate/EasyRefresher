@@ -6,6 +6,8 @@
 //  Copyright © 2020 Pircate. All rights reserved.
 //
 
+import UIKit
+
 open class RefreshStatefulView: RefreshView {
     
     var stateChanged: ((RefreshState) -> Void)?

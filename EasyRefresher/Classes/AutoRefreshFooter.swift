@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 /// The trigger mode of automatic refresh
 public enum TriggerMode {
     case percent(CGFloat)

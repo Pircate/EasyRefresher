@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 public protocol RefreshStateful: class {
     
     /// refresher state did change

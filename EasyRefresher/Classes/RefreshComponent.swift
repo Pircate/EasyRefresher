@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 open class RefreshComponent: RefreshStatefulView {
     
     internal(set) public var state: RefreshState = .idle {

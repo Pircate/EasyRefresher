@@ -6,6 +6,8 @@
 //  Copyright © 2019 Pircate. All rights reserved.
 //
 
+import UIKit
+
 open class AppearanceRefreshFooter: RefreshFooter {
     
     public override var automaticallyChangeAlpha: Bool {
