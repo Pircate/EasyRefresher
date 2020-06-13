@@ -240,6 +240,14 @@ extension RefreshComponent: Refreshable {
         }
     }
     
+    open override var isHidden: Bool {
+        didSet {
+            guard oldValue != isHidden, isHidden else { return }
+            
+            endRefreshing()
+        }
+    }
+    
     public func addRefreshClosure(_ refreshClosure: @escaping () -> Void) {
         self.refreshClosure = refreshClosure
         

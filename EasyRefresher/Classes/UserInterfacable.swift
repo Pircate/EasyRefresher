@@ -21,6 +21,9 @@ public protocol UserInterfacable {
     /// The alpha value of refresher's view.
     var alpha: CGFloat { get set }
     
+    /// A Boolean value indicating whether the refresher is hidden, default is false.
+    var isHidden: Bool { get set }
+    
     /// The background color of refresher's view.
     var backgroundColor: UIColor? { get set }
     

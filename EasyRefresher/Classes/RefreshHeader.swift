@@ -118,6 +118,8 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
     }
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
+        guard !isHidden else { return }
+        
         let offset = scrollView.contentOffset.y + scrollView.refreshInset.top
         
         offsetDidChange(offset)

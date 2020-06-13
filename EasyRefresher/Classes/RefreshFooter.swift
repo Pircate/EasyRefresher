@@ -64,6 +64,8 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
     }
     
     override func scrollViewContentOffsetDidChange(_ scrollView: UIScrollView) {
+        guard !isHidden else { return }
+        
         let offset: CGFloat
         
         if scrollView.refreshInset.top + scrollView.contentSize.height >= scrollView.bounds.height {
