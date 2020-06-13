@@ -25,7 +25,7 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     
     var arrowDirection: ArrowDirection { .down }
     
-    private lazy var stackView: UIStackView = {
+    lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
         stackView.spacing = 8
         stackView.alignment = .center

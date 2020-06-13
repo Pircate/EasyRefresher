@@ -11,7 +11,11 @@ import ObjectiveC
 
 public typealias Refresher = Refreshable & HasStateTitle & UserInterfacable
 
-public protocol HeaderRefresher: Refresher {}
+public protocol HeaderRefresher: Refresher {
+    
+    /// The text of time when refresher last updated.
+    var lastUpdatedTimeText: ((Date?) -> String?)? { get set }
+}
 
 public protocol FooterRefresher: Refresher {}
 

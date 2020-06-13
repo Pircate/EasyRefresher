@@ -14,3 +14,7 @@
 "pull_up_to_load_more" = "上拉可以加載更多";
 "release_to_load_more" = "鬆開立即加載更多";
 "no_more_data" = "沒有更多數據";
+
+"last_update_time" = "最後更新：";
+"today" = "今天";
+"no_record" = "無記錄";
