@@ -23,9 +23,10 @@ it, simply add the following line to your Podfile:
 pod 'EasyRefresher'
 ```
 
-## Demo
+## Preview
 
 ![](https://github.com/Pircate/EasyRefresher/blob/master/image.gif)
+![](https://github.com/Pircate/EasyRefresher/blob/master/image1.gif)
 
 ## Usage
 
@@ -60,6 +61,17 @@ tableView.refresh.header.setTitle("loading...", for: .refreshing)
 tableView.refresh.footer.setAttributedTitle(
     NSAttributedString(string: "已到最后一页", attributes: [.foregroundColor: UIColor.red]), for: .disabled
 )
+```
+
+* Last updated time
+
+```swift
+tableView.refresh.header.lastUpdatedTimeText = { date in
+    guard let date = date else { return "暂无更新记录" }
+    
+    return "上次刷新时间：\(date)"
+}
+
 ```
 
 * UIActivityIndicatorView Style
