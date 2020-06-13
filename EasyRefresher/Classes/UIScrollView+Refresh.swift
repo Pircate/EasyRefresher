@@ -36,6 +36,10 @@ extension UIScrollView {
         }
         set {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshHeader {
+                // 结构的属性调用 set 方法也会触发结构体自身的 set 方法，若 newValue 是自身则不重复赋值,
+                // 否则需要移除掉旧的 refresher。
+                if obj === newValue { return }
+                
                 obj.removeFromScrollView()
             }
             
@@ -65,6 +69,8 @@ extension UIScrollView {
         }
         set {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.footer) as? RefreshFooter {
+                if obj === newValue { return }
+                
                 obj.removeFromScrollView()
             }
             
