@@ -8,6 +8,10 @@
 
 import UIKit
 
+public protocol RefreshDelegate: class {
+    func refresherDidRefresh(_ refresher: Refresher)
+}
+
 open class RefreshComponent: RefreshStatefulView {
     
     internal(set) public var state: RefreshState = .idle {
@@ -30,6 +34,8 @@ open class RefreshComponent: RefreshStatefulView {
         return scrollView.contentInset
     }()
     
+    private weak var delegate: RefreshDelegate?
+    
     private var isEnding: Bool = false
     
     private lazy var observation: ScrollViewObservation = { ScrollViewObservation() }()
@@ -49,6 +55,29 @@ open class RefreshComponent: RefreshStatefulView {
         refreshClosure: @escaping () -> Void
     ) where T: UIView, T: RefreshStateful {
         self.refreshClosure = refreshClosure
+        
+        super.init(noBuild: height)
+        
+        prepare()
+        
+        addStateView(stateView)
+        didChangeStateView(stateView)
+    }
+    
+    public init(height: CGFloat = 54, delegate: RefreshDelegate) {
+        self.delegate = delegate
+        
+        super.init(height: height)
+        
+        prepare()
+    }
+    
+    public init<T>(
+        stateView: T,
+        height: CGFloat = 54,
+        delegate: RefreshDelegate
+    ) where T: UIView, T: RefreshStateful {
+        self.delegate = delegate
         
         super.init(noBuild: height)
         
@@ -263,7 +292,11 @@ extension RefreshComponent: Refreshable {
         
         prepareForRefreshing()
         state = .refreshing
-        willBeginRefreshing { self.refreshClosure?() }
+        willBeginRefreshing {
+            self.refreshClosure?()
+            
+            self.delegate?.refresherDidRefresh(self)
+        }
     }
     
     public func endRefreshing() {

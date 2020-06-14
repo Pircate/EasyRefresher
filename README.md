@@ -45,6 +45,8 @@ tableView.refresh.footer = AutoRefreshFooter(triggerMode: .percent(0.5)) {
     }
 }
 
+tableView.refresh.header = RefreshHeader(delegate: self)
+
 ```
 
 * Manual Trigger

@@ -23,11 +23,7 @@ class ViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellID")
         
-        tableView.refresh.header.addRefreshClosure {
-            self.reqeust {
-                self.tableView.refresh.header.endRefreshing()
-            }
-        }
+        tableView.refresh.header = RefreshHeader(delegate: self)
         
         tableView.refresh.header.automaticallyChangeAlpha = false
         tableView.refresh.header.impactFeedbackMode = .on(style: .medium)
@@ -44,6 +40,14 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 completion()
             }
+        }
+    }
+}
+
+extension ViewController: RefreshDelegate {
+    func refresherDidRefresh(_ refresher: Refresher) {
+        reqeust {
+            self.tableView.refresh.header.endRefreshing()
         }
     }
 }

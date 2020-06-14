@@ -39,6 +39,27 @@ open class AutoRefreshFooter: RefreshFooter {
         super.init(stateView: stateView, height: height, refreshClosure: refreshClosure)
     }
     
+    public init(
+        triggerMode: TriggerMode = .percent(0),
+        height: CGFloat = 54,
+        delegate: RefreshDelegate
+    ) {
+        self.triggerMode = triggerMode
+        
+        super.init(height: height, delegate: delegate)
+    }
+    
+    public init<T>(
+        stateView: T,
+        triggerMode: TriggerMode = .percent(0),
+        height: CGFloat = 54,
+        delegate: RefreshDelegate
+    ) where T : UIView, T : RefreshStateful {
+        self.triggerMode = triggerMode
+        
+        super.init(stateView: stateView, height: height, delegate: delegate)
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
         self.triggerMode = .percent(0)
         
