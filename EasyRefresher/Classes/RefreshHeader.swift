@@ -18,23 +18,6 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
     
     public var lastUpdatedTimeText: ((Date?) -> String?)?
     
-    override var stackView: UIStackView {
-        get { internalStackView }
-        set {}
-    }
-    
-    private lazy var internalStackView: UIStackView = {
-        let vStackView = UIStackView(arrangedSubviews: [stateLabel, lastUpdatedLabel])
-        vStackView.axis = .vertical
-        vStackView.spacing = 5
-        vStackView.alignment = .center
-        
-        let hStackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, vStackView])
-        hStackView.spacing = 8
-        hStackView.alignment = .center
-        return hStackView
-   }()
-    
     private lazy var lastUpdatedLabel: UILabel = {
         let lastUpdatedLabel = UILabel()
         lastUpdatedLabel.font = UIFont.systemFont(ofSize: 12)
@@ -48,6 +31,18 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
     private var lastUpdatedTime: Date? {
         get { UserDefaults.standard.object(forKey: lastUpdatedTimekey) as? Date }
         set { UserDefaults.standard.set(newValue, forKey: lastUpdatedTimekey) }
+    }
+    
+    override func buildStackView() -> UIStackView {
+        let vStackView = UIStackView(arrangedSubviews: [stateLabel, lastUpdatedLabel])
+        vStackView.axis = .vertical
+        vStackView.spacing = 5
+        vStackView.alignment = .center
+        
+        let hStackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, vStackView])
+        hStackView.spacing = 8
+        hStackView.alignment = .center
+        return hStackView
     }
     
     override func add(to scrollView: UIScrollView) {
@@ -70,14 +65,9 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
         switch state {
         case .pulling, .willRefresh, .refreshing:
             if let closure = lastUpdatedTimeText {
-                guard let text = closure(lastUpdatedTime) else {
-                    lastUpdatedLabel.isHidden = true
-                    return
-                }
-                
-                lastUpdatedLabel.isHidden = false
+                let text = closure(lastUpdatedTime)
+                lastUpdatedLabel.isHidden = text == nil
                 lastUpdatedLabel.text = text
-                
                 return
             }
             

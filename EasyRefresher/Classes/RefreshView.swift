@@ -26,10 +26,7 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     var arrowDirection: ArrowDirection { .down }
     
     lazy var stackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
-        stackView.spacing = 8
-        stackView.alignment = .center
-        return stackView
+        buildStackView()
     }()
     
     lazy var arrowImageView: UIImageView = {
@@ -62,7 +59,7 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
         
         super.init(frame: .zero)
         
-        build()
+        layoutStackView()
     }
     
     public init(noBuild height: CGFloat) {
@@ -76,10 +73,17 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
         
         super.init(coder: aDecoder)
         
-        build()
+        layoutStackView()
     }
     
-    private func build() {
+    func buildStackView() -> UIStackView {
+        let stackView = UIStackView(arrangedSubviews: [activityIndicator, arrowImageView, stateLabel])
+        stackView.spacing = 8
+        stackView.alignment = .center
+        return stackView
+    }
+    
+    private func layoutStackView() {
         addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false

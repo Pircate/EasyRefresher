@@ -26,7 +26,7 @@ public protocol Refreshable: class {
     var isEnabled: Bool { get set }
     
     /// The callback in refresh.
-    var refreshClosure: () -> Void { get set }
+    var refreshClosure: (() -> Void)? { get set }
     
     /// Add a refresh callback to refresher.
     /// - Parameter refreshClosure: The callback in refresh.

@@ -18,7 +18,7 @@ open class RefreshComponent: RefreshStatefulView {
         }
     }
     
-    public var refreshClosure: () -> Void
+    public var refreshClosure: (() -> Void)?
     
     weak var scrollView: UIScrollView? {
         didSet { scrollView?.alwaysBounceVertical = true }
@@ -59,16 +59,12 @@ open class RefreshComponent: RefreshStatefulView {
     }
     
     public required init?(coder aDecoder: NSCoder) {
-        self.refreshClosure = {}
-        
         super.init(coder: aDecoder)
         
         prepare()
     }
     
     override init(height: CGFloat = 54) {
-        self.refreshClosure = {}
-        
         super.init(height: height)
         
         prepare()
@@ -267,7 +263,7 @@ extension RefreshComponent: Refreshable {
         
         prepareForRefreshing()
         state = .refreshing
-        willBeginRefreshing { self.refreshClosure() }
+        willBeginRefreshing { self.refreshClosure?() }
     }
     
     public func endRefreshing() {
