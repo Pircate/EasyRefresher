@@ -77,6 +77,37 @@ extension UIScrollView {
         }
     }
     
+    var refresh_trailer: TrailerRefresher {
+        get {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.trailer) as? TrailerRefresher {
+                return obj
+            }
+            
+            let trailer = RefreshTrailer()
+            trailer.scrollView = self
+            
+            objcSetAssociatedObject(trailer, for: &AssociatedKeys.trailer)
+            
+            return trailer
+        }
+        set {
+            if let obj = objcGetAssociatedObject(for: &AssociatedKeys.trailer) as? RefreshTrailer {
+                if obj === newValue { return }
+                
+                obj.removeFromScrollView()
+            }
+            
+            objcSetAssociatedObject(newValue, for: &AssociatedKeys.trailer)
+            
+            guard let trailer = newValue as? RefreshTrailer else {
+                fatalError("Please use RefreshTrailer or it's subclass.")
+            }
+            
+            trailer.scrollView = self
+            trailer.add(to: self)
+        }
+    }
+    
     var changed_inset: UIEdgeInsets {
         get {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.changedInset) as? UIEdgeInsets {
@@ -109,6 +140,8 @@ struct AssociatedKeys {
     static var header = "com.pircate.github.refresh.header"
     
     static var footer = "com.pircate.github.refresh.footer"
+    
+    static var trailer = "com.pircate.github.refresh.trailer"
     
     static var changedInset = "com.pircate.github.changed.inset"
 }

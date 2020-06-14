@@ -230,7 +230,9 @@ private extension RefreshComponent {
         
         var contentInset = scrollView.contentInset
         contentInset.top -= scrollView.changed_inset.top
+        contentInset.left -= scrollView.changed_inset.left
         contentInset.bottom -= scrollView.changed_inset.bottom
+        contentInset.right -= scrollView.changed_inset.right
         
         originalInset = contentInset
     }

@@ -33,6 +33,12 @@ class ViewController: UIViewController {
                 self.tableView.refresh.footer.endRefreshing()
             }
         }
+        
+        tableView.refresh.trailer.addRefreshClosure {
+            self.reqeust {
+                self.tableView.refresh.trailer.endRefreshing()
+            }
+        }
     }
     
     private func reqeust(completion: @escaping () -> Void) {

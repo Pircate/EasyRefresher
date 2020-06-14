@@ -45,4 +45,9 @@ public extension Refresh where Base: UIScrollView {
         get { base.refresh_footer }
         set { base.refresh_footer = newValue }
     }
+    
+    var trailer: TrailerRefresher {
+        get { base.refresh_trailer }
+        set { base.refresh_trailer = newValue }
+    }
 }
