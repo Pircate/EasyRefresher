@@ -222,6 +222,10 @@ private extension RefreshComponent {
             self.isEnding = false
         }
     }
+    
+    func shouldRefreshing() -> Bool {
+        return !isRefreshing && isEnabled && !isHidden
+    }
 }
 
 // MARK: - Refresher
@@ -259,7 +263,7 @@ extension RefreshComponent: Refreshable {
     public func beginRefreshing() {
         assert(isDescendantOfScrollView, "Please add refresher to UIScrollView before begin refreshing.")
         
-        guard !isRefreshing, isEnabled else { return }
+        guard shouldRefreshing() else { return }
         
         prepareForRefreshing()
         state = .refreshing

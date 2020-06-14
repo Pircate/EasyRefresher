@@ -68,7 +68,7 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
         super.stateDidChange(state)
         
         switch state {
-        case .pulling, .willRefresh:
+        case .pulling, .willRefresh, .refreshing:
             if let closure = lastUpdatedTimeText {
                 guard let text = closure(lastUpdatedTime) else {
                     lastUpdatedLabel.isHidden = true
