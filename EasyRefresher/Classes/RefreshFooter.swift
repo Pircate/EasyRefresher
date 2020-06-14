@@ -86,6 +86,8 @@ open class RefreshFooter: RefreshComponent, FooterRefresher {
         guard isEnabled else { return }
         
         if scrollView.isDragging, triggerAutoRefresh(by: offset) {
+            scrollView.contentOffset.y -= offset
+            defer { scrollView.contentOffset.y += offset }
             beginRefreshing()
             return
         }
