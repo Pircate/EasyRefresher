@@ -8,6 +8,8 @@
 
 import UIKit
 
+public protocol FooterRefresher: Refresher {}
+
 open class RefreshFooter: RefreshComponent, FooterRefresher {
     
     override var arrowDirection: ArrowDirection { .up }

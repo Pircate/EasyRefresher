@@ -8,6 +8,12 @@
 
 import UIKit
 
+public protocol HeaderRefresher: Refresher {
+    
+    /// The text of time when refresher last updated.
+    var lastUpdatedTimeText: ((Date?) -> String?)? { get set }
+}
+
 open class RefreshHeader: RefreshComponent, HeaderRefresher {
     
     public var lastUpdatedTimeText: ((Date?) -> String?)?

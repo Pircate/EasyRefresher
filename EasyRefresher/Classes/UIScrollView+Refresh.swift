@@ -11,14 +11,6 @@ import ObjectiveC
 
 public typealias Refresher = Refreshable & HasStateTitle & UserInterfacable
 
-public protocol HeaderRefresher: Refresher {
-    
-    /// The text of time when refresher last updated.
-    var lastUpdatedTimeText: ((Date?) -> String?)? { get set }
-}
-
-public protocol FooterRefresher: Refresher {}
-
 extension UIScrollView {
     
     var refresh_header: HeaderRefresher {
@@ -36,8 +28,8 @@ extension UIScrollView {
         }
         set {
             if let obj = objcGetAssociatedObject(for: &AssociatedKeys.header) as? RefreshHeader {
-                // 结构的属性调用 set 方法也会触发结构体自身的 set 方法，若 newValue 是自身则不重复赋值,
-                // 否则需要移除掉旧的 refresher。
+                // 结构体属性的属性调用 setter 方法会一层层传递到上层属性的 setter。
+                // 若 newValue 是自身则不重复赋值，否则需要移除掉旧的 refresher。
                 if obj === newValue { return }
                 
                 obj.removeFromScrollView()
