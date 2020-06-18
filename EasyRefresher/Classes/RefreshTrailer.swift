@@ -19,7 +19,7 @@ open class RefreshTrailer: RefreshComponent, TrailerRefresher {
     private lazy var constraintOfLeftAnchor: NSLayoutConstraint? = {
         guard let scrollView = scrollView, isDescendant(of: scrollView) else { return nil }
         
-        let constraint = leftAnchor.constraint(equalTo: scrollView.rightAnchor)
+        let constraint = leftAnchor.constraint(equalTo: scrollView.leftAnchor)
         constraint.isActive = true
         
         return constraint
@@ -30,9 +30,7 @@ open class RefreshTrailer: RefreshComponent, TrailerRefresher {
         
         guard let scrollView = scrollView else { return }
         
-        constraintOfLeftAnchor?.constant = scrollView.contentOffset.x
-            + scrollView.bounds.width
-            - scrollView.changed_inset.right
+        constraintOfLeftAnchor?.constant = scrollView.contentSize.width
     }
     
     override func buildStackView() -> UIStackView {

@@ -8,15 +8,21 @@
 
 import UIKit
 
+public enum LastUpdatedTimeStrategy {
+    case none
+    case `default`
+    case custom((Date?) -> String)
+}
+
 public protocol HeaderRefresher: Refresher {
     
     /// The text of time when refresher last updated.
-    var lastUpdatedTimeText: ((Date?) -> String?)? { get set }
+    var lastUpdatedTimeStrategy: LastUpdatedTimeStrategy { get set }
 }
 
 open class RefreshHeader: RefreshComponent, HeaderRefresher {
     
-    public var lastUpdatedTimeText: ((Date?) -> String?)?
+    public var lastUpdatedTimeStrategy: LastUpdatedTimeStrategy = .default
     
     private lazy var lastUpdatedLabel: UILabel = {
         let lastUpdatedLabel = UILabel()
@@ -62,26 +68,7 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
     override func stateDidChange(_ state: RefreshState) {
         super.stateDidChange(state)
         
-        switch state {
-        case .pulling, .willRefresh, .refreshing:
-            if let closure = lastUpdatedTimeText {
-                let text = closure(lastUpdatedTime)
-                lastUpdatedLabel.isHidden = text == nil
-                lastUpdatedLabel.text = text
-                return
-            }
-            
-            lastUpdatedLabel.isHidden = false
-            
-            guard let lastUpdatedTime = lastUpdatedTime else {
-                lastUpdatedLabel.text = "\("last_update_time".localized())\("no_record".localized())"
-                return
-            }
-            
-            lastUpdatedLabel.text = "\("last_update_time".localized())\(lastUpdatedTime.lastUpdatedTimeString)"
-        default:
-            lastUpdatedLabel.isHidden = true
-        }
+        updateLastUpdatedTime(for: state)
     }
     
     override func willBeginRefreshing(completion: @escaping () -> Void) {
@@ -125,6 +112,29 @@ open class RefreshHeader: RefreshComponent, HeaderRefresher {
         guard isEnabled else { return }
         
         didChangeState(by: offset)
+    }
+    
+    private func updateLastUpdatedTime(for state: RefreshState) {
+        guard state != .idle, state != .disabled else {
+            lastUpdatedLabel.isHidden = true
+            return
+        }
+        
+        switch lastUpdatedTimeStrategy {
+        case .none:
+            lastUpdatedLabel.isHidden = true
+        case .default:
+            lastUpdatedLabel.isHidden = false
+            guard let lastUpdatedTime = lastUpdatedTime else {
+                lastUpdatedLabel.text = "\("last_update_time".localized())\("no_record".localized())"
+                return
+            }
+            
+            lastUpdatedLabel.text = "\("last_update_time".localized())\(lastUpdatedTime.lastUpdatedTimeString)"
+        case .custom(let closure):
+            lastUpdatedLabel.isHidden = false
+            lastUpdatedLabel.text = closure(lastUpdatedTime)
+        }
     }
 }
 
