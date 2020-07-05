@@ -56,7 +56,7 @@ open class RefreshComponent: RefreshStatefulView {
     ) where T: UIView, T: RefreshStateful {
         self.refreshClosure = refreshClosure
         
-        super.init(noBuild: height)
+        super.init(empty: height)
         
         prepare()
         
@@ -79,7 +79,7 @@ open class RefreshComponent: RefreshStatefulView {
     ) where T: UIView, T: RefreshStateful {
         self.delegate = delegate
         
-        super.init(noBuild: height)
+        super.init(empty: height)
         
         prepare()
         

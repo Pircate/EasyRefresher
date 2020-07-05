@@ -25,9 +25,7 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
     
     var arrowDirection: ArrowDirection { .down }
     
-    lazy var stackView: UIStackView = {
-        buildStackView()
-    }()
+    lazy var stackView: UIStackView = { buildStackView() }()
     
     lazy var arrowImageView: UIImageView = {
         let image = UIImage(named: "refresh_arrow_down", in: .current, compatibleWith: nil)
@@ -62,7 +60,7 @@ open class RefreshView: UIView, HasStateTitle, UserInterfacable {
         layoutStackView()
     }
     
-    public init(noBuild height: CGFloat) {
+    public init(empty height: CGFloat) {
         self.height = height
         
         super.init(frame: .zero)
