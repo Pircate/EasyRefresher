@@ -23,15 +23,17 @@ extension String {
     }
 }
 
-enum Language: String {
+public enum Language: String {
     case en
     case zhHans = "zh-Hans"
     case zhHant = "zh-Hant"
     
-    static let current: Language = {
+    public static var current: Language = {
         guard let language = Locale.preferredLanguages.first else { return .en }
         
         if language.contains("zh-HK") { return .zhHant }
+        
+        if language.contains("zh-Hans") { return .zhHans }
         
         return Language(rawValue: language) ?? .en
     }()
